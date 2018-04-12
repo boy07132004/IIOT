@@ -15,7 +15,7 @@ def main():
     callback=cb[1:len(cb)-1]
     
     run = int(monit_t / 5)                  #run time /
-    whitelist =['ls']                       #white list for command
+    whitelist =['ls']                       #允許執行命令的白名單
     
 
     for i in range(run) :   
@@ -25,7 +25,7 @@ def main():
         
         if eval(cond,{"__builtins__":None},wh):
         
-            if callback in whitelist:         #if command in whitelist execute
+            if callback in whitelist:         #如果輸入是在允許名單內的話 執行
                 subprocess.Popen(callback,shell=True) 
             else:print('Error')
 
