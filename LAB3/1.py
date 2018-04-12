@@ -23,6 +23,7 @@ def main():
         if eval(cond,{"__builtins__":None},wh):
             if callback in wl:
                 subprocess.Popen(callback,shell=True)
+            else:print('Error')
 
         else:break
         time.sleep(5)
