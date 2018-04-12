@@ -1,16 +1,7 @@
-#!/usr/bin/env python3
-"""
-@author: FATESAIKOU
-@argv[1]: BCM pin id
-@argv[2]: monit time
-@argv[3]: monit delay
-"""
-
 import time
-
 import sys
-
 import Adafruit_DHT as DHT
+import os
 
 
 def main():
@@ -24,13 +15,15 @@ def main():
     callback=cb[1:len(cb)-1]
     
     run = int(monit_t / 5)
-        
+    cc  = os.popen(callback).read()
+    a   =cc.split("\n")
+
     for i in range(run) :   
         h, t = DHT.read_retry(11, BCM_PIN)
         h=h/100
         wh={'t':t,'h':h}
         if eval(cond,{"__builtins__":None},wh):
-            eval(callback)
+            print(a)
 
         else:break
         time.sleep(5)
