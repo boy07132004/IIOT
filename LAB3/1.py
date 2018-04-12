@@ -15,13 +15,14 @@ def main():
     callback=cb[1:len(cb)-1]
     
     run = int(monit_t / 5)
-    
+    wl =['ls']
     for i in range(run) :   
         h, t = DHT.read_retry(11, BCM_PIN)
         h=h/100
         wh={'t':t,'h':h}
         if eval(cond,{"__builtins__":None},wh):
-            subprocess.Popen(callback,['ls'],shell=True)
+            if callback in wl:
+                subprocess.Popen(callback,shell=True)
 
         else:break
         time.sleep(5)
