@@ -1,7 +1,7 @@
 import time
 import sys
 import Adafruit_DHT as DHT
-import os
+import subprocess
 
 
 def main():
@@ -15,15 +15,13 @@ def main():
     callback=cb[1:len(cb)-1]
     
     run = int(monit_t / 5)
-    cc  = os.popen(callback).read()
-    a   =cc.split("\n")
-
+    
     for i in range(run) :   
         h, t = DHT.read_retry(11, BCM_PIN)
         h=h/100
         wh={'t':t,'h':h}
         if eval(cond,{"__builtins__":None},wh):
-            print(a)
+            subprocess.Popen(callback,shell=True)
 
         else:break
         time.sleep(5)
