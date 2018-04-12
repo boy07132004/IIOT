@@ -28,6 +28,7 @@ def main():
         wh={'t':t,'h':h}
         if eval(cond,{"__builtins__":None},wh):
             print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(t, h))
+            print("test")
         else:break
         time.sleep(5)
     
