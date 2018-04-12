@@ -27,8 +27,8 @@ def main():
         h, t = DHT.read_retry(11, BCM_PIN)
         wh={'t':t,'h':h}
         if eval(cond,{"__builtins__":None},wh):
-            print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(t, h))
-            print("test")
+            print(t,h)
+
         else:break
         time.sleep(5)
     
