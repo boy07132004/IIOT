@@ -10,7 +10,7 @@ import time
 
 import sys
 
-#import Adafruit_DHT as DHT
+import Adafruit_DHT as DHT
 
 
 def main():
@@ -19,14 +19,14 @@ def main():
     co      =sys.argv[2]
     cond    =(co[1:len(co)-1])
     mt      =sys.argv[3]
-    monit_t =(mt[1:len(mt)-1])
+    monit_t =float(mt[1:len(mt)-1])
     
     run = int(monit_t / 5)
         
     for i in range(run) :   
         h, t = DHT.read_retry(11, BCM_PIN)
         wh={'t':t,'h':h}
-        if eval(cond,wh):
+        if eval(cond,{"__builtins__":None},wh):
             print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(t, h))
         else:break
         time.sleep(5)
