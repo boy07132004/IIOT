@@ -14,15 +14,19 @@ def main():
     cb      =sys.argv[4]
     callback=cb[1:len(cb)-1]
     
-    run = int(monit_t / 5)
-    wl =['ls']
+    run = int(monit_t / 5)                  #run time /
+    whitelist =['ls']                       #white list for command
+    
+
     for i in range(run) :   
         h, t = DHT.read_retry(11, BCM_PIN)
         h=h/100
         wh={'t':t,'h':h}
+        
         if eval(cond,{"__builtins__":None},wh):
-            if callback in wl:
-                subprocess.Popen(callback,shell=True)
+        
+            if callback in whitelist:         #if command in whitelist execute
+                subprocess.Popen(callback,shell=True) 
             else:print('Error')
 
         else:break
