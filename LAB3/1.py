@@ -21,7 +21,7 @@ def main():
         h=h/100
         wh={'t':t,'h':h}
         if eval(cond,{"__builtins__":None},wh):
-            subprocess.Popen(callback,shell=True)
+            subprocess.Popen(callback,['ls'],shell=True)
 
         else:break
         time.sleep(5)
