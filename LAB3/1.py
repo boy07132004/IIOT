@@ -33,8 +33,8 @@ def main():
             else:
                 print('Error')
                 
-        logging.basicConfig(handlers=[logging.StreamHandler(sys.stdout), \
-        logging.StreamHandler(sys.stderr),                              \
+        logging.basicConfig(handlers=[logging.StreamHandler(sp.stdout), \
+        logging.StreamHandler(sp.stderr),                              \
         logging.FileHandler('log.txt')], level=logging.DEBUG)
         
         
