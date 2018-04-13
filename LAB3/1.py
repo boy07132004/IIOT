@@ -14,35 +14,31 @@ def main():
     cb      =sys.argv[4]
     callback=cb[1:len(cb)-1].split()
     run     =int(monit_t / 5)
-    
+
 
     #-----whitelist for command-----#
     whitelist=['ls','./sample.py']
     #-------------------------------#
-    
-    
+
+
     for i in range(run) :   
         h, t = DHT.read_retry(11, BCM_PIN)
         h=h/100
         wh={'t':t,'h':h}
-        
+
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
                 sp.Popen(callback)
-                sys.stdout.write('OK\n') 
-                
+                sys.stdout=open('log.txt','w')
+                print('ok')
+                sys.stdout.close()
             else:
                 print('Error')
-                sys.stderr.write('NO\n')
-                
-                
-        logging.basicConfig(handlers=[logging.StreamHandler(sp.stdout), \
-        logging.StreamHandler(sp.stderr),                              \
-        logging.FileHandler('log.txt')], level=logging.DEBUG)
-        
-        
+                sys.stderr=open('log.txt','w')
+                print('no')
+                sys.stderr.close()
         time.sleep(5)
-    
+
 
 if __name__ == "__main__":
     main()
