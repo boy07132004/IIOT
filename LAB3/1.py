@@ -16,7 +16,9 @@ def main():
     
     run = int(monit_t / 5)                  #run time /
 
-    # whitelist for command
+    #-----whitelist for command-----#
+    whitelist=['ls','~/IIOT/temp/123.py']
+    #-------------------------------#
     callback=callback.split()
     
     print(callback)
@@ -26,10 +28,9 @@ def main():
         wh={'t':t,'h':h}
         
         if eval(cond,{"__builtins__":None},wh):
-       
-            #if callback in whitelist:         #if command in whitelist execute
-            subprocess.Popen(callback) 
-            #else:print('Error')
+            if set(callback)&set(whitelist): 
+                subprocess.Popen(callback) 
+            else:print('Error')
 
         else:break
         time.sleep(5)
