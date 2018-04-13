@@ -5,7 +5,7 @@ import subprocess as sp
 import logging
 
 
-logging.basicConfig(level=logging.debug,filename='log.txt', \
+logging.basicConfig(level=logging.INFO,filename='log.txt', \
 format='%(asctime)s - %(name)s - %(message)s')
 
 def main():
@@ -23,8 +23,7 @@ def main():
     #-----whitelist for command-----#
     whitelist=['ls','./sample.py']
     #-------------------------------#
-    output=open('log.txt','w')
-
+    
     for i in range(run) :   
         
         h, t = DHT.read_retry(11, BCM_PIN)
@@ -34,7 +33,7 @@ def main():
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
                 sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
-                logging.debug('work->')
+                logging.INFO('work->')
             
                 
         time.sleep(5)
