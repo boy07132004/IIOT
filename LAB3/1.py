@@ -37,8 +37,8 @@ def main():
         logging.StreamHandler(sys.stderr),                              \
         logging.FileHandler('log.txt')], level=logging.DEBUG)
         
-        stderr.flush()
-        stdout.flush()
+        sys.stderr.flush()
+        sys.stdout.flush()
         
         time.sleep(5)
     
