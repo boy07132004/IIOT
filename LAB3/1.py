@@ -12,13 +12,13 @@ def main():
     mt      =sys.argv[3]
     monit_t =float(mt[1:len(mt)-1])
     cb      =sys.argv[4]
-    cback   =cb[2:len(cb)-2]
+    cback   =cb[1:len(cb)-1]
     
     run = int(monit_t / 5)                  #run time /
 
     # whitelist for command
     whitelist =['ls','~/IIOT/temp/123.py']
-    callback  =shlex.quote(cback)
+    callback  =shlex.quote(cb)
     print(callback)
     for i in range(run) :   
         h, t = DHT.read_retry(11, BCM_PIN)
