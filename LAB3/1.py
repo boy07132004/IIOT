@@ -17,8 +17,7 @@ def main():
     run = int(monit_t / 5)                  #run time /
 
     # whitelist for command
-    whitelist =['ls -alh','./buzzer_play 2 freq_sequence.json'\
-                    '~/IIOT/temp/123.py [7:50:1]']
+    callback=callback.split()
     
     print(callback)
     for i in range(run) :   
@@ -29,7 +28,7 @@ def main():
         if eval(cond,{"__builtins__":None},wh):
        
             if callback in whitelist:         #if command in whitelist execute
-                subprocess.Popen(callback,shell=True) 
+                subprocess.Popen(callback) 
             else:print('Error')
 
         else:break
