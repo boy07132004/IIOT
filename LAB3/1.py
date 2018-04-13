@@ -33,7 +33,7 @@ def main():
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
                 sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
-                logging.INFO('work->')
+                logging.INFO('work')
             
                 
         time.sleep(5)
