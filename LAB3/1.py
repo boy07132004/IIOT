@@ -18,8 +18,7 @@ def main():
 
     # whitelist for command
     whitelist =['ls -alh','python3 ./buzzer_play 2 freq_sequence.json'\
-                'python3 ~/IIOT/temp/123.py [7:50:1]'
-                ]
+                    'python3 ~/IIOT/temp/123.py [7:50:1]']
     
     print(callback)
     for i in range(run) :   
