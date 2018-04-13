@@ -1,7 +1,7 @@
 import time
 import sys
 import Adafruit_DHT as DHT
-import subprocess
+import subprocess as sp
 import logging
 
 def main():
@@ -28,7 +28,7 @@ def main():
         
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
-                subprocess.Popen(callback,stdout=PIPE,stderr=PIPE) 
+                sp.Popen(callback,stdout=sp.PIPE,stderr=sp.PIPE) 
                 
             else:
                 print('Error')
