@@ -25,10 +25,10 @@ def main():
         h=h/100
         wh={'t':t,'h':h}
         
-        if eval(cond,{"__builtins__":None},wh):
-            if set(callback)&set(whitelist): 
-                subprocess.Popen(callback) 
-            else:print('Error')
+            if eval(cond,{"__builtins__":None},wh):
+                if set(callback)&set(whitelist): 
+                    subprocess.Popen(callback) 
+                else:print('Error')
         
         logging.basicConfig(handlers=[logging.StreamHandler(sys.stdout), \
         logging.StreamHandler(sys.stderr),                              \
