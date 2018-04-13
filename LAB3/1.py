@@ -13,7 +13,10 @@ def main():
     monit_t =float(mt[1:len(mt)-1])
     cb      =sys.argv[4]
     callback=cb[1:len(cb)-1].split()
-    run = int(monit_t / 5)                  #run time 
+    run     =int(monit_t / 5)
+    print  >>sys.stderr,'Errorrr'
+    print  >>sys.stdout,'OK'
+
 
     #-----whitelist for command-----#
     whitelist=['ls','./sample.py']
@@ -25,10 +28,10 @@ def main():
         h=h/100
         wh={'t':t,'h':h}
         
-            if eval(cond,{"__builtins__":None},wh):
-                if set(callback)&set(whitelist): 
-                    subprocess.Popen(callback) 
-                else:print('Error')
+        if eval(cond,{"__builtins__":None},wh):
+            if set(callback)&set(whitelist): 
+                subprocess.Popen(callback) 
+            else:print('Error')
         
         logging.basicConfig(handlers=[logging.StreamHandler(sys.stdout), \
         logging.StreamHandler(sys.stderr),                              \
