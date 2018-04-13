@@ -15,8 +15,9 @@ def main():
     callback=cb[1:len(cb)-1]
     
     run = int(monit_t / 5)                  #run time /
+
     #whitelist =['ls']                       #white list for command
-    
+  
 
     for i in range(run) :   
         h, t = DHT.read_retry(11, BCM_PIN)
@@ -24,10 +25,10 @@ def main():
         wh={'t':t,'h':h}
         
         if eval(cond,{"__builtins__":None},wh):
-        
+       
             #if callback in whitelist:         #if command in whitelist execute
             subprocess.Popen(callback,shell=True) 
-            else:print('Error')
+            #else:print('Error')
 
         else:break
         time.sleep(5)
