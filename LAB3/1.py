@@ -17,8 +17,8 @@ def main():
     run = int(monit_t / 5)                  #run time /
 
     # whitelist for command
-    whitelist =['ls -alh','python3 ./buzzer_play 2 freq_sequence.json'\
-                    'python3 ~/IIOT/temp/123.py [7:50:1]']
+    whitelist =['ls -alh','./buzzer_play 2 freq_sequence.json'\
+                    '~/IIOT/temp/123.py [7:50:1]']
     
     print(callback)
     for i in range(run) :   
