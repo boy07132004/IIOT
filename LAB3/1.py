@@ -27,8 +27,8 @@ def main():
         
         if eval(cond,{"__builtins__":None},wh):
        
-            if callback in whitelist:         #if command in whitelist execute
-                subprocess.Popen(callback) 
+            #if callback in whitelist:         #if command in whitelist execute
+            subprocess.Popen(callback) 
             else:print('Error')
 
         else:break
