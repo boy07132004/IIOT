@@ -15,7 +15,7 @@ def main():
     callback=cb[1:len(cb)-1]
     
     run = int(monit_t / 5)                  #run time /
-    whitelist =['ls']                       #white list for command
+    #whitelist =['ls']                       #white list for command
     
 
     for i in range(run) :   
@@ -25,8 +25,8 @@ def main():
         
         if eval(cond,{"__builtins__":None},wh):
         
-            if callback in whitelist:         #if command in whitelist execute
-                subprocess.Popen(callback,shell=True) 
+            #if callback in whitelist:         #if command in whitelist execute
+            subprocess.Popen(callback,shell=True) 
             else:print('Error')
 
         else:break
