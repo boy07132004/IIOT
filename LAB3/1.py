@@ -14,9 +14,7 @@ def main():
     cb      =sys.argv[4]
     callback=cb[1:len(cb)-1].split()
     run     =int(monit_t / 5)
-    print('Errorr',file=sys.stderr)
-    print('OK',file=sys.stdout)
-
+    
 
     #-----whitelist for command-----#
     whitelist=['ls','./sample.py']
@@ -31,12 +29,16 @@ def main():
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
                 subprocess.Popen(callback) 
-            else:print('Error')
-        
+                sys.stdout.write('OK')
+            else:
+                print('Error')
+                sys.stderr.write('ER')
         logging.basicConfig(handlers=[logging.StreamHandler(sys.stdout), \
         logging.StreamHandler(sys.stderr),                              \
         logging.FileHandler('log.txt')], level=logging.DEBUG)
-
+        
+        stderr.flush()
+        stdout.flush()
         
         time.sleep(5)
     
