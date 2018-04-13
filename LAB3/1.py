@@ -14,8 +14,8 @@ def main():
     cb      =sys.argv[4]
     callback=cb[1:len(cb)-1].split()
     run     =int(monit_t / 5)
-    print  >>sys.stderr,'Errorrr'
-    print  >>sys.stdout,'OK'
+    print('Errorr',file=sys.stderr)
+    print('OK',file=sys.stdout)
 
 
     #-----whitelist for command-----#
