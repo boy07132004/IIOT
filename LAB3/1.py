@@ -28,7 +28,7 @@ def main():
         
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
-                subprocess.Popen(callback,stdout='t',stderr='ER') 
+                subprocess.Popen(callback,stdout=PIPE,stderr=PIPE) 
                 
             else:
                 print('Error')
