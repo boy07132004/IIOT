@@ -29,7 +29,7 @@ def main():
        
             #if callback in whitelist:         #if command in whitelist execute
             subprocess.Popen(callback) 
-            else:print('Error')
+            #else:print('Error')
 
         else:break
         time.sleep(5)
