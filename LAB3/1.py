@@ -12,7 +12,7 @@ def main():
     mt      =sys.argv[3]
     monit_t =float(mt[1:len(mt)-1])
     cb      =sys.argv[4]
-    cback   =cb[1:len(cb)-1]
+    callback=cb[1:len(cb)-1]
     
     run = int(monit_t / 5)                  #run time /
 
