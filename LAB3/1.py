@@ -2,7 +2,7 @@ import time
 import sys
 import Adafruit_DHT as DHT
 import subprocess
-
+import logging
 
 def main():
     P       =sys.argv[1]
@@ -12,16 +12,14 @@ def main():
     mt      =sys.argv[3]
     monit_t =float(mt[1:len(mt)-1])
     cb      =sys.argv[4]
-    callback=cb[1:len(cb)-1]
-    
-    run = int(monit_t / 5)                  #run time /
+    callback=cb[1:len(cb)-1].split()
+    run = int(monit_t / 5)                  #run time 
 
     #-----whitelist for command-----#
-    whitelist=['ls','~/IIOT/temp/123.py']
+    whitelist=['ls','./sample.py']
     #-------------------------------#
-    callback=callback.split()
     
-    print(callback)
+    
     for i in range(run) :   
         h, t = DHT.read_retry(11, BCM_PIN)
         h=h/100
@@ -32,7 +30,10 @@ def main():
                 subprocess.Popen(callback) 
             else:print('Error')
 
-        else:break
+        h=[logging.StreamHandler(sys.stdout),logging.StreamHandler(sys.stderr)]
+        logging.basicConfig(handlers=h,logging.FileHandler('log.txt'))
+
+        
         time.sleep(5)
     
 
