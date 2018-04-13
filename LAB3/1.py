@@ -28,17 +28,15 @@ def main():
         
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
-                subprocess.Popen(callback) 
-                sys.stdout.write('OK')
+                subprocess.Popen(callback,stdout='t',stderr='ER') 
+                
             else:
                 print('Error')
-                sys.stderr.write('ER')
+                
         logging.basicConfig(handlers=[logging.StreamHandler(sys.stdout), \
         logging.StreamHandler(sys.stderr),                              \
         logging.FileHandler('log.txt')], level=logging.DEBUG)
         
-        sys.stderr.flush()
-        sys.stdout.flush()
         
         time.sleep(5)
     
