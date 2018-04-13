@@ -31,8 +31,8 @@ def main():
             else:print('Error')
         
         logging.basicConfig(handlers=[logging.StreamHandler(sys.stdout), \
-        logging.StreamHandler(sys.stderr)],                                \
-        logging.filehandler('log.txt'), level=logging.DEBUG)
+        logging.StreamHandler(sys.stderr),                              \
+        logging.filehandler('log.txt')], level=logging.DEBUG)
 
         
         time.sleep(5)
