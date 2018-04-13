@@ -2,7 +2,7 @@ import time
 import sys
 import Adafruit_DHT as DHT
 import subprocess
-
+import shlex
 
 def main():
     P       =sys.argv[1]
@@ -12,13 +12,14 @@ def main():
     mt      =sys.argv[3]
     monit_t =float(mt[1:len(mt)-1])
     cb      =sys.argv[4]
-    callback=cb[1:len(cb)-1]
+    cback   =cb[1:len(cb)-1]
     
     run = int(monit_t / 5)                  #run time /
 
-    #whitelist =['ls']                       #white list for command
-  
-
+    # whitelist for command
+    whitelist =['ls','~/IIOT/temp/123.py']
+    callback  =shlex.quote(cback)
+    print(callback)
     for i in range(run) :   
         h, t = DHT.read_retry(11, BCM_PIN)
         h=h/100
@@ -26,9 +27,9 @@ def main():
         
         if eval(cond,{"__builtins__":None},wh):
        
-            #if callback in whitelist:         #if command in whitelist execute
-            subprocess.Popen(callback,shell=True) 
-            #else:print('Error')
+            if callback in whitelist:         #if command in whitelist execute
+                subprocess.Popen(cback,shell=True) 
+            else:print('Error')
 
         else:break
         time.sleep(5)
