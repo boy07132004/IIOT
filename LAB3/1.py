@@ -32,7 +32,7 @@ def main():
         
         logging.basicConfig(handlers=[logging.StreamHandler(sys.stdout), \
         logging.StreamHandler(sys.stderr),                                \
-        logging.FileHandler('log.txt')])
+        logging.filename('log.txt')])
 
         
         time.sleep(5)
