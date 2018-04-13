@@ -5,8 +5,9 @@ import subprocess as sp
 import logging
 
 
-logging.basicConfig(level=logging.INFO,filename='log.txt', \
+logging.basicConfig(level=logging.DEBUG,filename='log.txt', \
 format='%(asctime)s - %(name)s - %(message)s')
+log = logging.getLogger('1')
 
 def main():
     P       =sys.argv[1]
@@ -33,7 +34,7 @@ def main():
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
                 sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
-                logging.INFO('work')
+                log.DEBUG('work')
             
                 
         time.sleep(5)
