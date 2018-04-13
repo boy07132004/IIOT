@@ -4,6 +4,10 @@ import Adafruit_DHT as DHT
 import subprocess as sp
 import logging
 
+
+logging.basicConfig(level=logging.debug,filename='log.txt', \
+format='%(asctime)s - %(name)s - %(message)s')
+
 def main():
     P       =sys.argv[1]
     BCM_PIN =int(P[1:len(P)-1])
@@ -19,24 +23,20 @@ def main():
     #-----whitelist for command-----#
     whitelist=['ls','./sample.py']
     #-------------------------------#
-
+    output=open('log.txt','w')
 
     for i in range(run) :   
+        
         h, t = DHT.read_retry(11, BCM_PIN)
         h=h/100
         wh={'t':t,'h':h}
 
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
-                sp.Popen(callback)
-                sys.stdout=open('log.txt','w')
-                print('ok')
-                sys.stdout.close()
-            else:
-                print('Error')
-                sys.stderr=open('log.txt','w')
-                print('no')
-                sys.stderr.close()
+                sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
+                logging.debug('work->')
+            
+                
         time.sleep(5)
 
 
