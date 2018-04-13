@@ -29,9 +29,10 @@ def main():
             if set(callback)&set(whitelist): 
                 subprocess.Popen(callback) 
             else:print('Error')
-
-        h=[logging.StreamHandler(sys.stdout),logging.StreamHandler(sys.stderr)]
-        logging.basicConfig(handlers=h,logging.FileHandler('log.txt'))
+        
+        logging.basicConfig(handlers=[logging.StreamHandler(sys.stdout), \
+        logging.StreamHandler(sys.stderr),                                \
+        logging.FileHandler('log.txt')])
 
         
         time.sleep(5)
