@@ -28,10 +28,13 @@ def main():
         
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
-                sp.Popen(callback,stdout=sp.PIPE,stderr=sp.PIPE) 
+                sp.Popen(callback)
+                sys.stdout.write('OK\n') 
                 
             else:
                 print('Error')
+                sys.stderr.write('NO\n')
+                
                 
         logging.basicConfig(handlers=[logging.StreamHandler(sp.stdout), \
         logging.StreamHandler(sp.stderr),                              \
