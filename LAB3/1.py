@@ -34,11 +34,11 @@ def main():
 
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
-                out=sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
+                out=sp.Popen(callback,stdin=sp.PIPE,stdout=sp.PIPE,stderr=sp.PIPE)
                 (stdout,stderr)=out.communicate()
                 
                 L.debug(stdout)
-                L.NOTSET()
+                L.debug(stdin)
                 LER.error(stderr)
             else:LER.error('err in callback')
         else:LER.error('err in cond')
