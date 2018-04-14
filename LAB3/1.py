@@ -37,7 +37,7 @@ def main():
                 out=sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
                 (stdout,stderr)=out.communicate()
                 
-                L.INFO(stdout)
+                L.debug(stdout)
                 L.NOTSET()
                 LER.error(stderr)
             else:LER.error('err in callback')
