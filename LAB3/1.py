@@ -6,9 +6,9 @@ import logging
 
 
 logging.basicConfig(level=logging.DEBUG,filename='log.txt', \
-format='%(asctime)s - %(message)s')
-L = logging.getLogger('IIOT')
-
+format='%(asctime)s -%(name)s -%(message)s')
+L = logging.getLogger('STDOUT')
+LL= logging.getLogger('STDERR')
 
 def main():
     P       =sys.argv[1]
@@ -35,8 +35,9 @@ def main():
         if eval(cond,{"__builtins__":None},wh):
             if set(callback)&set(whitelist): 
                 out=sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
-                stdout=out.communicate()
-                L.info(stdout)
+                (stdout,stderr)=out.communicate()
+                L.DEBUG(stdout)
+                LL.error(stderr)
         time.sleep(5)
 
 
