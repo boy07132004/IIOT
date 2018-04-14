@@ -38,7 +38,7 @@ def main():
                 (stdout,stderr)=out.communicate()
                 print(stdout)
                 print(stderr)
-                print(out.output)
+                #print(out.output)
                 #L.info(stdout)
             else:LER.error('err in callback')
         else:LER.error('err in cond')
