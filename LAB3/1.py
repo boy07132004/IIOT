@@ -37,8 +37,8 @@ def main():
                 out=sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
                 (stdout,stderr)=out.communicate()
                 L.info(stdout)
-            else:LL.error(stderr)
-        else:LL.error(stderr)
+            else:LL.error('err in callback')
+        else:LL.error('err in cond')
         time.sleep(5)
 
 
