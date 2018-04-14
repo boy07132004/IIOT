@@ -28,7 +28,7 @@ def main():
     
     for i in range(run) :   
         
-        h, t = DHT.read_retry(11, BCM_PIN)
+        h, t = DHT.read(11, BCM_PIN)
         h=h/100
         wh={'t':t,'h':h}
 
@@ -36,6 +36,7 @@ def main():
             if set(callback)&set(whitelist): 
                 out=sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
                 (stdout,stderr)=out.communicate()
+                
                 L.INFO(stdout)
                 L.NOTSET()
                 LER.error(stderr)
