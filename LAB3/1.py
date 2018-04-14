@@ -8,7 +8,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG,filename='log.txt', \
 format='%(asctime)s -%(name)s -%(message)s')
 L = logging.getLogger('STDOUT')
-LL= logging.getLogger('STDERR')
+LER= logging.getLogger('STDERR')
 
 def main():
     P       =sys.argv[1]
@@ -36,9 +36,12 @@ def main():
             if set(callback)&set(whitelist): 
                 out=sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
                 (stdout,stderr)=out.communicate()
-                L.info(stdout)
-            else:LL.error('err in callback')
-        else:LL.error('err in cond')
+                print(stdout)
+                print(stderr)
+                print(out.output)
+                #L.info(stdout)
+            else:LER.error('err in callback')
+        else:LER.error('err in cond')
         time.sleep(5)
 
 
