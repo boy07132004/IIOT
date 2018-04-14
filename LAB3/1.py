@@ -7,7 +7,7 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG,filename='log.txt', \
 format='%(asctime)s - %(name)s - %(message)s')
-log = logging.getLogger('log')
+log = logging.getLogger()
 
 def main():
     P       =sys.argv[1]
@@ -22,7 +22,7 @@ def main():
 
 
     #-----whitelist for command-----#
-    whitelist=['ls','./sample.py']
+    whitelist=['ls','./for_test.py']
     #-------------------------------#
     
     for i in range(run) :   
