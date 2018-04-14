@@ -23,7 +23,7 @@ def main():
 
 
     #-----whitelist for command-----#
-    whitelist=['ls','./0.py']
+    whitelist=['ls','./0.py','./00.py']
     #-------------------------------#
     
     for i in range(run) :   
@@ -36,10 +36,9 @@ def main():
             if set(callback)&set(whitelist): 
                 out=sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
                 (stdout,stderr)=out.communicate()
-                print(stdout)
-                print(stderr)
-                #print(out.output)
-                #L.info(stdout)
+                L.INFO(stdout)
+                L.NOTSET()
+                LER.error(stderr)
             else:LER.error('err in callback')
         else:LER.error('err in cond')
         time.sleep(5)
