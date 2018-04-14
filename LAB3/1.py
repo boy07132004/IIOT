@@ -36,7 +36,7 @@ def main():
             if set(callback)&set(whitelist): 
                 out=sp.Popen(callback,stdout=sp.PIPE,stderr=sp.STDOUT)
                 stdout=out.communicate()
-                
+                L.info(stdout)
         time.sleep(5)
 
 
