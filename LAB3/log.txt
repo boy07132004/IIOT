@@ -1,6 +1,3 @@
-2018-04-14 23:25:02,123 -Return -0
-2018-04-14 23:25:02,124 -STDOUT -b''
-2018-04-14 23:25:02,125 -STDERR -b''
-2018-04-14 23:27:52,430 -Return -1
-2018-04-14 23:27:52,431 -STDOUT -b''
-2018-04-14 23:27:52,432 -STDERR -b'Traceback (most recent call last):\n  File "./00.py", line 53, in <module>\n    main()\n  File "./00.py", line 44, in main\n    v = artVoice(PIN)\nNameError: name \'artVoice\' is not defined\n'
+2018-04-15 13:38:03,826 -RETURN -0
+2018-04-15 13:38:03,827 -STDOUT -b'0.json\n0.py\n1.py\nfor_test.py\nlog.txt\nsample_DHT.py\n'
+2018-04-15 13:38:03,828 -STDERR -b''
