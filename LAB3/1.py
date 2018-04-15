@@ -20,7 +20,7 @@ def main():
     monit_t =float(mt[1:len(mt)-1])
     cb      =sys.argv[4]
     callback=cb[1:len(cb)-1].split()
-    r       =monit_t // 5
+    r       =int(monit_t // 5)
 
 
     #-----whitelist for command-----#
