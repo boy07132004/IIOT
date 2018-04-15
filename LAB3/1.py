@@ -24,7 +24,7 @@ def main():
 
 
     #-----whitelist for command-----#
-    whitelist=['ls','./0.py','./00.py']
+    whitelist=['ls','./test0.py','./test1.py']
     #-------------------------------#
     
     for i in range(run) :   
