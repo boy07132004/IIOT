@@ -6,7 +6,7 @@ import logging
 
 
 logging.basicConfig(level=logging.DEBUG,filename='log.txt', \
-format='%(asctime)s -%(name)s -%(message)s')
+format='%(asctime)s -%(name)s : %(message)s')
 L = logging.getLogger('STDOUT')
 R = logging.getLogger('RETURN')
 LER= logging.getLogger('STDERR')
@@ -20,14 +20,20 @@ def main():
     monit_t =float(mt[1:len(mt)-1])
     cb      =sys.argv[4]
     callback=cb[1:len(cb)-1].split()
-    run     =int(monit_t / 5)
+    r       =monit_t // 5
 
 
     #-----whitelist for command-----#
     whitelist=['ls','./test0.py','./test1.py']
     #-------------------------------#
     
+    if r >= 0:
+        run     = r+1
+        delay  = 5
+    else:LER.error('error monit_time')
+    
     for i in range(run) :   
+        if i==run-1:    delay=monit_t % 5
         
         h, t = DHT.read_retry(11, BCM_PIN)
         h=h/100
@@ -42,7 +48,7 @@ def main():
                 LER.error(stderr)
             else:LER.error('error in callback')
         else:LER.error('error in cond')
-        time.sleep(5)
+        time.sleep(delay)
 
 
 if __name__ == "__main__":
