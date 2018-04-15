@@ -49,7 +49,7 @@ def main():
                 (stdout,stderr)=out.communicate()
                 R.debug(out.returncode)
                 L.debug(stdout)
-                LER.error(stderr)
+                if stderr:LER.log(logging.error,stderr)
             else:LER.error('error in callback')
         else:LER.error('error in condition')
         time.sleep(delay)
