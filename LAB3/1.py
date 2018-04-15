@@ -29,7 +29,7 @@ def main():
     
     for i in range(run) :   
         
-        h, t = DHT.read(11, BCM_PIN)
+        h, t = DHT.read_retry(11, BCM_PIN)
         h=h/100
         wh={'t':t,'h':h}
 
