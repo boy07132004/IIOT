@@ -1,3 +1,9 @@
-2018-04-15 13:38:03,826 -RETURN -0
-2018-04-15 13:38:03,827 -STDOUT -b'0.json\n0.py\n1.py\nfor_test.py\nlog.txt\nsample_DHT.py\n'
-2018-04-15 13:38:03,828 -STDERR -b''
+2018-04-15 14:58:05,817 -RETURN : 1
+2018-04-15 14:58:05,818 -STDOUT : b'shining\n'
+2018-04-15 14:58:05,818 -STDERR : b'Traceback (most recent call last):\n  File "./test0.py", line 53, in <module>\n    main()\n  File "./test0.py", line 31, in main\n    PINS.append(int(PIN[1]))    # Which PINS\nValueError: invalid literal for int() with base 10: \'15]\'\n'
+2018-04-15 14:58:11,543 -RETURN : 1
+2018-04-15 14:58:11,544 -STDOUT : b'shining\n'
+2018-04-15 14:58:11,544 -STDERR : b'Traceback (most recent call last):\n  File "./test0.py", line 53, in <module>\n    main()\n  File "./test0.py", line 31, in main\n    PINS.append(int(PIN[1]))    # Which PINS\nValueError: invalid literal for int() with base 10: \'15]\'\n'
+2018-04-15 14:58:17,275 -RETURN : 1
+2018-04-15 14:58:17,276 -STDOUT : b'shining\n'
+2018-04-15 14:58:17,276 -STDERR : b'Traceback (most recent call last):\n  File "./test0.py", line 53, in <module>\n    main()\n  File "./test0.py", line 31, in main\n    PINS.append(int(PIN[1]))    # Which PINS\nValueError: invalid literal for int() with base 10: \'15]\'\n'
