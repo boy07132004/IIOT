@@ -8,7 +8,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG,filename='log.txt', \
 format='%(asctime)s -%(name)s -%(message)s')
 L = logging.getLogger('STDOUT')
-R = logging.getLogger('Return')
+R = logging.getLogger('RETURN')
 LER= logging.getLogger('STDERR')
 
 def main():
