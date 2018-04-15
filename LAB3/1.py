@@ -5,11 +5,15 @@ import subprocess as sp
 import logging
 
 
+#-------------------------------LOG---------------------------------#
 logging.basicConfig(level=logging.DEBUG,filename='log.txt', \
 format='%(asctime)s -%(name)s : %(message)s')
 L = logging.getLogger('STDOUT')
 R = logging.getLogger('RETURN')
 LER= logging.getLogger('STDERR')
+#-------------------------------------------------------------------#
+
+delay=5
 
 def main():
     P       =sys.argv[1]
@@ -20,17 +24,16 @@ def main():
     monit_t =float(mt[1:len(mt)-1])
     cb      =sys.argv[4]
     callback=cb[1:len(cb)-1].split()
-    r       =int(monit_t // 5)
+    r       =int(monit_t // delay)
 
 
     #-----whitelist for command-----#
     whitelist=['ls','./test0.py','./test1.py']
     #-------------------------------#
     
-    if r >= 0:
-        run     = r+1
-        delay  = 5
+    if r >= 0 :   run = r+1  
     else:LER.error('error monit_time')
+    
     
     for i in range(run) :   
         if i==run-1:    delay=monit_t % 5
