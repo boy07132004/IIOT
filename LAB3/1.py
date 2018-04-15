@@ -13,9 +13,9 @@ R = logging.getLogger('RETURN')
 LER= logging.getLogger('STDERR')
 #-------------------------------------------------------------------#
 
-delay=5
 
 def main():
+    delay   =5
     P       =sys.argv[1]
     BCM_PIN =int(P[1:len(P)-1])
     co      =sys.argv[2]
@@ -34,8 +34,9 @@ def main():
     if r >= 0 :   run = r+1  
     else:LER.error('error monit_time')
     
-    
+
     for i in range(run) :   
+        
         if i==run-1:    delay=monit_t % 5
         
         h, t = DHT.read_retry(11, BCM_PIN)
@@ -50,7 +51,7 @@ def main():
                 L.debug(stdout)
                 LER.error(stderr)
             else:LER.error('error in callback')
-        else:LER.error('error in cond')
+        else:LER.error('error in condition')
         time.sleep(delay)
 
 
