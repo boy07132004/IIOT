@@ -67,25 +67,31 @@ def main():
     initEnv(PIN)
     initPin(led)
     
+    # function 
+    print("1:	setup led\n0	:setoff led\nPower:poweroff\n")
+
     # start .........
-    while True:
-    
-    # function
-        print("1:	setup led\n0	:setoff led\nPower:poweroff\n")
+    while True:  
         s = getSignal(PIN)
         sig=decodeSingal(s,signal_map,0.001)
         
-        if sig == str('on'):GPIO.output(led,True)
+        if sig == str('on'):
+        	print('turn on led\n')
+        	GPIO.output(led,True)
+        	
+        elif sig == str('off'):
+        	print('turn off led\n')
+        	GPIO.output(led,False)
+        	
+        elif sig == str('power'):
+        	print('--Good Bye--\n')
+        	break
         
-        elif sig == str('off'):GPIO.output(led,False)
-        
-        elif sig == str('power'):break
-        
 
 
 
 
-        else:print('not record')
+        else:print('not record\n')
     
     # end
     endEnv()
