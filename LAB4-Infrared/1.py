@@ -1,12 +1,3 @@
-#!/usr/bin/env python3
-"""
-This is a program for recognizing infrared signal.
-
-@author: FATESAIKOU
-@argv[1]: data input pin(BOARD)
-@argv[2]: signal key map
-"""
-
 import RPi.GPIO as GPIO
 import time
 import sys
@@ -15,11 +6,10 @@ import json
 def initEnv(pin):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setwarnings(False)
-
     GPIO.setup(pin, GPIO.IN)
 
-def initPin(led):
-    GPIO.setup(led, GPIO.OUT)
+def initPin(lp):
+    GPIO.setup(lp, GPIO.OUT)
 
 def endEnv():
     GPIO.cleanup()
@@ -27,7 +17,6 @@ def endEnv():
 
 def getSignal(pin):
     start, stop = 0, 0
-
     signals = []
 
     while True:
@@ -60,6 +49,7 @@ def decodeSingal(s, signal_map, rang):
             return name
 
     return None
+
     
 
 def main():
@@ -72,16 +62,19 @@ def main():
     src.close()
 
     initEnv(PIN)
-
+    initPin(led)
     while True:
         print("1:setup led\n   0:setoff led\n P:poweroff\n")
         s = getSignal(PIN)
-        sig=decodeSingal(s,signal_map,0.1)
-        if sig == "1":
-            print('ok')
-        else:print('err')
-
-    endEnv()
-
+        sig=decodeSingal(s,signal_map,0.001)
+        
+        print('\n',sig)
+        if sig == str('on'):
+            GPIO.output(led,True)
+        elif sig == str('off'):
+            GPIO.output(led,False)
+        elif sig == str('power'):break
+        else:print('not record')
+    endEnv()    
 if __name__ == "__main__":
     main()
