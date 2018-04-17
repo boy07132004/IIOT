@@ -54,8 +54,8 @@ def main():
     p1  = sys.argv[1]
     l1  = sys.argv[2]
     m1  = sys.argv[3]
-    PIN = p1[1:len(p1)-1]
-    led = l1[1:len(l1)-1]
+    PIN = int(p1[1:len(p1)-1])
+    led = int(l1[1:len(l1)-1])
     smap= m1[1:len(m1)-1]
     
     # open map
