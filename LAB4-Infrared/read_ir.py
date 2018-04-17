@@ -48,7 +48,7 @@ def decodeSingal(s, signal_map, rang):
             return name
 
     return None
-#-----------------------DEF------------------------#
+#-----------------------MAIN------------------------#
 def main():
     # read argv
     p1  = sys.argv[1]
