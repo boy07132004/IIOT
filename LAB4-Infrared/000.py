@@ -116,7 +116,7 @@ def main():
                 elif sigg == str('power'):
                     print('Turn off the led first')
 
-        elif sig == str('plus') or str('minus'):
+        elif sig == (str('plus') or str('minus')):
             print('Turn on the led first')
         elif sig == str('off'):print('Led is off now')
         elif sig == str('power'):
