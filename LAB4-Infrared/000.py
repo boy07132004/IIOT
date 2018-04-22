@@ -11,10 +11,10 @@ def initEnv(pin):
 
 def initPin(lp):
     GPIO.setup(lp, GPIO.OUT)
-def fuck(lp):
-    t_pwm = GPIO.PWM(lp, 1000)
-    t_pwm.start(50)
-    return t_pwm
+def start(lp)    
+    pwm = GPIO.PWM(lp, 1000)
+    pwm.start(50)
+    return pwm
 
 def getSignal(pin):
     start, stop = 0, 0
@@ -43,7 +43,7 @@ def compairSignal(s1, s2, rang):
     
     return True
 
-def decodeSingal(s, signal_map, rang):
+def decodeSignal(s, signal_map, rang):
     for name in signal_map.keys():
         if compairSignal(s, signal_map[name], rang):
             return name
@@ -75,15 +75,15 @@ def main():
     # start .........
     while True:  
         s = getSignal(PIN)
-        sig=decodeSingal(s,signal_map,0.001)
+        sig=decodeSignal(s,signal_map,0.001)
         
         if sig == str('on'):
         	print('turn on led\n')
-            pwms=fuck(led)
+            pwms=start(led)
             s=True
         	while s:
                 ss = getSignal(PIN)
-                sigg=decodeSingal(ss,signal_map,0.001)
+                sigg=decodeSignal(ss,signal_map,0.001)
                 
                 if sigg == str('up') and duties <90:
                     duties+=10
