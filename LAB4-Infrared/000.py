@@ -69,7 +69,7 @@ def main():
     
     # function 
     print("1:	setup led\n0	:setoff led\nPower:poweroff\n\
-        +:up\n-:minus")
++:up\n-:minus")
 
     # start .........
     while True:  
@@ -97,22 +97,14 @@ def main():
                 
                 elif sigg == str('off'):
                     print('turn off led\n')
-                    duties=0.001 
+                    duties=0
                     pwms.ChangeDutyCycle(duties)
                     s=False
-            
-        if sig == str('off'):
-            print('turn off led\n')
-    #       GPIO.output(led,False)
-            
+    
         elif sig == str('power'):
             print('--Good Bye--\n')
             break
         
-
-
-
-
         else:print('not record\n')
     
     # end
