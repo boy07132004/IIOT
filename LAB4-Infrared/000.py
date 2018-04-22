@@ -84,7 +84,7 @@ def main():
         sig=decodeSignal(s,signal_map,0.001)
         
         if sig == str('on'):
-            print('turn on led\n')
+            print('----LED on----\n')
             duties=50
             pwms.ChangeDutyCycle(duties)
             shining=True
@@ -109,18 +109,18 @@ def main():
                     pwms.ChangeDutyCycle(duties)
                 
                 elif sigg == str('off'):
-                    print('turn off led\n')
+                    print('----LED off----\n')
                     duties=0
                     pwms.ChangeDutyCycle(duties)
                     shining=False
                 elif sigg == str('power'):
                     print('Turn off the led first')
 
-        elif sig == str('off') or str('plus') or str('minus'):
+        elif sig == str('plus') or str('minus'):
             print('Turn on the led first')
-        
+        elif sig == str('off'):print('Led is off now')
         elif sig == str('power'):
-            print('--Good Bye--\n')
+            print('----Good Bye----\n')
             break
         
         else:print('not record\n')
