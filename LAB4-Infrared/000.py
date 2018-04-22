@@ -11,7 +11,7 @@ def initEnv(pin):
 
 def initPin(lp):
     GPIO.setup(lp, GPIO.OUT)
-def start(lp)    
+def start(lp):    
     pwm = GPIO.PWM(lp, 1000)
     pwm.start(50)
     return pwm
