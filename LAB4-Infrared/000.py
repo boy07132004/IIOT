@@ -75,8 +75,8 @@ def main():
     pwms=initPin(led)
     
     # function 
-    print("1:	setup led\n0	:setoff led\nPower:poweroff\n\
-+:Plus Duty\n-:Minus Duty")
+    print("1    :LED on\n0    :LED off\nPower:poweroff\n\
++    :Plus Duty\n-:    Minus Duty")
 
     # start .........
     while True:  
@@ -97,7 +97,7 @@ def main():
                         print('duty limit :100')
                         continue
                     duties+=10
-                    print(duties)
+                    print('duty++  now duty:',duties)
                     pwms.ChangeDutyCycle(duties)
                 
                 elif sigg == str('minus'):
@@ -105,7 +105,7 @@ def main():
                         print('duty limit :0')
                         continue
                     duties-=10
-                    print(duties)
+                    print('duty--  now duty:',duties)
                     pwms.ChangeDutyCycle(duties)
                 
                 elif sigg == str('off'):
