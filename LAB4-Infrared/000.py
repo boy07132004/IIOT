@@ -11,9 +11,8 @@ def initEnv(pin):
 
 def initPin(lp):
     GPIO.setup(lp, GPIO.OUT)
-def start(lp):    
     pwm = GPIO.PWM(lp, 1000)
-    pwm.start(50)
+    pwm.start(0)
     return pwm
 
 def getSignal(pin):
@@ -66,7 +65,7 @@ def main():
 
     # init PIN
     initEnv(PIN)
-    initPin(led)
+    pwms=initPin(led)
     
     # function 
     print("1:	setup led\n0	:setoff led\nPower:poweroff\n\
@@ -79,7 +78,6 @@ def main():
         
         if sig == str('on'):
             print('turn on led\n')
-            pwms=start(led)
             duties=50
             pwms.ChangeDutyCycle(duties)
             s=True
@@ -99,7 +97,7 @@ def main():
                 
                 elif sigg == str('off'):
                     print('turn off led\n')
-                    duties=0 
+                    duties=0.001 
                     pwms.ChangeDutyCycle(duties)
                     s=False
             
