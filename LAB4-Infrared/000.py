@@ -78,7 +78,7 @@ def main():
         sig=decodeSignal(s,signal_map,0.001)
         
         if sig == str('on'):
-        	print('turn on led\n')
+            print('turn on led\n')
             pwms=start(led)
             s=True
         	while s:
