@@ -94,14 +94,15 @@ def main():
                 
                 if sigg == str('plus'):
                     if duties==100:
-                        print('duty limit')
+                        print('duty limit :100')
                         continue
                     duties+=10
+                    print(duties)
                     pwms.ChangeDutyCycle(duties)
                 
                 elif sigg == str('minus'):
                     if duties==0:
-                        print('duty limit')
+                        print('duty limit :0')
                         continue
                     duties-=10
                     print(duties)
@@ -115,7 +116,7 @@ def main():
                 elif sigg == str('power'):
                     print('Turn off the led first')
 
-        elif sig == (str('off') or str('plus') or str('minus')):
+        elif sig == str('off') or str('plus') or str('minus'):
             print('Turn on the led first')
         
         elif sig == str('power'):
