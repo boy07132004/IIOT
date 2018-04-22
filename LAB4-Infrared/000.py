@@ -81,7 +81,7 @@ def main():
             print('turn on led\n')
             pwms=start(led)
             s=True
-        	while s:
+            while s:
                 ss = getSignal(PIN)
                 sigg=decodeSignal(ss,signal_map,0.001)
                 
@@ -100,14 +100,14 @@ def main():
                     duties=0 
                     pwms.ChangeDutyCycle(duties)
                     s=False
-        	
+            
         if sig == str('off'):
-        	print('turn off led\n')
-    #    	GPIO.output(led,False)
-        	
+            print('turn off led\n')
+    #       GPIO.output(led,False)
+            
         elif sig == str('power'):
-        	print('--Good Bye--\n')
-        	break
+            print('--Good Bye--\n')
+            break
         
 
 
