@@ -95,14 +95,14 @@ def main():
                 if sigg == str('plus'):
                     if duties==100:
                         print('duty limit')
-                        next
+                        continue
                     duties+=10
                     pwms.ChangeDutyCycle(duties)
                 
                 elif sigg == str('minus'):
                     if duties==0:
                         print('duty limit')
-                        next
+                        continue
                     duties-=10
                     print(duties)
                     pwms.ChangeDutyCycle(duties)
