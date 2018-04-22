@@ -75,7 +75,7 @@ def main():
     
     # function 
     print("1:	setup led\n0	:setoff led\nPower:poweroff\n\
-+:up\n-:minus")
++:Plus Duty\n-:Minus Duty")
 
     # start .........
     while True:  
