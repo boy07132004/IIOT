@@ -126,6 +126,7 @@ def main():
         else:print('not record\n')
     
     # end
+    pwms.stop()
     GPIO.cleanup()
     
 if __name__ == "__main__":
