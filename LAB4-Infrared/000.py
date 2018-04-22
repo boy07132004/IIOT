@@ -80,6 +80,8 @@ def main():
         if sig == str('on'):
             print('turn on led\n')
             pwms=start(led)
+            duties=50
+            pwms.ChangeDutyCycle(duties)
             s=True
             while s:
                 ss = getSignal(PIN)
