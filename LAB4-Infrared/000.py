@@ -69,7 +69,7 @@ def main():
     signal_map = json.loads(src.read())
     src.close()
     print(signal_map)
-    """
+    
     # init PIN
     initEnv(PIN)
     pwms=initPin(led)
@@ -115,7 +115,7 @@ def main():
                 elif sigg == str('power'):
                     print('Turn off the led first')
 
-        elif sig == str('off') or str('plus') or str('minus'):
+        elif sig == (str('off') or str('plus') or str('minus')):
             print('Turn on the led first')
         
         elif sig == str('power'):
@@ -126,6 +126,6 @@ def main():
     
     # end
     GPIO.cleanup()
-    """
+    
 if __name__ == "__main__":
     main()
