@@ -20,13 +20,11 @@ def initPin(pins):
     GPIO.setup(pins,GPIO.OUT)
     t_pwm = GPIO.PWM(pins, 1000)
     t_pwm.start(50)
-    print(t_pwm)
     return t_pwm
 
 
 def setPin(pwms, duties):
-    for i in range(len(pwms)):
-        pwms.ChangeDutyCycle(duties)
+    pwms.ChangeDutyCycle(duties)
 
 def endEnv():
     GPIO.cleanup()
@@ -61,7 +59,7 @@ def compairSignal(s1, s2, rang):
     return True
 
 
-def decodeSingal(s, signal_map, rang):
+def decodeSignal(s, signal_map, rang):
     for name in signal_map.keys():
         if compairSignal(s, signal_map[name], rang):
             return name
@@ -87,48 +85,43 @@ def main():
     # init PIN
     initEnv(PIN)
     #initPin(led)
-    pwms = initPin(led)
+    
 
     # function
     print("1:setup led\n0:setoff led\n Power:power off\nup:bright led\ndown:dim led")
-
+    a=1
     # start .........
-    while True:
+    while a>0:
         s = getSignal(PIN)
-        sig = decodeSingal(s, signal_map, 0.001)
+        sig = decodeSignal(s, signal_map, 0.001)
+        pwms=initPin(led)
 
         if sig == str('on'):
-            print('turn on led\n')
-            GPIO.output(led, True)
-            a = 50
-            """
-            while (sig == str('up')):
-                duties = [ a + 1]
-                setPin(pwms, duties )
-                a = a + 1
-            while (sig == str('down')):
-                duties = [ a - 1]
-                setPin(pwms, duties )
-                a = a- 1
-			"""
-        elif sig == str('off'):
-            print('turn off led\n')
-            GPIO.output(led, False)
+            shining=True
 
-        elif sig == str('power'):
-            print('--Good Bye--\n')
-            break
-        elif  sig== str('up'):
+        else:print('not record\n')
 
-
-
-
-
-
-        else:
-            print('not record\n')
+        while sig == :
+            s = getSignal(PIN)
+            sig = decodeSignal(s,signal_map,0.001)
+            if sig == 
+            elif sig == str('up'):
+                duties+=10
+                setPin(pwms,duties)
+            elif sig == str('down') and duties>1:
+                duties-=10
+                setPin(pwms,duties)
+            elif sig == str('off'):
+                duties=0
+                setPin(pwms,duties)
+            
+            elif sig == str('power'):
+                print('--Good  Bye--')
+                a=-1
+                     
 
     # end
+    pwms.stop()
     endEnv()
 
 
