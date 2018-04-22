@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+"""
+argv[1] : [input]
+argv[2] : [led pin]
+argv[3] : [signal key map]
+"""
 import RPi.GPIO as GPIO
 import time
 import sys
@@ -80,17 +86,22 @@ def main():
             print('turn on led\n')
             duties=50
             pwms.ChangeDutyCycle(duties)
-            s=True
-            while s:
+            shining=True
+            while shining:
                 ss = getSignal(PIN)
                 sigg=decodeSignal(ss,signal_map,0.001)
                 
-                if sigg == str('up') and duties <90:
+                if sigg == str('plus'):
+                    if duties==100:
+                        print('duty limit')
+                        break
                     duties+=10
-                    print(duties)
                     pwms.ChangeDutyCycle(duties)
                 
-                elif sigg == str('down') and duties >10:
+                elif sigg == str('minus'):
+                    if duties==0:
+                        print('duty limit')
+                        break
                     duties-=10
                     print(duties)
                     pwms.ChangeDutyCycle(duties)
@@ -99,8 +110,13 @@ def main():
                     print('turn off led\n')
                     duties=0
                     pwms.ChangeDutyCycle(duties)
-                    s=False
-    
+                    shining=False
+                elif sigg == str('power'):
+                    print('Turn off the led first')
+
+        elif sig == str('off') or str('plus') or str('minus'):
+            print('Turn on the led first')
+        
         elif sig == str('power'):
             print('--Good Bye--\n')
             break
