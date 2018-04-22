@@ -68,7 +68,8 @@ def main():
     src = open(smap, 'r')
     signal_map = json.loads(src.read())
     src.close()
-
+    print(signal_map)
+    """
     # init PIN
     initEnv(PIN)
     pwms=initPin(led)
@@ -125,6 +126,6 @@ def main():
     
     # end
     GPIO.cleanup()
-
+    """
 if __name__ == "__main__":
     main()
