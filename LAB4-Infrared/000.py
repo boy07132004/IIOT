@@ -76,7 +76,7 @@ def main():
     
     # function 
     print("1    :LED on\n0    :LED off\nPower:poweroff\n\
-+    :Plus Duty\n-:    Minus Duty")
++    :Plus Duty\n-    :Minus Duty")
 
     # start .........
     while True:  
@@ -116,8 +116,8 @@ def main():
                 elif sigg == str('power'):
                     print('Turn off the led first')
 
-        elif sig == (str('plus') or str('minus')):
-            print('Turn on the led first')
+        elif sig == str('plus'):print('Turn on the led first')
+        elif sig == str('minus'):print('Turn on the led first')
         elif sig == str('off'):print('Led is off now')
         elif sig == str('power'):
             print('----Good Bye----\n')
