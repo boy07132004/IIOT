@@ -68,7 +68,7 @@ def main():
     src = open(smap, 'r')
     signal_map = json.loads(src.read())
     src.close()
-    print(signal_map)
+    
     
     # init PIN
     initEnv(PIN)
@@ -95,14 +95,14 @@ def main():
                 if sigg == str('plus'):
                     if duties==100:
                         print('duty limit')
-                        break
+                        next
                     duties+=10
                     pwms.ChangeDutyCycle(duties)
                 
                 elif sigg == str('minus'):
                     if duties==0:
                         print('duty limit')
-                        break
+                        next
                     duties-=10
                     print(duties)
                     pwms.ChangeDutyCycle(duties)
