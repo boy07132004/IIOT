@@ -21,8 +21,8 @@ def end_service(signal, frame):
     pwmr.stop()
     global service_on
     print('[INFO] Ctrl+C captured, shutdown service.')
-    service_on = False
     GPIO.cleanup()
+    service_on = False
     sys.exit(0)
 
 # Client request handler
