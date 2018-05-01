@@ -14,16 +14,23 @@ from bluetooth import *
 
 pins={'r':3,'g':5,'b':7}
 
-
-
+# Service ending handler
+def end_service(signal, frame):
+    pwmg.stop()
+    pwmb.stop()
+    pwmr.stop()
+    global service_on
+    print('[INFO] Ctrl+C captured, shutdown service.')
+    service_on = False
+    GPIO.cleanup()
+    sys.exit(0)
 
 # Client request handler
 def handler(sock, info):
     global service_on
     print("[INFO] Accepted connection from", info)
     GPIO.setmode(GPIO.BOARD)
-    for i in pins :GPIO.setup(pins[i],GPIO.OUT)
-        
+    for i in pins:GPIO.setup(pins[i],GPIO.OUT)
     pwmr = GPIO.PWM(pins['r'],2000)
     pwmg = GPIO.PWM(pins['g'],2000)
     pwmb = GPIO.PWM(pins['b'],2000)
@@ -37,7 +44,7 @@ def handler(sock, info):
             if len(data) == 0: break
 
             print("[RECV] %s" % data)
-            sock.send('foo ' + data.decode('ascii'))
+            sock.send('done ' + data.decode('ascii'))
             rec=data.decode('ascii')
             rec1=rec.split(' ')
             print(data.decode('ascii'))
@@ -58,16 +65,6 @@ def handler(sock, info):
         pass
         
 
-# Service ending handler
-def end_service(signal, frame):
-    pwmg.stop()
-    pwmb.stop()
-    pwmr.stop()
-    global service_on
-    print('[INFO] Ctrl+C captured, shutdown service.')
-    service_on = False
-    GPIO.cleanup()
-    sys.exit(0)
 
 # Env init
 UUID = '94f39d29-7d6d-437d-973b-fba39e49d4ee'
