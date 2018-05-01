@@ -14,16 +14,7 @@ from bluetooth import *
 
 pins={'r':3,'g':5,'b':7}
 
-# Service ending handler
-def end_service(signal, frame):
-    global service_on
-    print('[INFO] Ctrl+C captured, shutdown service.')
-    service_on = False
-    pwmr.stop()
-    pwmg.stop()
-    pwmb.stop()
-    GPIO.cleanup()
-    sys.exit(0)
+
 
 
 # Client request handler
@@ -65,6 +56,17 @@ def handler(sock, info):
         pass
         
 
+# Service ending handler
+def end_service(signal, frame):
+    global service_on
+    print('[INFO] Ctrl+C captured, shutdown service.')
+    service_on = False
+    pwmr.stop()
+    pwmg.stop()
+    pwmb.stop()
+    GPIO.cleanup()
+    sys.exit(0)
+    
 # Env init
 UUID = '94f39d29-7d6d-437d-973b-fba39e49d4ee'
 SERVER_NAME = sys.argv[1]
