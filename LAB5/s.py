@@ -22,13 +22,20 @@ def handler(sock, info):
     global service_on
     print("[INFO] Accepted connection from", info)
     GPIO.setmode(GPIO.BOARD)
-    for i in pins :GPIO.setup(pins[i],GPIO.OUT)
+    for i in pins :
+        GPIO.setup(pins[i],GPIO.OUT)
+        t = str(pins[i])
+        print(t)
+        t = GPIO.PWM(pins[i],2000)
+        t.start(0)
+    """
     pwmr = GPIO.PWM(pins['r'],2000)
     pwmg = GPIO.PWM(pins['g'],2000)
     pwmb = GPIO.PWM(pins['b'],2000)
     pwmr.start(0)
     pwmg.start(0)
     pwmb.start(0)
+    """
     try:
         while service_on:
             data = sock.recv(1024)
