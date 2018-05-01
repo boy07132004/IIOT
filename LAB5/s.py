@@ -51,7 +51,7 @@ def handler(sock, info):
                 pwmg.ChangeDutyCycle(G)
                 pwmb.ChangeDutyCycle(B)
             else:print('nope')
-            print("[SEND] >> foo " + data.decode('ascii'))
+            print("[SEND] >> done " + data.decode('ascii'))
     except IOError:
         pass
         
@@ -61,12 +61,12 @@ def end_service(signal, frame):
     global service_on
     print('[INFO] Ctrl+C captured, shutdown service.')
     service_on = False
-    pwmr.stop()
     pwmg.stop()
     pwmb.stop()
+    pwmr.stop()
     GPIO.cleanup()
     sys.exit(0)
-    
+
 # Env init
 UUID = '94f39d29-7d6d-437d-973b-fba39e49d4ee'
 SERVER_NAME = sys.argv[1]
