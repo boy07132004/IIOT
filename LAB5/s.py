@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
 """
-This program is a simple rfcomm server based on bluetooth connection,
-please check your BlueTooth connection before you start your testing.
-
-@author: FATESAIKOU
 @argv[1]: server name
-3:R 5:G 7:B
+PIN >> 3:R 5:G 7:B
 """
 import RPi.GPIO as GPIO
 import signal
 import sys
 from bluetooth import *
 
+#set PINS
 pins={'r':3,'g':5,'b':7}
 
 # Service ending handler
