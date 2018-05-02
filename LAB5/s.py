@@ -47,7 +47,7 @@ def handler(sock, info):
             if rec1[0:3] == ['get','led','values']:
                 try:
                     string=str(R)+':'+str(G)+':'+str(B)
-                    sock.send('NOW R:G:B >>'+string)
+                    sock.send('NOW R:G:B >> '+string)
                     print(string)
                 except:
                     sock.send('ERROR GET')
