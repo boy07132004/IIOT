@@ -16,9 +16,6 @@ pins={'r':3,'g':5,'b':7}
 
 # Service ending handler
 def end_service(signal, frame):
-    pwmg.stop()
-    pwmb.stop()
-    pwmr.stop()
     global service_on
     print('[INFO] Ctrl+C captured, shutdown service.')
     GPIO.cleanup()
@@ -49,10 +46,10 @@ def handler(sock, info):
             rec1=rec.split(' ')
             print(data.decode('ascii'))
             
-            if rec1[0] == 'get':
+            if rec1[0:3] == ['get','led','values']:
                 print('get')
-            elif rec1[0] == 'set':
-                a=rec1[1].split(':')
+            elif rec1[0:2] == ['set','led']:
+                a=rec1[2].split(':')
                 R=int(a[0])
                 G=int(a[1])
                 B=int(a[2])
@@ -61,6 +58,9 @@ def handler(sock, info):
                 pwmb.ChangeDutyCycle(B)
             else:print('nope')
             print("[SEND] >> done " + data.decode('ascii'))
+        pwmg.stop()
+        pwmb.stop()
+        pwmr.stop()
     except IOError:
         pass
         
