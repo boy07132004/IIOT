@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-@argv[1]: server name
-PIN >> 3:R 5:G 7:B
+@argv[1]: [server name]
+@argv[2]: [led_r_pin:led_g_pin:led_b_pin]
 """
 import RPi.GPIO as GPIO
 import signal
@@ -9,12 +9,17 @@ import sys
 from bluetooth import *
 
 #set PINS
-pins={'r':3,'g':5,'b':7}
+pins={}
+pin =sys.argv[2]
+ptmp=pin[1:len(pin)-1].split(':')
+pins['r'] = int(ptmp[0])
+pins['g'] = int(ptmp[1])
+pins['b'] = int(ptmp[2])
 
 # Service ending handler
 def end_service(signal, frame):
     global service_on
-    print('[INFO] Ctrl+C captured, shutdown service.')
+    print('\n[INFO] Ctrl+C captured, shutdown service.')
     GPIO.cleanup()
     service_on = False
     sys.exit(0)
@@ -47,16 +52,16 @@ def handler(sock, info):
             if rec1[0:3] == ['get','led','values']:
                 try:
                     string=str(R)+':'+str(G)+':'+str(B)
-                    sock.send('NOW R:G:B >> '+string)
-                    print(string)
+                    sock.send(string)
+
                 except:
                     sock.send('ERROR GET')
-                    print('ERROR GET')
+                    print('[INFO] ERROR GET')
                     continue
 
-            elif rec1[0:2] == ['set','led']:
+            elif rec1[0] == 'set':
                 try:
-                    a=rec1[2].split(':')
+                    a=rec1[1].split(':')
                     R=int(a[0])
                     G=int(a[1])
                     B=int(a[2])
@@ -66,11 +71,11 @@ def handler(sock, info):
                     sock.send('DONE SET')
                 except:
                     sock.send('ERROR SET')
-                    print('ERROR SET')
+                    print('[INFO] ERROR SET')
                     continue
             else:
                 sock.send('ERROR INPUT')
-                print('ERROR INPUT')
+                print('[INFO] ERROR INPUT')
                 continue
             print("[SEND] >> done " + rec)
         pwmg.stop()
@@ -82,7 +87,8 @@ def handler(sock, info):
 
 # Env init
 UUID = '94f39d29-7d6d-437d-973b-fba39e49d4ee'
-SERVER_NAME = sys.argv[1]
+S_N = sys.argv[1]
+SERVER_NAME = S_N[1:len(S_N)-1]
 service_on = True
 
 
