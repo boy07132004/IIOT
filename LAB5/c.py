@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 """
-This program is a simple rfcomm client paired with sample_rfcomm_server.py,
-please check your BlueTooth connection before you start your testing.
-
-@author: FATESAIKOU
-@argv[1]: server address
-@argv[2]: server name
+@argv[1]: [server address]
+@argv[2]: [server name]
 """
 
 import signal
@@ -21,7 +17,10 @@ def end_read(signal, frame):
 
 
 # Env init
-ADDRESS = sys.argv[1]
+A = sys.argv[1]
+ADDRESS = A[1:len(A)-1]
+N = sys.argv[2]
+SERVER_NAME = N[1:len(N)-1]
 UUID = '94f39d29-7d6d-437d-973b-fba39e49d4ee'
 read_on = True
 
@@ -44,6 +43,10 @@ first_match = service_matches[0]
 port = first_match['port']
 name = first_match['name']
 host = first_match['host']
+
+if name != SERVER_NAME:
+    print('[INFO] Server name error, exiting client =(')
+    sys.exit(0)
 
 print('[INFO] Connecting to [%s]:%s' % (name, host))
 
