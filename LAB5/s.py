@@ -49,15 +49,9 @@ def handler(sock, info):
             rec=data.decode('ascii')
             rec1=rec.split(' ')
                          
-            if rec1[0:3] == ['get','led','values']:
-                try:
-                    string=str(R)+':'+str(G)+':'+str(B)
-                    sock.send(string)
-
-                except:
-                    sock.send('ERROR GET')
-                    print('[INFO] ERROR GET')
-                    continue
+            if rec1[0:len(rec1)] == ['get','led','values']:
+                string=str(R)+':'+str(G)+':'+str(B)
+                sock.send(string)
 
             elif rec1[0] == 'set':
                 try:
