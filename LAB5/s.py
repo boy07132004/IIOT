@@ -3,6 +3,7 @@
 @argv[1]: [server name]
 @argv[2]: [led_r_pin:led_g_pin:led_b_pin]
 """
+#test
 import RPi.GPIO as GPIO
 import signal
 import sys
