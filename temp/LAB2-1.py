@@ -41,11 +41,11 @@ def endVoice(v):
     return np.random.choice(cand_freqs, freq_num)
 '''
 def main():
-    pin = []
+    
     y = sys.argv[1]
     y1 = y.split("[")
     y2 = y1[1].split("]")
-    pin.append(int(y2[0]))
+    pin=(int(y2[0]))
     freq = []
     x = sys.argv[2]
     x1 = x.split("[")
