@@ -15,6 +15,8 @@ int main(void) {
     UA_Server *server = UA_Server_new(config);
 
     UA_StatusCode retval = UA_Server_run(server, &running);
+    UA_String ID("123")
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, ID);
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
     return (int)retval;
