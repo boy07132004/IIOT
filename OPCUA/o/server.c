@@ -14,8 +14,9 @@ int main(void) {
 
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
-           
-    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER,"N66061359");
+    const char* c = "N66061359";
+    UA_String s = UA_String_fromChars(c);
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER,"%s",s.data);
     
     UA_StatusCode retval = UA_Server_run(server, &running); 
     UA_Server_delete(server);
