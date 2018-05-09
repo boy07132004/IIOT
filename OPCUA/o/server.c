@@ -1,5 +1,6 @@
 #include <signal.h>
 #include "open62541.h"
+#include <stdio.h>
 
 
 UA_Boolean running = true;
@@ -14,10 +15,15 @@ int main(void) {
 
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
+    
     const char* c = "N66061359";
     UA_String s = UA_String_fromChars(c);
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER,"%s",s.data);
     
+    UA_DateTime Ser_t;
+    Ser_t = UA_DateTime_now();
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER,"%u",Ser_t);
+
     UA_StatusCode retval = UA_Server_run(server, &running); 
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
