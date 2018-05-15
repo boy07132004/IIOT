@@ -40,7 +40,7 @@
 
 #include "open62541.h"
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/deps/queue.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/deps/queue.h" ***********************************/
 
 /*	$OpenBSD: queue.h,v 1.38 2013/07/03 15:05:21 fgsch Exp $	*/
 /*	$NetBSD: queue.h,v 1.11 1996/05/16 05:17:14 mycroft Exp $	*/
@@ -693,7 +693,7 @@ struct {								\
 } while (0)
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/deps/pcg_basic.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/deps/pcg_basic.h" ***********************************/
 
 /*
  * PCG Random Number Generation for C.
@@ -740,7 +740,7 @@ uint32_t pcg32_random_r(pcg32_random_t* rng);
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/deps/libc_time.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/deps/libc_time.h" ***********************************/
 
 
 struct mytm {
@@ -760,7 +760,7 @@ struct mytm {
 int __secs_to_tm(long long t, struct mytm *tm);
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_util.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_util.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -942,7 +942,7 @@ void UA_EXPORT UA_dump_hex_pkg(UA_Byte* buffer, size_t bufferLen);
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_types_encoding_binary.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_types_encoding_binary.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -1024,10 +1024,10 @@ UA_findDataTypeByBinary(const UA_NodeId *typeId);
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/build/src_generated/ua_types_generated_encoding_binary.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/build/src_generated/ua_types_generated_encoding_binary.h" ***********************************/
 
-/* Generated from Opc.Ua.Types.bsd with script /home/jpfr/software/open62541/tools/generate_datatypes.py
- * on host virtualbox by user jpfr at 2018-03-06 10:22:17 */
+/* Generated from Opc.Ua.Types.bsd with script /home/travis/build/open62541/open62541/tools/generate_datatypes.py
+ * on host travis-job-7351cf99-afc7-4146-b1a0-082059a9e9f0 by user travis at 2018-03-06 12:20:29 */
 
 
 /* Boolean */
@@ -2980,10 +2980,10 @@ UA_QueryFirstRequest_decodeBinary(const UA_ByteString *src, size_t *offset, UA_Q
     return UA_decodeBinary(src, offset, dst, &UA_TYPES[UA_TYPES_QUERYFIRSTREQUEST], 0, NULL);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/build/src_generated/ua_transport_generated.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/build/src_generated/ua_transport_generated.h" ***********************************/
 
-/* Generated from Opc.Ua.Types.bsd, Custom.Opc.Ua.Transport.bsd with script /home/jpfr/software/open62541/tools/generate_datatypes.py
- * on host virtualbox by user jpfr at 2018-03-06 10:22:17 */
+/* Generated from Opc.Ua.Types.bsd, Custom.Opc.Ua.Transport.bsd with script /home/travis/build/open62541/open62541/tools/generate_datatypes.py
+ * on host travis-job-7351cf99-afc7-4146-b1a0-082059a9e9f0 by user travis at 2018-03-06 12:20:29 */
 
 
 #ifdef __cplusplus
@@ -3162,10 +3162,10 @@ typedef struct {
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/build/src_generated/ua_transport_generated_handling.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/build/src_generated/ua_transport_generated_handling.h" ***********************************/
 
-/* Generated from Opc.Ua.Types.bsd, Custom.Opc.Ua.Transport.bsd with script /home/jpfr/software/open62541/tools/generate_datatypes.py
- * on host virtualbox by user jpfr at 2018-03-06 10:22:17 */
+/* Generated from Opc.Ua.Types.bsd, Custom.Opc.Ua.Transport.bsd with script /home/travis/build/open62541/open62541/tools/generate_datatypes.py
+ * on host travis-job-7351cf99-afc7-4146-b1a0-082059a9e9f0 by user travis at 2018-03-06 12:20:29 */
 
 
 #ifdef __cplusplus
@@ -3494,10 +3494,10 @@ UA_SecureConversationMessageHeader_delete(UA_SecureConversationMessageHeader *p)
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/build/src_generated/ua_transport_generated_encoding_binary.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/build/src_generated/ua_transport_generated_encoding_binary.h" ***********************************/
 
-/* Generated from Opc.Ua.Types.bsd, Custom.Opc.Ua.Transport.bsd with script /home/jpfr/software/open62541/tools/generate_datatypes.py
- * on host virtualbox by user jpfr at 2018-03-06 10:22:17 */
+/* Generated from Opc.Ua.Types.bsd, Custom.Opc.Ua.Transport.bsd with script /home/travis/build/open62541/open62541/tools/generate_datatypes.py
+ * on host travis-job-7351cf99-afc7-4146-b1a0-082059a9e9f0 by user travis at 2018-03-06 12:20:29 */
 
 
 /* SecureConversationMessageAbortBody */
@@ -3620,7 +3620,7 @@ UA_SecureConversationMessageHeader_decodeBinary(const UA_ByteString *src, size_t
     return UA_decodeBinary(src, offset, dst, &UA_TRANSPORT[UA_TRANSPORT_SECURECONVERSATIONMESSAGEHEADER], 0, NULL);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_connection_internal.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_connection_internal.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -3697,7 +3697,7 @@ void UA_Connection_attachSecureChannel(UA_Connection *connection,
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_securechannel.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_securechannel.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -3950,7 +3950,7 @@ UA_SecureChannel_processChunk(UA_SecureChannel *channel, UA_ByteString *chunk,
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_timer.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_timer.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -4032,7 +4032,7 @@ void UA_Timer_deleteMembers(UA_Timer *t);
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_session.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_session.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -4219,7 +4219,7 @@ UA_Session_addPublishReq(UA_Session *session, UA_PublishResponseEntry* entry);
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_subscription.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_subscription.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -4390,7 +4390,7 @@ UA_Subscription_answerPublishRequestsNoSubscription(UA_Server *server, UA_Sessio
 UA_Boolean
 UA_Subscription_reachedPublishReqLimit(UA_Server *server,  UA_Session *session);
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_session_manager.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_session_manager.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -4450,7 +4450,7 @@ UA_SessionManager_getSessionById(UA_SessionManager *sm, const UA_NodeId *session
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_securechannel_manager.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_securechannel_manager.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -4520,7 +4520,7 @@ UA_SecureChannelManager_close(UA_SecureChannelManager *cm, UA_UInt32 channelId);
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_server_internal.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_server_internal.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -4887,7 +4887,7 @@ UA_StatusCode UA_Server_initNS0(UA_Server *server);
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_services.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_services.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -5374,7 +5374,7 @@ void Service_DeleteSubscriptions(UA_Server *server, UA_Session *session,
 #endif
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/build/src_generated/ua_namespace0.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/build/src_generated/ua_namespace0.h" ***********************************/
 
 /* WARNING: This is a generated file.
  * Any manual changes will be overwritten. */
@@ -5393,7 +5393,7 @@ extern UA_StatusCode ua_namespace0(UA_Server *server);
 
 #endif /* UA_NAMESPACE0_H_ */
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/client/ua_client_internal.h" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/client/ua_client_internal.h" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -5547,7 +5547,7 @@ receiveServiceResponse(UA_Client *client, void *response, const UA_DataType *res
                        UA_DateTime maxDate, UA_UInt32 *synchronousRequestId);
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_types.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_types.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -6660,7 +6660,7 @@ UA_Array_delete(void *p, size_t size, const UA_DataType *type) {
     UA_free((void*)((uintptr_t)p & ~(uintptr_t)UA_EMPTY_ARRAY_SENTINEL));
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_types_encoding_binary.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_types_encoding_binary.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -8416,10 +8416,10 @@ UA_calcSizeBinary(void *p, const UA_DataType *type) {
     return s;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/build/src_generated/ua_types_generated.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/build/src_generated/ua_types_generated.c" ***********************************/
 
-/* Generated from Opc.Ua.Types.bsd with script /home/jpfr/software/open62541/tools/generate_datatypes.py
- * on host virtualbox by user jpfr at 2018-03-06 10:22:17 */
+/* Generated from Opc.Ua.Types.bsd with script /home/travis/build/open62541/open62541/tools/generate_datatypes.py
+ * on host travis-job-7351cf99-afc7-4146-b1a0-082059a9e9f0 by user travis at 2018-03-06 12:20:29 */
 
 
 /* Boolean */
@@ -16284,10 +16284,10 @@ const UA_DataType UA_TYPES[UA_TYPES_COUNT] = {
 };
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/build/src_generated/ua_transport_generated.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/build/src_generated/ua_transport_generated.c" ***********************************/
 
-/* Generated from Opc.Ua.Types.bsd, Custom.Opc.Ua.Transport.bsd with script /home/jpfr/software/open62541/tools/generate_datatypes.py
- * on host virtualbox by user jpfr at 2018-03-06 10:22:17 */
+/* Generated from Opc.Ua.Types.bsd, Custom.Opc.Ua.Transport.bsd with script /home/travis/build/open62541/open62541/tools/generate_datatypes.py
+ * on host travis-job-7351cf99-afc7-4146-b1a0-082059a9e9f0 by user travis at 2018-03-06 12:20:29 */
 
 
 /* SecureConversationMessageAbortBody */
@@ -16688,11 +16688,11 @@ const UA_DataType UA_TRANSPORT[UA_TRANSPORT_COUNT] = {
 };
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/build/src_generated/ua_statuscode_descriptions.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/build/src_generated/ua_statuscode_descriptions.c" ***********************************/
 
 /**********************************************************
  * Autogenerated -- do not modify
- * Generated from /home/jpfr/software/open62541/tools/schema/Opc.Ua.StatusCodes.csv with script /home/jpfr/software/open62541/tools/generate_statuscode_descriptions.py
+ * Generated from /home/travis/build/open62541/open62541/tools/schema/Opc.Ua.StatusCodes.csv with script /home/travis/build/open62541/open62541/tools/generate_statuscode_descriptions.py
  *********************************************************/
 
 
@@ -16955,7 +16955,7 @@ const char * UA_StatusCode_name(UA_StatusCode code) {
 
 #endif
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_util.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_util.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17049,7 +17049,7 @@ UA_parseEndpointUrl(const UA_String *endpointUrl, UA_String *outHostname,
     return UA_STATUSCODE_GOOD;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_timer.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_timer.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17411,7 +17411,7 @@ UA_Timer_deleteMembers(UA_Timer *t) {
     }
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_connection.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_connection.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17656,7 +17656,7 @@ UA_Connection_attachSecureChannel(UA_Connection *connection, UA_SecureChannel *c
         UA_atomic_xchg((void**)&connection->channel, (void*)channel);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/ua_securechannel.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/ua_securechannel.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -18736,7 +18736,7 @@ UA_SecurityPolicy_getRemoteAsymEncryptionBufferLengthOverhead(const UA_SecurityP
     return maxNumberOfBlocks * (encryptedBlockSize - plainTextBlockSize);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_session.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_session.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -18936,7 +18936,7 @@ void UA_Session_addPublishReq( UA_Session *session, UA_PublishResponseEntry* ent
 
 #endif
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_nodes.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_nodes.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19545,7 +19545,7 @@ void UA_Node_deleteReferences(UA_Node *node) {
     node->referencesSize = 0;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_server.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_server.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19849,7 +19849,7 @@ UA_Server_removeRepeatedCallback(UA_Server *server, UA_UInt64 callbackId) {
     return UA_Timer_removeRepeatedCallback(&server->timer, callbackId);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_server_ns0.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_server_ns0.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -20588,7 +20588,7 @@ UA_Server_initNS0(UA_Server *server) {
     return retVal;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/build/src_generated/ua_namespace0.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/build/src_generated/ua_namespace0.c" ***********************************/
 
 /* WARNING: This is a generated file.
  * Any manual changes will be overwritten. */
@@ -25493,7 +25493,7 @@ retVal |= function_ua_namespace0_0_finish(server, ns);
 return retVal;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_server_binary.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_server_binary.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -26297,7 +26297,7 @@ UA_Server_removeConnection(UA_Server *server, UA_Connection *connection) {
 #endif
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_server_utils.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_server_utils.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -26796,7 +26796,7 @@ const UA_ViewAttributes UA_ViewAttributes_default = {
 };
 
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_server_worker.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_server_worker.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -27255,7 +27255,7 @@ UA_Server_run(UA_Server *server, volatile UA_Boolean *running) {
     return UA_Server_run_shutdown(server);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_server_discovery.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_server_discovery.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -27412,7 +27412,7 @@ UA_Server_unregister_discovery(UA_Server *server, const char* discoveryServerUrl
 
 #endif /* UA_ENABLE_DISCOVERY */
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_securechannel_manager.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_securechannel_manager.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -27664,7 +27664,7 @@ UA_SecureChannelManager_close(UA_SecureChannelManager *cm, UA_UInt32 channelId) 
     return removeSecureChannel(cm, entry);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_session_manager.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_session_manager.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -27838,7 +27838,7 @@ UA_SessionManager_removeSession(UA_SessionManager *sm, const UA_NodeId *token) {
     return removeSession(sm, current);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_subscription.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_subscription.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -28375,7 +28375,7 @@ UA_Subscription_answerPublishRequestsNoSubscription(UA_Server *server,
 
 #endif /* UA_ENABLE_SUBSCRIPTIONS */
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_subscription_datachange.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_subscription_datachange.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -28705,7 +28705,7 @@ MonitoredItem_unregisterSampleCallback(UA_Server *server, UA_MonitoredItem *mon)
 
 #endif /* UA_ENABLE_SUBSCRIPTIONS */
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_services_view.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_services_view.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -29463,7 +29463,7 @@ void Service_UnregisterNodes(UA_Server *server, UA_Session *session,
     }
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_services_call.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_services_call.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -29730,7 +29730,7 @@ UA_Server_call(UA_Server *server, const UA_CallMethodRequest *request) {
 
 #endif /* UA_ENABLE_METHODCALLS */
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_services_session.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_services_session.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -30020,7 +30020,7 @@ Service_CloseSession(UA_Server *server, UA_Session *session,
                                         &session->header.authenticationToken);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_services_attribute.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_services_attribute.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -31351,7 +31351,7 @@ __UA_Server_write(UA_Server *server, const UA_NodeId *nodeId,
     return UA_Server_write(server, &wvalue);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_services_discovery.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_services_discovery.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -32106,7 +32106,7 @@ UA_Server_setRegisterServerCallback(UA_Server *server,
 
 #endif /* UA_ENABLE_DISCOVERY */
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_services_subscription.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_services_subscription.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -32796,7 +32796,7 @@ Service_Republish(UA_Server *server, UA_Session *session,
 
 #endif /* UA_ENABLE_SUBSCRIPTIONS */
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_services_securechannel.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_services_securechannel.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -32860,7 +32860,7 @@ Service_CloseSecureChannel(UA_Server *server, UA_SecureChannel *channel) {
                                   channel->securityToken.channelId);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_services_nodemanagement.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_services_nodemanagement.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -34655,7 +34655,7 @@ UA_Server_setNodeTypeLifecycle(UA_Server *server, UA_NodeId nodeId,
                               &lifecycle);
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/server/ua_services_discovery_multicast.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/server/ua_services_discovery_multicast.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -35306,7 +35306,7 @@ iterateMulticastDiscoveryServer(UA_Server* server, UA_DateTime *nextRepeat,
 
 #endif /* defined(UA_ENABLE_DISCOVERY) && defined(UA_ENABLE_DISCOVERY_MULTICAST) */
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/client/ua_client.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/client/ua_client.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -35741,7 +35741,7 @@ UA_Client_runAsync(UA_Client *client, UA_UInt16 timeout) {
     return retval;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/client/ua_client_connect.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/client/ua_client_connect.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -36326,7 +36326,7 @@ UA_Client_close(UA_Client *client) {
     return UA_STATUSCODE_GOOD;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/client/ua_client_discovery.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/client/ua_client_discovery.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -36463,7 +36463,7 @@ UA_Client_findServersOnNetwork(UA_Client *client, const char *serverUrl,
     return retval;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/client/ua_client_highlevel.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/client/ua_client_highlevel.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -36919,7 +36919,7 @@ UA_Client_readArrayDimensionsAttribute(UA_Client *client, const UA_NodeId nodeId
     return retval;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/client/ua_client_subscriptions.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/client/ua_client_subscriptions.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -37682,7 +37682,7 @@ UA_Client_Subscriptions_backgroundPublish(UA_Client *client) {
 
 #endif /* UA_ENABLE_SUBSCRIPTIONS */
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/src/client/ua_client_subscriptions_deprecated.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/src/client/ua_client_subscriptions_deprecated.c" ***********************************/
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -38066,7 +38066,7 @@ UA_Client_Subscriptions_removeMonitoredItem(UA_Client *client, UA_UInt32 subscri
 
 #endif /* UA_ENABLE_SUBSCRIPTIONS */
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/deps/libc_time.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/deps/libc_time.c" ***********************************/
 
 /* Originally released by the musl project (http://www.musl-libc.org/) under the
  * MIT license. Taken from the file /src/time/__secs_to_tm.c */
@@ -38151,7 +38151,7 @@ int __secs_to_tm(long long t, struct mytm *tm) {
     return 0;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/deps/pcg_basic.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/deps/pcg_basic.c" ***********************************/
 
 /*
  * PCG Random Number Generation for C.
@@ -38193,7 +38193,7 @@ uint32_t pcg32_random_r(pcg32_random_t* rng) {
     return (xorshifted >> rot) | (xorshifted << ((~rot + 1u) & 31)); /* was (xorshifted >> rot) | (xorshifted << ((-rot) & 31)) */
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/plugins/ua_network_tcp.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/plugins/ua_network_tcp.c" ***********************************/
 
 /* This work is licensed under a Creative Commons CCZero 1.0 Universal License.
  * See http://creativecommons.org/publicdomain/zero/1.0/ for more information. 
@@ -39173,7 +39173,7 @@ UA_ClientConnectionTCP(UA_ConnectionConfig conf,
     return connection;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/plugins/ua_clock.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/plugins/ua_clock.c" ***********************************/
 
 /* This work is licensed under a Creative Commons CCZero 1.0 Universal License.
  * See http://creativecommons.org/publicdomain/zero/1.0/ for more information. 
@@ -39301,7 +39301,7 @@ UA_DateTime UA_DateTime_nowMonotonic(void) {
 #endif
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/plugins/ua_log_stdout.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/plugins/ua_log_stdout.c" ***********************************/
 
 /* This work is licensed under a Creative Commons CCZero 1.0 Universal License.
  * See http://creativecommons.org/publicdomain/zero/1.0/ for more information. 
@@ -39371,7 +39371,7 @@ UA_Log_Stdout(UA_LogLevel level, UA_LogCategory category,
 #endif
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/plugins/ua_accesscontrol_default.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/plugins/ua_accesscontrol_default.c" ***********************************/
 
 /* This work is licensed under a Creative Commons CCZero 1.0 Universal License.
  * See http://creativecommons.org/publicdomain/zero/1.0/ for more information. 
@@ -39612,7 +39612,7 @@ UA_AccessControl_default(UA_Boolean allowAnonymous, size_t usernamePasswordLogin
     return ac;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/plugins/ua_pki_certificate.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/plugins/ua_pki_certificate.c" ***********************************/
 
 /* This work is licensed under a Creative Commons CCZero 1.0 Universal License.
  * See http://creativecommons.org/publicdomain/zero/1.0/ for more information. 
@@ -39762,7 +39762,7 @@ UA_CertificateVerification_Trustlist(UA_CertificateVerification *cv,
 
 #endif
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/plugins/ua_nodestore_default.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/plugins/ua_nodestore_default.c" ***********************************/
 
 /* This work is licensed under a Creative Commons CCZero 1.0 Universal License.
  * See http://creativecommons.org/publicdomain/zero/1.0/ for more information. 
@@ -40235,7 +40235,7 @@ UA_Nodestore_default_new(UA_Nodestore *ns) {
     return UA_STATUSCODE_GOOD;
 }
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/plugins/ua_config_default.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/plugins/ua_config_default.c" ***********************************/
 
 /* This work is licensed under a Creative Commons CCZero 1.0 Universal License.
  * See http://creativecommons.org/publicdomain/zero/1.0/ for more information. 
@@ -40677,7 +40677,7 @@ const UA_ClientConfig UA_ClientConfig_default = {
     10 /* .outStandingPublishRequests */
 };
 
-/*********************************** amalgamated original file "/home/jpfr/software/open62541/plugins/ua_securitypolicy_none.c" ***********************************/
+/*********************************** amalgamated original file "/home/travis/build/open62541/open62541/plugins/ua_securitypolicy_none.c" ***********************************/
 
 /* This work is licensed under a Creative Commons CCZero 1.0 Universal License.
  * See http://creativecommons.org/publicdomain/zero/1.0/ for more information. 
