@@ -2,16 +2,17 @@
 import RPi.GPIO as GPIO
 import signal
 pins={'r':3,'g':5,'b':7}
+GPIO.setmode(GPIO.BOARD)
+for i in pins:GPIO.setup(pins[i], GPIO.OUT)
+pwmr = GPIO.PWM(pins['r'], 2000)
+pwmg = GPIO.PWM(pins['g'], 2000)
+pwmb = GPIO.PWM(pins['b'], 2000)
+pwmr.start(0)
+pwmg.start(0)
+pwmb.start(0)
 
 def fuck(you):
-    GPIO.setmode(GPIO.BOARD)
-    for i in pins:GPIO.setup(pins[i], GPIO.OUT)
-    pwmr = GPIO.PWM(pins['r'], 2000)
-    pwmg = GPIO.PWM(pins['g'], 2000)
-    pwmb = GPIO.PWM(pins['b'], 2000)
-    pwmr.start(0)
-    pwmg.start(0)
-    pwmb.start(0)
+    
     you=you%4
     if   you == 1:
         print('r')
@@ -24,6 +25,7 @@ def fuck(you):
         pwmg.ChangeDutyCycle(50)
         pwmb.ChangeDutyCycle(0)
     elif you == 3:
+        print("b")
         pwmr.ChangeDutyCycle(0)
         pwmg.ChangeDutyCycle(0)
         pwmb.ChangeDutyCycle(50)
