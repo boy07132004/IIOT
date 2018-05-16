@@ -25,7 +25,9 @@ Ledslback(UA_Server *server,
     if (!pDict){
         return -1;
     }
-    PyObject* pycode = PyDict_GetItemString(pDict, "main");
+    PyObject* pppp = PyDict_GetItemString(pDict,"init");
+    PyObject_CallFunction(pppp,NULL);
+    PyObject* pycode = PyDict_GetItemString(pDict, "fuck");
     PyObject_CallFunction(pycode,"i",a);
     a++;
     Py_DECREF(pycode);
