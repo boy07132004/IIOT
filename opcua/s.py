@@ -1,43 +1,32 @@
 #!/usr/bin/env python3
-import RPi.GPIO as GPIO
-import signal
 
-def fuck(you):
-    pins={'r':3,'g':5,'b':7}
-    PIO.setmode(GPIO.BOARD)
-    for i in pins:GPIO.setup(pins[i], GPIO.OUT)
-    pwmr = GPIO.PWM(pins['r'], 2000)
-    pwmg = GPIO.PWM(pins['g'], 2000)
-    pwmb = GPIO.PWM(pins['b'], 2000)
+import RPi.GPIO as GPIO
+
+
+# Client request handler
+def main():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(3,GPIO.OUT)
+    GPIO.setup(5,GPIO.OUT)
+    GPIO.setup(7,GPIO.OUT)
+    pwmr = GPIO.PWM(3,2000)
+    pwmg = GPIO.PWM(5,2000)
+    pwmb = GPIO.PWM(7,2000)
+    
     pwmr.start(0)
     pwmg.start(0)
     pwmb.start(0)
-
-    you=you%4
-    if   you == 1:
-        print('r')
+    
+    while True:
         pwmr.ChangeDutyCycle(50)
-        pwmg.ChangeDutyCycle(0)
-        pwmb.ChangeDutyCycle(0)
-    elif you == 2:
-        print('g')
-        pwmr.ChangeDutyCycle(0)
         pwmg.ChangeDutyCycle(50)
-        pwmb.ChangeDutyCycle(0)
-    elif you == 3:
-        print("b")
-        pwmr.ChangeDutyCycle(0)
-        pwmg.ChangeDutyCycle(0)
         pwmb.ChangeDutyCycle(50)
-    else:
-        print('close')
-        pwmr.ChangeDutyCycle(0)
-        pwmg.ChangeDutyCycle(0)
-        pwmb.ChangeDutyCycle(0)
 
-def end_service():
     pwmg.stop()
     pwmb.stop()
     pwmr.stop()
-    print('\n[INFO] Ctrl+C captured, shutdown service.')
-    GPIO.cleanup()
+
+ 
+
+if __name__ == "__main__":
+    main()
