@@ -1,18 +1,19 @@
 import RPi.GPIO as GPIO
 
-def main():    
-    print("start")
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BOARD)
-    pins={'r':3,'g':5,'b':7}
-    for i in pins:GPIO.setup(pins[i],GPIO.OUT)
-    pwmr = GPIO.PWM(pins['r'],2000)
-    pwmg = GPIO.PWM(pins['g'],2000)
-    pwmb = GPIO.PWM(pins['b'],2000)
-    pwmr.start(0)
-    pwmg.start(0)
-    pwmb.start(50)
-"""   
+def led(first):    
+    
+    if first==1:
+        print("start")
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BOARD)
+        pins={'r':3,'g':5,'b':7}
+        for i in pins:GPIO.setup(pins[i],GPIO.OUT)
+        pwmr = GPIO.PWM(pins['r'],2000)
+        pwmg = GPIO.PWM(pins['g'],2000)
+        pwmb = GPIO.PWM(pins['b'],2000)
+        pwmr.start(0)
+        pwmg.start(0)
+        pwmb.start(50)
     you=first%4
     if you==1:
         print('r')
@@ -34,6 +35,3 @@ def main():
         pwmr.ChangeDutyCycle(0)
         pwmg.ChangeDutyCycle(0)
         pwmb.ChangeDutyCycle(0)
-"""
-if __name__ == '__main__':
-    main()
