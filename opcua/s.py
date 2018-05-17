@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 
 def led(first):    
+    """
     if first==1:
         print("start")
         GPIO.setwarnings(False)
@@ -13,6 +14,7 @@ def led(first):
         pwmr.start(0)
         pwmg.start(0)
         pwmb.start(50)
+    """
     you=first%4
     if you==1:
         print('r')
