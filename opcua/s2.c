@@ -3,10 +3,10 @@
 #include "open62541.h"
 
 int led=1;
-const UA_String LEDDDD = UA_STRING("close");
 static void addVariable(UA_Server *server) {
 
     UA_VariableAttributes attr = UA_VariableAttributes_default;
+    UA_String LEDDDD = UA_STRING("close");
     switch(led%4){
         case 1:
             LEDDDD= UA_STRING("red");
@@ -44,18 +44,22 @@ Ledcallback(UA_Server *server,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
 /////
+    UA_String LEDDDD = UA_STRING("close");
     switch(led%4){
         case 1:
+            LEDDDD= UA_STRING("red");
             PyRun_SimpleString("pwmr.ChangeDutyCycle(90)");
             PyRun_SimpleString("pwmg.ChangeDutyCycle(0)");
             PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
             break;
         case 2:
+            LEDDDD= UA_STRING("green");
             PyRun_SimpleString("pwmr.ChangeDutyCycle(0)");
             PyRun_SimpleString("pwmg.ChangeDutyCycle(90)");
             PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
             break;
         case 3:
+            LEDDDD= UA_STRING("blue");
             PyRun_SimpleString("pwmr.ChangeDutyCycle(0)");
             PyRun_SimpleString("pwmg.ChangeDutyCycle(0)");
             PyRun_SimpleString("pwmb.ChangeDutyCycle(90)");
@@ -66,6 +70,15 @@ Ledcallback(UA_Server *server,
             PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
             break;
     }
+    
+    UA_String tmp = UA_STRING_ALLOC("LED turn");
+    if(LEDDDD.length > 0) {
+        tmp.data = (UA_Byte *)UA_realloc(tmp.data, tmp.length + LEDDDD.length);
+        memcpy(&tmp.data[tmp.length], LEDDDD.data, LEDDDD.length);
+        tmp.length += LEDDDD.length;
+    }
+    UA_Variant_setScalarCopy(output, &tmp, &UA_TYPES[UA_TYPES_STRING]);
+    UA_String_deleteMembers(&tmp);
 /////   
     printf("%d",led);
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, "Now: %s",LEDDDD.data);
