@@ -2,6 +2,8 @@ import RPi.GPIO as GPIO
 
 def led(first):    
     if first==1:
+        print("start")
+        GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         pins={'r':3,'g':5,'b':7}
         for i in pins:GPIO.setup(pins[i],GPIO.OUT)
@@ -10,7 +12,7 @@ def led(first):
         pwmb = GPIO.PWM(pins['b'],2000)
         pwmr.start(0)
         pwmg.start(0)
-        pwmb.start(0)
+        pwmb.start(50)
     you=first%4
     if you==1:
         print('r')
