@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import sys
-first = sys.argv[1]
+first=1
 
 if (first==1):
     print("start")
@@ -14,6 +14,7 @@ if (first==1):
     pwmr.start(0)
     pwmg.start(0)
     pwmb.start(50)
+    
  
 you=first%4
 if you==1:

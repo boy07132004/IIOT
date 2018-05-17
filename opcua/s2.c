@@ -13,19 +13,18 @@ Ledcallback(UA_Server *server,
                          size_t outputSize, UA_Variant *output) {
 //==================================================//
     PyObject *pModule,*pFunc;
-    PyObject *pArgs, *pValue;
+    PyObject *pArgs, *pDict;
 
 
     pModule = PyImport_Import(PyUnicode_FromString("sold"));
 
 
-    pFunc = PyObject_GetAttrString(pModule, "led");
-
+    pDict = PyModule_GetDict(pModule);
+    pFunc = PyDict_GetItemString(pDict,"led");
 
     pArgs = PyTuple_New(1);
-    PyTuple_SetItem(pArgs,0, PyLong_FromLong(led));
-
-    pValue = PyObject_CallObject(pFunc, pArgs);
+    PyTuple_SetItem(pArgs,0,Py_BuildValue("i",led));
+    PyObject_CallObject(pFunc,pArgs);
     led++;
     printf("%d",led);
 //==================================================//
