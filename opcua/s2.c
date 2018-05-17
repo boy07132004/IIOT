@@ -12,25 +12,19 @@ Ledcallback(UA_Server *server,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
 //==================================================//
-    if (led==1){
-        PyRun_SimpleString("import RPi.GPIO as GPIO");
-        PyRun_SimpleString("GPIO.setmode(GPIO.BOARD)");
-        PyRun_SimpleString("pins={'r':3,'g':5,'b':7}");
-        PyRun_SimpleString("for i in pins:GPIO.setup(pins[i],GPIO.OUT)");
-        PyRun_SimpleString("pwmr = GPIO.PWM(pins['r'],2000)");
-        PyRun_SimpleString("pwmg = GPIO.PWM(pins['g'],2000)");
-        PyRun_SimpleString("pwmb = GPIO.PWM(pins['b'],2000)");
-        PyRun_SimpleString("pwmr.start(0)");
-        PyRun_SimpleString("pwmg.start(50)");
-        PyRun_SimpleString("pwmb.start(50)");
-
+    PyObject *obj = Py_BuildValue("s", "s.py");
+    FILE *file = _Py_fopen_obj(obj, "r+");
+    if(file != NULL) {
+       PyRun_SimpleFile(file, "s.py");
     }
+    /*
     PyObject* pModule = PyImport_ImportModule("s");
     PyObject* pDict = PyModule_GetDict(pModule);
     
     
     PyObject* pycode = PyDict_GetItemString(pDict, "led");
     PyObject_CallFunction(pycode,"i",led);
+    */
     led++;
     
 //==================================================//
