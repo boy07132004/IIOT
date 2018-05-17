@@ -6,7 +6,7 @@ int led=1;
 static void addVariable(UA_Server *server) {
 
     UA_VariableAttributes attr = UA_VariableAttributes_default;
-    UA_String LEDDDD = UA_STRING("close");
+    UA_String LEDDDD = UA_STRING("off");
     switch(led%4){
         case 1:
             LEDDDD= UA_STRING("red");
@@ -44,7 +44,7 @@ Ledcallback(UA_Server *server,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
 /////
-    UA_String LEDDDD = UA_STRING("close");
+    UA_String LEDDDD = UA_STRING("off");
     switch(led%4){
         case 1:
             LEDDDD= UA_STRING("red");
