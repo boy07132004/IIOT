@@ -13,7 +13,7 @@ Ledcallback(UA_Server *server,
                          size_t outputSize, UA_Variant *output) {
 //==================================================//
     
-    
+    PyRun_SimpleString("import RPi.GPIO as GPIO");
     PyObject* pModule = PyImport_ImportModule("s");
     PyObject* pDict = PyModule_GetDict(pModule);
     
@@ -70,15 +70,6 @@ int main(void) {
     signal(SIGTERM, stopHandler);
     /*
     PyRun_SimpleString("import RPi.GPIO as GPIO");
-    PyRun_SimpleString("GPIO.setmode(GPIO.BOARD)");
-    PyRun_SimpleString("pins={'r':3,'g':5,'b':7}");
-    PyRun_SimpleString("for i in pins:GPIO.setup(pins[i],GPIO.OUT)");
-    PyRun_SimpleString("pwmr = GPIO.PWM(pins['r'],2000)");
-    PyRun_SimpleString("pwmg = GPIO.PWM(pins['g'],2000)");
-    PyRun_SimpleString("pwmb = GPIO.PWM(pins['b'],2000)");
-    PyRun_SimpleString("pwmr.start(0)");
-    PyRun_SimpleString("pwmg.start(0)");
-    PyRun_SimpleString("pwmb.start(0)");
     */
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
