@@ -12,8 +12,8 @@ Ledcallback(UA_Server *server,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
 //==================================================//
-    PyObject *obj = Py_BuildValue("s", "s.py");
-    FILE *file = _Py_fopen_obj(obj, "r+");
+
+    FILE *file = _Py_fopen("s.py", "r+");
     if(file != NULL) {
        PyRun_SimpleFile(file, "s.py");
     }
