@@ -28,7 +28,7 @@ Ledcallback(UA_Server *server,
             PyRun_SimpleString("pwmg.ChangeDutyCycle(0)");
             PyRun_SimpleString("pwmb.ChangeDutyCycle(90)");
             break;
-        case 4:
+        case 0:
             PyRun_SimpleString("pwmr.ChangeDutyCycle(0)");
             PyRun_SimpleString("pwmg.ChangeDutyCycle(0)");
             PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
@@ -103,7 +103,10 @@ int main(void) {
     PyRun_SimpleString("pwmb.start(0)");
     ///
     UA_StatusCode retval = UA_Server_run(server, &running); 
-    
+    PyRun_SimpleString("pwmr.stop()");
+    PyRun_SimpleString("pwmg.stop()");
+    PyRun_SimpleString("pwmb.stop()");
+    PyRun_SimpleString("GPIO.cleanup()");
     Py_Finalize();
     printf("\nbye\n");
     UA_Server_delete(server);
