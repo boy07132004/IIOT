@@ -12,28 +12,29 @@ Ledcallback(UA_Server *server,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
 //==================================================//
-    PyObject *pModule,*pFunc;
-    PyObject *pArgs, *pDict;
-    PyRun_SimpleString("import RPi.GPIO as GPIO");
-    PyRun_SimpleString("GPIO.setmode(GPIO.BOARD)");
-    PyRun_SimpleString("pins={'r':3,'g':5,'b':7}");
-    PyRun_SimpleString("for i in pins:GPIO.setup(pins[i],GPIO.OUT)");
-    PyRun_SimpleString("pwmr = GPIO.PWM(pins['r'],2000)");
-    PyRun_SimpleString("pwmg = GPIO.PWM(pins['g'],2000)");
-    PyRun_SimpleString("pwmb = GPIO.PWM(pins['b'],2000)");
-    PyRun_SimpleString("pwmr.start(0)");
-    PyRun_SimpleString("pwmg.start(50)");
-    PyRun_SimpleString("pwmb.start(50)");
-
-    pModule = PyImport_Import(PyUnicode_FromString("sold"));
-
-
-    pDict = PyModule_GetDict(pModule);
-    pFunc = PyDict_GetItemString(pDict,"led");
-
-    pArgs = PyTuple_New(1);
-    PyTuple_SetItem(pArgs,0,Py_BuildValue("i",led));
-    PyObject_CallObject(pFunc,pArgs);
+    switch(led%4){
+        case 1:
+            PyRun_SimpleString("pwmr.ChangeDutyCycle(90)");
+            PyRun_SimpleString("pwmg.ChangeDutyCycle(0)");
+            PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
+            break;
+        case 2:
+            PyRun_SimpleString("pwmr.ChangeDutyCycle(0)");
+            PyRun_SimpleString("pwmg.ChangeDutyCycle(90)");
+            PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
+            break;
+        case 3:
+            PyRun_SimpleString("pwmr.ChangeDutyCycle(0)");
+            PyRun_SimpleString("pwmg.ChangeDutyCycle(0)");
+            PyRun_SimpleString("pwmb.ChangeDutyCycle(90)");
+            break;
+        case 4:
+            PyRun_SimpleString("pwmr.ChangeDutyCycle(0)");
+            PyRun_SimpleString("pwmg.ChangeDutyCycle(0)");
+            PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
+            break;
+    }
+    
     led++;
     printf("%d",led);
 //==================================================//
@@ -89,11 +90,22 @@ int main(void) {
     UA_Server *server = UA_Server_new(config);
  
     LedMethod(server);
-    
+    ////
+    PyRun_SimpleString("import RPi.GPIO as GPIO");
+    PyRun_SimpleString("GPIO.setmode(GPIO.BOARD)");
+    PyRun_SimpleString("pins={'r':3,'g':5,'b':7}");
+    PyRun_SimpleString("for i in pins:GPIO.setup(pins[i],GPIO.OUT)");
+    PyRun_SimpleString("pwmr = GPIO.PWM(pins['r'],2000)");
+    PyRun_SimpleString("pwmg = GPIO.PWM(pins['g'],2000)");
+    PyRun_SimpleString("pwmb = GPIO.PWM(pins['b'],2000)");
+    PyRun_SimpleString("pwmr.start(0)");
+    PyRun_SimpleString("pwmg.start(0)");
+    PyRun_SimpleString("pwmb.start(0)");
+    ///
     UA_StatusCode retval = UA_Server_run(server, &running); 
     
     Py_Finalize();
-    printf("hi\n");
+    printf("\nbye\n");
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
     return (int)retval;
