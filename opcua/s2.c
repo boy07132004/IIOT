@@ -4,6 +4,29 @@
 
 int led=1;
 
+static void
+addVariable(UA_Server *server) {
+    /* Define the attribute of the LEDDDD variable node */
+    UA_VariableAttributes attr = UA_VariableAttributes_default;
+    const char* temp="123";
+    UA_String LEDDDD = UA_String_fromChars(temp);
+    UA_Variant_setScalar(&attr.value, &LEDDDD, &UA_TYPES[UA_TYPES_INT32]);
+    attr.description = UA_LOCALIZEDTEXT("en-US","the answer");
+    attr.displayName = UA_LOCALIZEDTEXT("en-US","LED_Status");
+    attr.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
+    attr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+
+    /* Add the variable node to the information model */
+    UA_NodeId LEDDDDNodeId = UA_NODEID_STRING(1, "the.answer");
+    UA_QualifiedName LEDDDDName = UA_QUALIFIEDNAME(1, "the answer");
+    UA_NodeId parentNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER);
+    UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES);
+    UA_Server_addVariableNode(server, LEDDDDNodeId, parentNodeId,
+                              parentReferenceNodeId, LEDDDDName,
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), attr, NULL, NULL);
+}
+
+
 static UA_StatusCode
 Ledcallback(UA_Server *server,
                          const UA_NodeId *sessionId, void *sessionHandle,
@@ -108,6 +131,7 @@ int main(void) {
     PyRun_SimpleString("pwmb.stop()");
     PyRun_SimpleString("GPIO.cleanup()");
     Py_Finalize();
+    led = led * 0;
     printf("\nbye\n");
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
