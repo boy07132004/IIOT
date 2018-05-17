@@ -3,7 +3,7 @@
 #include "open62541.h"
 
 int led=1;
-int b=1;
+
 static UA_StatusCode
 Ledcallback(UA_Server *server,
                          const UA_NodeId *sessionId, void *sessionHandle,
@@ -16,13 +16,9 @@ Ledcallback(UA_Server *server,
     
     PyObject* pModule = PyImport_ImportModule("s");
     PyObject* pDict = PyModule_GetDict(pModule);
-    if(b=1){
-        PyObject* pycode2 = PyDict_GetItemString(pDict, "init");
-        PyObject_CallFunction(pycode2,"i",0);
-        b--;
-    }
     
-    PyObject* pycode = PyDict_GetItemString(pDict, "fuc");
+    
+    PyObject* pycode = PyDict_GetItemString(pDict, "led");
     PyObject_CallFunction(pycode,"i",led);
     led++;
     
