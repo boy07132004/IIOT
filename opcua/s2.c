@@ -67,7 +67,7 @@ int main(void) {
     PyRun_SimpleString("import sys"); PyRun_SimpleString("sys.path.append('./')");
     signal(SIGINT, stopHandler);
     signal(SIGTERM, stopHandler);
-    //PyRun_SimpleString("import RPi.GPIO as GPIO");
+    PyRun_SimpleString("import RPi.GPIO as GPIO");
     PyRun_SimpleString("pins={'r':3,'g':5,'b':7}");
     PyRun_SimpleString("for i in pins:GPIO.setup(pins[i],GPIO.OUT)");
     PyRun_SimpleString("pwmr = GPIO.PWM(pins['r'],2000)");
