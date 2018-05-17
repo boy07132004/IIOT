@@ -12,21 +12,19 @@ Ledcallback(UA_Server *server,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
 //==================================================//
+    PyObject *pModule,*pFunc;
+    PyObject *pArgs, *pValue;
 
-    FILE *file = _Py_fopen("s.py", "r+");
-    if(file != NULL) {
-       PyRun_SimpleFile(file, "s.py");
-    }
-    /*
-    PyObject* pModule = PyImport_ImportModule("s");
-    PyObject* pDict = PyModule_GetDict(pModule);
-    
-    
-    PyObject* pycode = PyDict_GetItemString(pDict, "led");
-    PyObject_CallFunction(pycode,"i",led);
-    */
-    led++;
-    
+
+    pModule = PyImport_Import(PyUnicode_FromString("sold"));
+
+
+    pFunc = PyObject_GetAttrString(pModule, "led");
+
+
+    pArgs = PyTuple_New(led);
+
+    pValue = PyObject_CallObject(pFunc, pArgs);
 //==================================================//
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, "Turn on LED");
     return UA_STATUSCODE_GOOD;
