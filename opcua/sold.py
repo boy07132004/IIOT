@@ -4,6 +4,7 @@ def led(first):
     
     if first==1:
         print("start")
+        """
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         pins={'r':3,'g':5,'b':7}
@@ -14,6 +15,7 @@ def led(first):
         pwmr.start(0)
         pwmg.start(0)
         pwmb.start(50)
+        """
     you=first%4
     if you==1:
         print('r')
