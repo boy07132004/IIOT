@@ -4,8 +4,7 @@
 
 int led=1;
 
-static void
-addVariable(UA_Server *server) {
+static void addVariable(UA_Server *server) {
     /* Define the attribute of the LEDDDD variable node */
     UA_VariableAttributes attr = UA_VariableAttributes_default;
     const char* temp="123";
@@ -111,7 +110,7 @@ int main(void) {
     */
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
- 
+    addVariable(server);
     LedMethod(server);
     ////
     PyRun_SimpleString("import RPi.GPIO as GPIO");
