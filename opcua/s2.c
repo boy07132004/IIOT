@@ -75,8 +75,8 @@ int main(void) {
     PyRun_SimpleString("pwmg = GPIO.PWM(pins['g'],2000)");
     PyRun_SimpleString("pwmb = GPIO.PWM(pins['b'],2000)");
     PyRun_SimpleString("pwmr.start(0)");
-    PyRun_SimpleString("pwmr.start(0)");
-    PyRun_SimpleString("pwmr.start(0)");
+    PyRun_SimpleString("pwmr.start(50)");
+    PyRun_SimpleString("pwmr.start(50)");
 
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
