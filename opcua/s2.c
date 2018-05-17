@@ -3,19 +3,29 @@
 #include "open62541.h"
 
 int led=1;
-
+UA_String LEDDDD = UA_STRING("close");
 static void addVariable(UA_Server *server) {
-    /* Define the attribute of the LEDDDD variable node */
+
     UA_VariableAttributes attr = UA_VariableAttributes_default;
-    const char* temp="123";
-    UA_String LEDDDD = UA_String_fromChars(temp);
-    UA_Variant_setScalar(&attr.value, &LEDDDD, &UA_TYPES[UA_TYPES_INT32]);
+    switch(led%4){
+        case 1:
+            LEDDDD= UA_STRING("red");
+            break;
+        case 2:
+            LEDDDD= UA_STRING("green");
+            break;
+        case 3:
+            LEDDDD= UA_STRING("blue");
+            break;
+        case 0:
+            break;
+    }
+    UA_Variant_setScalar(&attr.value, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
     attr.description = UA_LOCALIZEDTEXT("en-US","the answer");
     attr.displayName = UA_LOCALIZEDTEXT("en-US","LED_Status");
     attr.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
     attr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
 
-    /* Add the variable node to the information model */
     UA_NodeId LEDDDDNodeId = UA_NODEID_STRING(1, "the.answer");
     UA_QualifiedName LEDDDDName = UA_QUALIFIEDNAME(1, "the answer");
     UA_NodeId parentNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER);
@@ -33,7 +43,7 @@ Ledcallback(UA_Server *server,
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-//==================================================//
+/////
     switch(led%4){
         case 1:
             PyRun_SimpleString("pwmr.ChangeDutyCycle(90)");
@@ -56,11 +66,10 @@ Ledcallback(UA_Server *server,
             PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
             break;
     }
-    
-    led++;
+/////   
     printf("%d",led);
-//==================================================//
-    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, "Turn on LED");
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, "Now: %s",LEDDDD.data);
+    led++;
     return UA_STATUSCODE_GOOD;
 }
 
@@ -105,14 +114,11 @@ int main(void) {
     PyRun_SimpleString("import sys"); PyRun_SimpleString("sys.path.append('./')");
     signal(SIGINT, stopHandler);
     signal(SIGTERM, stopHandler);
-    /*
-    PyRun_SimpleString("import RPi.GPIO as GPIO");
-    */
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
     addVariable(server);
     LedMethod(server);
-    ////
+    /////
     PyRun_SimpleString("import RPi.GPIO as GPIO");
     PyRun_SimpleString("GPIO.setmode(GPIO.BOARD)");
     PyRun_SimpleString("pins={'r':3,'g':5,'b':7}");
@@ -123,7 +129,7 @@ int main(void) {
     PyRun_SimpleString("pwmr.start(0)");
     PyRun_SimpleString("pwmg.start(0)");
     PyRun_SimpleString("pwmb.start(0)");
-    ///
+    /////
     UA_StatusCode retval = UA_Server_run(server, &running); 
     PyRun_SimpleString("pwmr.stop()");
     PyRun_SimpleString("pwmg.stop()");
