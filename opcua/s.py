@@ -1,5 +1,16 @@
 import RPi.GPIO as GPIO
+def init(a):
+    GPIO.setmode(GPIO.BOARD)
+    pins={'r':3,'g':5,'b':7}
+    for i in pins:GPIO.setup(pins[i],GPIO.OUT)
+    pwmr = GPIO.PWM(pins['r'],2000)
+    pwmg = GPIO.PWM(pins['g'],2000)
+    pwmb = GPIO.PWM(pins['b'],2000)
+    pwmr.start(a)
+    pwmg.start(50)
+    pwmb.start(0)
 def fuc(you):    
+    init(0)
     you=you%4
     if you==1:
         print('r')

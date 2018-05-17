@@ -3,6 +3,7 @@
 #include "open62541.h"
 
 int led=1;
+int b=1;
 static UA_StatusCode
 Ledcallback(UA_Server *server,
                          const UA_NodeId *sessionId, void *sessionHandle,
@@ -14,8 +15,12 @@ Ledcallback(UA_Server *server,
     
     
     PyObject* pModule = PyImport_ImportModule("s");
-    
     PyObject* pDict = PyModule_GetDict(pModule);
+    if(b=1){
+        PyObject* pycode2 = PyDict_GetItemString(pDict, "init");
+        PyObject_CallFunction(pycode2,"i",0);
+        b--;
+    }
     
     PyObject* pycode = PyDict_GetItemString(pDict, "fuc");
     PyObject_CallFunction(pycode,"i",led);
@@ -67,6 +72,7 @@ int main(void) {
     PyRun_SimpleString("import sys"); PyRun_SimpleString("sys.path.append('./')");
     signal(SIGINT, stopHandler);
     signal(SIGTERM, stopHandler);
+    /*
     PyRun_SimpleString("import RPi.GPIO as GPIO");
     PyRun_SimpleString("GPIO.setmode(GPIO.BOARD)");
     PyRun_SimpleString("pins={'r':3,'g':5,'b':7}");
@@ -75,9 +81,9 @@ int main(void) {
     PyRun_SimpleString("pwmg = GPIO.PWM(pins['g'],2000)");
     PyRun_SimpleString("pwmb = GPIO.PWM(pins['b'],2000)");
     PyRun_SimpleString("pwmr.start(0)");
-    PyRun_SimpleString("pwmr.start(50)");
-    PyRun_SimpleString("pwmr.start(50)");
-
+    PyRun_SimpleString("pwmg.start(0)");
+    PyRun_SimpleString("pwmb.start(0)");
+    */
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
  
