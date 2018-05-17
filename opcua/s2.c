@@ -25,6 +25,7 @@ Ledcallback(UA_Server *server,
     pArgs = PyTuple_New(led);
 
     pValue = PyObject_CallObject(pFunc, pArgs);
+    led++;
 //==================================================//
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, "Turn on LED");
     return UA_STATUSCODE_GOOD;
