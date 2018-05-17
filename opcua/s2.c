@@ -71,7 +71,7 @@ Ledcallback(UA_Server *server,
             break;
     }
     
-    UA_String tmp = UA_STRING_ALLOC("LED turn");
+    UA_String tmp = UA_STRING_ALLOC("LED turn : ");
     if(LEDDDD.length > 0) {
         tmp.data = (UA_Byte *)UA_realloc(tmp.data, tmp.length + LEDDDD.length);
         memcpy(&tmp.data[tmp.length], LEDDDD.data, LEDDDD.length);
@@ -80,8 +80,7 @@ Ledcallback(UA_Server *server,
     UA_Variant_setScalarCopy(output, &tmp, &UA_TYPES[UA_TYPES_STRING]);
     UA_String_deleteMembers(&tmp);
 /////   
-    printf("%d",led);
-    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, "Now: %s",LEDDDD.data);
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, "Now: %s ",LEDDDD.data);
     led++;
     return UA_STATUSCODE_GOOD;
 }
