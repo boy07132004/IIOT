@@ -3,7 +3,7 @@
 #include "open62541.h"
 
 int led=1;
-UA_String LEDDDD = UA_STRING("close");
+const UA_String LEDDDD = UA_STRING("close");
 static void addVariable(UA_Server *server) {
 
     UA_VariableAttributes attr = UA_VariableAttributes_default;
