@@ -22,7 +22,8 @@ Ledcallback(UA_Server *server,
     pFunc = PyObject_GetAttrString(pModule, "led");
 
 
-    pArgs = PyTuple_New(led);
+    pArgs = PyTuple_New(1);
+    PyTuple_SetItem(pArgs,0, PyLong_FromLong(led));
 
     pValue = PyObject_CallObject(pFunc, pArgs);
     led++;
