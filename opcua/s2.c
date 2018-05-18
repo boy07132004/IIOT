@@ -3,23 +3,39 @@
 #include "open62541.h"
 
 int led=1;
-static void addVariable(UA_Server *server) {
 
-    UA_VariableAttributes attr = UA_VariableAttributes_default;
-    UA_String LEDDDD = UA_STRING("off");
+static void
+writeVariable(UA_Server *server) {
+    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
+
+    /* Write a different integer value */
+    UA_String LEDD = UA_STRING("off");
     switch(led%4){
         case 1:
-            LEDDDD= UA_STRING("red");
+            LEDD= UA_STRING("red");
             break;
         case 2:
-            LEDDDD= UA_STRING("green");
+            LEDD= UA_STRING("green");
             break;
         case 3:
-            LEDDDD= UA_STRING("blue");
+            LEDD= UA_STRING("blue");
             break;
         case 0:
             break;
     }
+    UA_Variant myVar;
+    UA_Variant_init(&myVar);
+    UA_Variant_setScalar(&myVar, &LEDD, &UA_TYPES[UA_TYPES_STRING]);
+    UA_Server_writeValue(server, myIntegerNodeId, myVar);
+
+}
+
+
+static void addVariable(UA_Server *server) {
+
+    UA_VariableAttributes attr = UA_VariableAttributes_default;
+    UA_String LEDDDD = UA_STRING("off");
+    
     UA_Variant_setScalar(&attr.value, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
     attr.description = UA_LOCALIZEDTEXT("en-US","the answer");
     attr.displayName = UA_LOCALIZEDTEXT("en-US","LED_Status");
