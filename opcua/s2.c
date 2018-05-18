@@ -6,27 +6,7 @@ int led=1;
 
 static void
 writeVariable(UA_Server *server) {
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
-
-    /* Write a different integer value */
-    UA_String LEDD = UA_STRING("off");
-    switch(led%4){
-        case 1:
-            LEDD= UA_STRING("red");
-            break;
-        case 2:
-            LEDD= UA_STRING("green");
-            break;
-        case 3:
-            LEDD= UA_STRING("blue");
-            break;
-        case 0:
-            break;
-    }
-    UA_Variant myVar;
-    UA_Variant_init(&myVar);
-    UA_Variant_setScalar(&myVar, &LEDD, &UA_TYPES[UA_TYPES_STRING]);
-    UA_Server_writeValue(server, myIntegerNodeId, myVar);
+    
 
 }
 
@@ -35,7 +15,6 @@ static void addVariable(UA_Server *server) {
 
     UA_VariableAttributes attr = UA_VariableAttributes_default;
     UA_String LEDDDD = UA_STRING("off");
-    
     UA_Variant_setScalar(&attr.value, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
     attr.description = UA_LOCALIZEDTEXT("en-US","the answer");
     attr.displayName = UA_LOCALIZEDTEXT("en-US","LED_Status");
@@ -86,7 +65,13 @@ Ledcallback(UA_Server *server,
             PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
             break;
     }
-    writeVaribale(server);
+    //
+    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
+    UA_Variant myVar;
+    UA_Variant_init(&myVar);
+    UA_Variant_setScalar(&myVar, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
+    UA_Server_writeValue(server, myIntegerNodeId, myVar);
+    //
     UA_String tmp = UA_STRING_ALLOC("LED turn : ");
     if(LEDDDD.length > 0) {
         tmp.data = (UA_Byte *)UA_realloc(tmp.data, tmp.length + LEDDDD.length);
