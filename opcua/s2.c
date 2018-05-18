@@ -86,7 +86,7 @@ Ledcallback(UA_Server *server,
             PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
             break;
     }
-    
+    writeVaribale(server);
     UA_String tmp = UA_STRING_ALLOC("LED turn : ");
     if(LEDDDD.length > 0) {
         tmp.data = (UA_Byte *)UA_realloc(tmp.data, tmp.length + LEDDDD.length);
