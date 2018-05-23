@@ -33,15 +33,6 @@ addObject(UA_Server *server) {
     pFunc3 = PyObject_GetAttrString(pModule, "LEDDD");
     
     //==CALLBACK==//
-    UA_StatusCode Ledcallback(UA_Server *server,const UA_NodeId *sessionId, void *sessionHandle,
-                         const UA_NodeId *methodId, void *methodContext,
-                         const UA_NodeId *OBJNodeId, void *objectContext,
-                         size_t inputSize, const UA_Variant *input,
-                         size_t outputSize, UA_Variant *output) {        
-    printf("Hello");
-    return UA_STATUSCODE_GOOD;
-    }
-
     //==VARIABLE==//
     UA_VariableAttributes attr = UA_VariableAttributes_default;
     UA_String LEDDDD = UA_STRING("off");
