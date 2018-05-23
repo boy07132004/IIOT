@@ -32,7 +32,7 @@ addObject(UA_Server *server) {
     pFunc = PyObject_GetAttrString(pModule, "initEnv");
     pFunc2 = PyObject_GetAttrString(pModule, "initPin");
     pFunc3 = PyObject_GetAttrString(pModule, "LEDDD");
-    LedMethod(server);
+    
     //==VARIABLE==//
     UA_VariableAttributes attr = UA_VariableAttributes_default;
     UA_String LEDDDD = UA_STRING("off");
@@ -53,11 +53,11 @@ addObject(UA_Server *server) {
 
 
 }
-static void
+static UA_StatusCode
 Ledcallback(UA_Server *server,
                          const UA_NodeId *sessionId, void *sessionHandle,
                          const UA_NodeId *methodId, void *methodContext,
-                         const UA_NodeId *objectId, void *objectContext,
+                         const UA_NodeId *OBJNodeId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
     //==CALLBACK==//    
@@ -110,6 +110,7 @@ int main(void) {
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
     addObject(server);
+    LedMethod(server);
     
 
     UA_StatusCode retval = UA_Server_run(server, &running); 
