@@ -32,7 +32,7 @@ addObject(UA_Server *server) {
     pFunc = PyObject_GetAttrString(pModule, "initEnv");
     pFunc2 = PyObject_GetAttrString(pModule, "initPin");
     pFunc3 = PyObject_GetAttrString(pModule, "LEDDD");
-
+    LedMethod(server);
     //==VARIABLE==//
     UA_VariableAttributes attr = UA_VariableAttributes_default;
     UA_String LEDDDD = UA_STRING("off");
@@ -53,6 +53,7 @@ addObject(UA_Server *server) {
 
 
 }
+static void
 Ledcallback(UA_Server *server,
                          const UA_NodeId *sessionId, void *sessionHandle,
                          const UA_NodeId *methodId, void *methodContext,
