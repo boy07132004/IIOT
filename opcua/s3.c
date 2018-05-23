@@ -79,8 +79,8 @@ addObject(UA_Server *server) {
     ledattr.executable = true;
     ledattr.userExecutable = true;
     UA_Server_addMethodNode(server, UA_NODEID_NUMERIC(1,62541),
-                            UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
                             OBJNodeId,
+                            UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
                             UA_QUALIFIEDNAME(1, "LED-QualName"),
                             ledattr, &Ledcallback,
                             1, &inputArgument, 1, &outputArgument, NULL, NULL);
