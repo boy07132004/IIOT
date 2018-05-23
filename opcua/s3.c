@@ -25,7 +25,7 @@ addObject(UA_Server *server) {
                             UA_NODEID_NULL,oAttr, NULL, NULL);
     PyRun_SimpleString("import sys");  
     PyRun_SimpleString("sys.path.append('./')");
-    Py_Initialize();
+    
     PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL, *pArg = NULL, *result = NULL; 
     PyObject *pFunc2 = NULL,*pFunc3 = NULL,*pFunc4 = NULL;
     pModule = PyImport_ImportModule("LED");
@@ -60,13 +60,14 @@ static void stopHandler(int sig) {
 int main(void) {
     signal(SIGINT, stopHandler);
     signal(SIGTERM, stopHandler);
-
+    Py_Initialize();
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
     addObject(server);
     
 
     UA_StatusCode retval = UA_Server_run(server, &running); 
+    Py_Finalize(); 
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
     return (int)retval;
