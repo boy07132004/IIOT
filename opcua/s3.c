@@ -31,7 +31,7 @@ addObject(UA_Server *server) {
     pModule = PyImport_ImportModule("LED");
     pFunc = PyObject_GetAttrString(pModule, "initEnv");
     pFunc2 = PyObject_GetAttrString(pModule, "initPin");
-    pFunc2 = PyObject_GetAttrString(pModule, "LEDDD");
+    pFunc3 = PyObject_GetAttrString(pModule, "LEDDD");
 
     //==VARIABLE==//
     UA_VariableAttributes attr = UA_VariableAttributes_default;
@@ -48,7 +48,52 @@ addObject(UA_Server *server) {
     UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES);
     UA_Server_addVariableNode(server, LEDDDDNodeId, OBJNodeId,
                               parentReferenceNodeId, LEDDDDName,
-                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), attr, NULL, NULL);
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), attr, NULL, NULL);   
+
+
+
+}
+Ledcallback(UA_Server *server,
+                         const UA_NodeId *sessionId, void *sessionHandle,
+                         const UA_NodeId *methodId, void *methodContext,
+                         const UA_NodeId *objectId, void *objectContext,
+                         size_t inputSize, const UA_Variant *input,
+                         size_t outputSize, UA_Variant *output) {
+    //==CALLBACK==//    
+    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
+    UA_Variant myVar;
+    UA_Variant_init(&myVar);
+    //UA_Variant_setScalar(&myVar, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
+    UA_Server_writeValue(server, myIntegerNodeId, myVar);
+    return UA_STATUSCODE_GOOD;
+    }
+static void LedMethod(UA_Server *server) {
+    //==METHOD==//
+    UA_Argument inputArgument;
+    UA_Argument_init(&inputArgument);
+    inputArgument.description = UA_LOCALIZEDTEXT("en-US", "A String");
+    inputArgument.name = UA_STRING("MyInput");
+    inputArgument.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
+    inputArgument.valueRank = -1;
+
+    UA_Argument outputArgument;
+    UA_Argument_init(&outputArgument);
+    outputArgument.description = UA_LOCALIZEDTEXT("en-US", "A String");
+    outputArgument.name = UA_STRING("MyOutput");
+    outputArgument.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
+    outputArgument.valueRank = -1;
+
+    UA_MethodAttributes ledattr = UA_MethodAttributes_default;
+    ledattr.description = UA_LOCALIZEDTEXT("en-US","Turn on");
+    ledattr.displayName = UA_LOCALIZEDTEXT("en-US","LED-Display");
+    ledattr.executable = true;
+    ledattr.userExecutable = true;
+    UA_Server_addMethodNode(server, UA_NODEID_NUMERIC(1,62541),
+                            UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
+                            UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
+                            UA_QUALIFIEDNAME(1, "LED-QualName"),
+                            ledattr, &Ledcallback,
+                            1, &inputArgument, 1, &outputArgument, NULL, NULL);
 }
 
 UA_Boolean running = true;
