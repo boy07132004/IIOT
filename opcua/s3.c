@@ -34,17 +34,12 @@ addObject(UA_Server *server) {
     pFunc3 = PyObject_GetAttrString(pModule, "LEDDD");
     
     //==CALLBACK==//
-    UA_StatusCode Ledcallback(UA_Server *server,
-                         const UA_NodeId *sessionId, void *sessionHandle,
+    UA_StatusCode Ledcallback(UA_Server *server,const UA_NodeId *sessionId, void *sessionHandle,
                          const UA_NodeId *methodId, void *methodContext,
                          const UA_NodeId *OBJNodeId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {        
-    UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
-    UA_Variant myVar;
-    UA_Variant_init(&myVar);
-    UA_Variant_setScalar(&myVar, &myIntegerNodeId, &UA_TYPES[UA_TYPES_STRING]);
-    UA_Server_writeValue(server, myIntegerNodeId, myVar);
+    printf("Hello");
     return UA_STATUSCODE_GOOD;
     }
 
@@ -108,8 +103,7 @@ int main(void) {
     Py_Initialize();
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
-    addObject(server);
-    
+    addObject(server);    
 
     UA_StatusCode retval = UA_Server_run(server, &running); 
     Py_Finalize(); 
