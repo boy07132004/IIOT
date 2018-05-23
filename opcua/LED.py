@@ -9,12 +9,13 @@ def initEnv():
 def initPin():
     GPIO.setup(7, GPIO.OUT)
 
-def LEDDD(LED):
+def LEDDD():
+    LEDD = True
 
-    if LED == True:
+    if LEDD == True:
         GPIO.output(7, True)
-    elif LED == False:
+    elif LEDD == False:
         GPIO.output(7, False)
-            
+    return LEDD        
 def clean():
     GPIO.cleanup()

@@ -64,7 +64,7 @@ Ledcallback(UA_Server *server,
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
     UA_Variant myVar;
     UA_Variant_init(&myVar);
-    //UA_Variant_setScalar(&myVar, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
+    UA_Variant_setScalar(&myVar, &myIntegerNodeId, &UA_TYPES[UA_TYPES_STRING]);
     UA_Server_writeValue(server, myIntegerNodeId, myVar);
     return UA_STATUSCODE_GOOD;
     }
