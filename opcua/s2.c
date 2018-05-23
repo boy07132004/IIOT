@@ -4,12 +4,6 @@
 
 int led=1;
 
-static void
-writeVariable(UA_Server *server) {
-    
-
-}
-
 
 static void addVariable(UA_Server *server) {
 
