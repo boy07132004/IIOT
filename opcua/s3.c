@@ -23,8 +23,7 @@ addObject(UA_Server *server) {
                             UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),
                             UA_QUALIFIEDNAME(1, "OBJECT"),
                             UA_NODEID_NULL,oAttr, NULL, NULL);
-    PyRun_SimpleString("import sys");  
-    PyRun_SimpleString("sys.path.append('./')");
+
     
     PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL, *pArg = NULL, *result = NULL; 
     PyObject *pFunc2 = NULL,*pFunc3 = NULL,*pFunc4 = NULL;
@@ -59,7 +58,7 @@ addObject(UA_Server *server) {
     UA_Server_addVariableNode(server, LEDDDDNodeId, OBJNodeId,
                               parentReferenceNodeId, LEDDDDName,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), attr, NULL, NULL);  
-
+    //==METHOD==//
     UA_Argument inputArgument;
     UA_Argument_init(&inputArgument);
     inputArgument.description = UA_LOCALIZEDTEXT("en-US", "A String");
@@ -81,7 +80,7 @@ addObject(UA_Server *server) {
     ledattr.userExecutable = true;
     UA_Server_addMethodNode(server, UA_NODEID_NUMERIC(1,62541),
                             UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
-                            UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
+                            OBJNodeId,
                             UA_QUALIFIEDNAME(1, "LED-QualName"),
                             ledattr, &Ledcallback,
                             1, &inputArgument, 1, &outputArgument, NULL, NULL);
@@ -101,9 +100,11 @@ int main(void) {
     signal(SIGINT, stopHandler);
     signal(SIGTERM, stopHandler);
     Py_Initialize();
+    PyRun_SimpleString("import sys");  
+    PyRun_SimpleString("sys.path.append('./')");
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
-    addObject(server);    
+    addObject(server);
 
     UA_StatusCode retval = UA_Server_run(server, &running); 
     Py_Finalize(); 
