@@ -155,8 +155,8 @@
         pFunc = PyDict_GetItemString(pDict, "main");
         pArg = Py_BuildValue("(s)", "DHT");
         result = PyEval_CallObject(pFunc, pArg);
-        UA_Double m;
-        UA_Double h;
+        UA_Double m=0;
+        UA_Double h=0;
         PyArg_Parse(result, "(d,d)", &h,&m);
         printf("H : %f\nM:%f\n\n\n",h,m);
         return UA_STATUSCODE_GOOD;}
