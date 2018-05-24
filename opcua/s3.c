@@ -30,7 +30,28 @@ static UA_StatusCode Ledcallback(UA_Server *server,
         pModule = PyImport_ImportModule("LED");
         pFunc = PyObject_GetAttrString(pModule, "main");
         pArg = Py_BuildValue("(s)", "on");
+        PyEval_CallObject(pFunc, pArg);
         return UA_STATUSCODE_GOOD;}
+
+static UA_StatusCode Ledcallback2(UA_Server *server,
+                         const UA_NodeId *sessionId, void *sessionHandle,
+                         const UA_NodeId *methodId, void *methodContext,
+                         const UA_NodeId *objectId, void *objectContext,
+                         size_t inputSize, const UA_Variant *input,
+                         size_t outputSize, UA_Variant *output) {
+        UA_String LEDDDD = UA_STRING("off");
+        UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
+        UA_Variant myVar;
+        UA_Variant_init(&myVar);
+        UA_Variant_setScalar(&myVar, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
+        UA_Server_writeValue(server, myIntegerNodeId, myVar);
+        PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL, *pArg = NULL, *result = NULL; 
+        pModule = PyImport_ImportModule("LED");
+        pFunc = PyObject_GetAttrString(pModule, "OFF");
+        pArg = Py_BuildValue("(s)", "off");
+        PyEval_CallObject(pFunc, pArg);
+        return UA_STATUSCODE_GOOD;}
+
 
 
 static void
@@ -44,16 +65,6 @@ addObject(UA_Server *server) {
                             UA_QUALIFIEDNAME(1, "OBJECT"),
                             UA_NODEID_NULL,oAttr, NULL, NULL);
 
-    /*
-    PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL, *pArg = NULL, *result = NULL; 
-    PyObject *pFunc2 = NULL,*pFunc3 = NULL,*pFunc4 = NULL;
-    pModule = PyImport_ImportModule("LED");
-    pFunc = PyObject_GetAttrString(pModule, "initEnv");
-    pFunc2 = PyObject_GetAttrString(pModule, "initPin");
-    pFunc3 = PyObject_GetAttrString(pModule, "LEDDD");
-    */
-    //==CALLBACK==//
-    
 
     //==VARIABLE==//
     UA_VariableAttributes attr = UA_VariableAttributes_default;
@@ -98,6 +109,33 @@ addObject(UA_Server *server) {
                             ledattr, &Ledcallback,
                             1, &inputArgument, 1, &outputArgument, NULL, NULL);
     
+    //==METHOD2==//
+    UA_Argument inputArgument2;
+    UA_Argument_init(&inputArgument2);
+    inputArgument2.description = UA_LOCALIZEDTEXT("en-US", "A String");
+    inputArgument2.name = UA_STRING("MyInput");
+    inputArgument2.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
+    inputArgument2.valueRank = -1;
+
+    UA_Argument outputArgument2;
+    UA_Argument_init(&outputArgument2);
+    outputArgument2.description = UA_LOCALIZEDTEXT("en-US", "A String");
+    outputArgument2.name = UA_STRING("MyOutput");
+    outputArgument2.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
+    outputArgument2.valueRank = -1;
+
+    UA_MethodAttributes ledattr2 = UA_MethodAttributes_default;
+    ledattr2.description = UA_LOCALIZEDTEXT("en-US","Turn off");
+    ledattr2.displayName = UA_LOCALIZEDTEXT("en-US","turnoff");
+    ledattr2.executable = true;
+    ledattr2.userExecutable = true;
+    UA_Server_addMethodNode(server, UA_NODEID_NUMERIC(1,62540),
+                            OBJNodeId,
+                            UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
+                            UA_QUALIFIEDNAME(2, "LED-QualName2"),
+                            ledattr2, &Ledcallback2,
+                            1, &inputArgument2, 1, &outputArgument2, NULL, NULL);
+    
 }
 
 
@@ -118,7 +156,7 @@ int main(void) {
     addObject(server);
 
     UA_StatusCode retval = UA_Server_run(server, &running); 
-    PyRun_SimpleString("GPIO.cleanup()");
+    PyRun_SimpleString("GPIO.cleanup()"); 
     Py_Finalize(); 
     UA_Server_delete(server);
     UA_ServerConfig_delete(config);
