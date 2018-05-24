@@ -137,9 +137,9 @@ addObject(UA_Server *server) {
     ledattr2.displayName = UA_LOCALIZEDTEXT("en-US","turnoff");
     ledattr2.executable = true;
     ledattr2.userExecutable = true;
-    UA_Server_addMethodNode(server, UA_NODEID_NUMERIC(2,62541),
+    UA_Server_addMethodNode(server, UA_NODEID_NUMERIC(1,62540),
                             OBJNodeId,
-                            UA_NODEID_NUMERIC(1, UA_NS0ID_HASORDEREDCOMPONENT),
+                            UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
                             UA_QUALIFIEDNAME(2, "LED-QualName2"),
                             ledattr2, &Ledcallback2,
                             1, &inputArgument2, 1, &outputArgument2, NULL, NULL);
