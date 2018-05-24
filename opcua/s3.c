@@ -158,6 +158,7 @@
         UA_Double m;
         UA_Double h;
         PyArg_Parse(result, "(d,d)", &h,&m);
+        printf("%lf,%lf\n\n\n",h,m);
         return UA_STATUSCODE_GOOD;}
 //  Add DHT OBJECT
     static void addObjectDHT(UA_Server *server) {
@@ -167,26 +168,25 @@
     UA_Server_addObjectNode(server, DOBJNodeId,
                             UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
                             UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),
-                            UA_QUALIFIEDNAME(1, "DHTQ"),
+                            UA_QUALIFIEDNAME(1, "DHT"),
                             UA_NODEID_NULL,HAttr, NULL, NULL);
 
 
-    //==VARIABLE==//
+    /*/==VARIABLE==//
         UA_VariableAttributes attrD = UA_VariableAttributes_default;
-        UA_String DHTTTT = UA_STRING("off");
-        UA_Variant_setScalar(&attrD.value, &DHTTTT, &UA_TYPES[UA_TYPES_STRING]);
+        UA_String DHTVAR = UA_STRING("off");
+        UA_Variant_setScalar(&attrD.value, &DHTVAR, &UA_TYPES[UA_TYPES_STRING]);
         attrD.description = UA_LOCALIZEDTEXT("en-US","the answer");
         attrD.displayName = UA_LOCALIZEDTEXT("en-US","LED_Status");
         attrD.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
         attrD.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
 
-        UA_NodeId DHTTTTNodeId = UA_NODEID_STRING(1, "the.answer");
-        UA_QualifiedName DHTTTTName = UA_QUALIFIEDNAME(1, "the answer");
-        UA_NodeId NNNN = UA_NODEID_NUMERIC(1,62543);
+        UA_NodeId DHTVARNodeId = UA_NODEID_STRING(1, "the.answer");
+        UA_QualifiedName DHTVARName = UA_QUALIFIEDNAME(1, "the answer");
         UA_NodeId DparentReferenceNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES);
-        UA_Server_addVariableNode(server, DHTTTTNodeId, DOBJNodeId,
-                                DparentReferenceNodeId, DHTTTTName,
-                                UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), attrD, NULL, NNNN);  
+        UA_Server_addVariableNode(server, DHTVARNodeId, DOBJNodeId,
+                                DparentReferenceNodeId, DHTVARName,
+                                UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), attrD, NULL, NULL); */ 
     //==METHOD==//
         UA_Argument inputArgumentH;
         UA_Argument_init(&inputArgumentH);
