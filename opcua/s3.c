@@ -29,7 +29,7 @@ static UA_StatusCode Ledcallback(UA_Server *server,
         PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL, *pArg = NULL, *result = NULL; 
         pModule = PyImport_ImportModule("LED");
         pFunc = PyObject_GetAttrString(pModule, "main");
-        pArg = Py_BuildValue("s", "on");
+        pArg = Py_BuildValue("(s)", "on");
         return UA_STATUSCODE_GOOD;}
 
 static UA_StatusCode Ledcallback2(UA_Server *server,
@@ -47,7 +47,7 @@ static UA_StatusCode Ledcallback2(UA_Server *server,
         PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL, *pArg = NULL, *result = NULL; 
         pModule = PyImport_ImportModule("LED");
         pFunc = PyObject_GetAttrString(pModule, "OFF");
-        pArg = Py_BuildValue("s", "off");
+        pArg = Py_BuildValue("(s)", "off");
         return UA_STATUSCODE_GOOD;}
 
 
