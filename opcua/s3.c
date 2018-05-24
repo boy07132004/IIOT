@@ -158,7 +158,7 @@
         UA_Double m;
         UA_Double h;
         PyArg_Parse(result, "(d,d)", &h,&m);
-        printf("%lf,%lf\n\n\n",h,m);
+        printf("H : %f\nM:%f\n\n\n",h,m);
         return UA_STATUSCODE_GOOD;}
 //  Add DHT OBJECT
     static void addObjectDHT(UA_Server *server) {
