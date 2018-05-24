@@ -32,8 +32,9 @@ Ledcallback(UA_Server *server,
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-/////
+
     UA_String LEDDDD = UA_STRING("off");
+    
     switch(led%4){
         case 1:
             LEDDDD= UA_STRING("red");
@@ -59,7 +60,7 @@ Ledcallback(UA_Server *server,
             PyRun_SimpleString("pwmb.ChangeDutyCycle(0)");
             break;
     }
-    //
+    
     UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
     UA_Variant myVar;
     UA_Variant_init(&myVar);
@@ -74,7 +75,7 @@ Ledcallback(UA_Server *server,
     }
     UA_Variant_setScalarCopy(output, &tmp, &UA_TYPES[UA_TYPES_STRING]);
     UA_String_deleteMembers(&tmp);
-/////   
+ 
     UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, "Now: %s ",LEDDDD.data);
     led++;
     return UA_STATUSCODE_GOOD;
@@ -125,7 +126,7 @@ int main(void) {
     UA_Server *server = UA_Server_new(config);
     addVariable(server);
     LedMethod(server);
-    /////
+    
     PyRun_SimpleString("import RPi.GPIO as GPIO");
     PyRun_SimpleString("GPIO.setmode(GPIO.BOARD)");
     PyRun_SimpleString("pins={'r':3,'g':5,'b':7}");
@@ -136,13 +137,14 @@ int main(void) {
     PyRun_SimpleString("pwmr.start(0)");
     PyRun_SimpleString("pwmg.start(0)");
     PyRun_SimpleString("pwmb.start(0)");
-    /////
+    
     UA_StatusCode retval = UA_Server_run(server, &running); 
     PyRun_SimpleString("pwmr.stop()");
     PyRun_SimpleString("pwmg.stop()");
     PyRun_SimpleString("pwmb.stop()");
     PyRun_SimpleString("GPIO.cleanup()");
     Py_Finalize();
+    
     led = led * 0;
     printf("\nbye\n");
     UA_Server_delete(server);

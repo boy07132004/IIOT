@@ -3,6 +3,7 @@
     "files.associations": {
         "open62541.h": "c",
         "*.tcc": "c",
-        "python.h": "c"
+        "python.h": "c",
+        "type_traits": "c"
     }
 }

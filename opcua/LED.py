@@ -10,12 +10,6 @@ def initPin():
     GPIO.setup(7, GPIO.OUT)
 
 def LEDDD():
-    LEDD = True
-
-    if LEDD == True:
-        GPIO.output(7, True)
-    elif LEDD == False:
-        GPIO.output(7, False)
-    return LEDD        
+        GPIO.output(7, True)     
 def clean():
     GPIO.cleanup()

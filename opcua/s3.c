@@ -13,6 +13,29 @@
     • hum 放濕度值（UA_Double，初始值為0）
 */
 
+//  CALLBACK LED TURN ON
+static UA_StatusCode Ledcallback(UA_Server *server,
+                         const UA_NodeId *sessionId, void *sessionHandle,
+                         const UA_NodeId *methodId, void *methodContext,
+                         const UA_NodeId *objectId, void *objectContext,
+                         size_t inputSize, const UA_Variant *input,
+                         size_t outputSize, UA_Variant *output) {
+        UA_String LEDDDD = UA_STRING("off");
+        UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
+        UA_Variant myVar;
+        UA_Variant_init(&myVar);
+        UA_Variant_setScalar(&myVar, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
+        UA_Server_writeValue(server, myIntegerNodeId, myVar);
+        PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL, *pArg = NULL, *result = NULL; 
+        PyObject *pFunc2 = NULL,*pFunc3 = NULL;
+        pModule = PyImport_ImportModule("LED");
+        pFunc = PyObject_GetAttrString(pModule, "initEnv");
+        pFunc2 = PyObject_GetAttrString(pModule, "initPin");
+        pFunc3 = PyObject_GetAttrString(pModule, "LEDDD");
+        return UA_STATUSCODE_GOOD;}
+
+
+
 static void
 addObject(UA_Server *server) {
     UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
@@ -24,15 +47,17 @@ addObject(UA_Server *server) {
                             UA_QUALIFIEDNAME(1, "OBJECT"),
                             UA_NODEID_NULL,oAttr, NULL, NULL);
 
-    
+    /*
     PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL, *pArg = NULL, *result = NULL; 
     PyObject *pFunc2 = NULL,*pFunc3 = NULL,*pFunc4 = NULL;
     pModule = PyImport_ImportModule("LED");
     pFunc = PyObject_GetAttrString(pModule, "initEnv");
     pFunc2 = PyObject_GetAttrString(pModule, "initPin");
     pFunc3 = PyObject_GetAttrString(pModule, "LEDDD");
-    
+    */
     //==CALLBACK==//
+    
+
     //==VARIABLE==//
     UA_VariableAttributes attr = UA_VariableAttributes_default;
     UA_String LEDDDD = UA_STRING("off");
@@ -76,8 +101,6 @@ addObject(UA_Server *server) {
                             ledattr, &Ledcallback,
                             1, &inputArgument, 1, &outputArgument, NULL, NULL);
     
-    
-
 }
 
 
