@@ -1,13 +1,7 @@
-import time
-import sys
 import Adafruit_DHT as DHT
 
 
-def main():
-    
+def main(DHT):   
     h, t = DHT.read_retry(11, BCM_PIN)
-    h=h/100
+    return h,t
 
-
-if __name__ == "__main__":
-    main()
