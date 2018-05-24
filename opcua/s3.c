@@ -149,15 +149,20 @@
         UA_Variant_init(&myVar);
         UA_Variant_setScalar(&myVar, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
         UA_Server_writeValue(server, myIntegerNodeId, myVar);
-        PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL,*pArg = NULL, *result = NULL; 
+        PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL,*pArg = NULL, *resultH = NULL, *resultM = NULL; 
         pModule = PyImport_ImportModule("DHT");
         pDict = PyModule_GetDict(pModule);
-        pFunc = PyDict_GetItemString(pDict, "main");
+        pFunc = PyDict_GetItemString(pDict, "H");
         pArg = Py_BuildValue("(s)", "DHT");
-        result = PyEval_CallObject(pFunc, pArg);
+        resultH = PyEval_CallObject(pFunc, pArg);
+        pFunc = PyDict_GetItemString(pDict, "M");
+        pArg = Py_BuildValue("(s)", "DHT");
+        resultM = PyEval_CallObject(pFunc, pArg);
         UA_Double m=0;
         UA_Double h=0;
-        PyArg_ParseTuple(result, "dd", &h,&m);
+        PyArg_Parse(resultH, "d", &h);
+        PyArg_Parse(resultH, "d", &m);
+        printf("H : %f\nM : %f",h,m);
         
         printf("H : %f\nM:%f\n\n\n",h,m);
         return UA_STATUSCODE_GOOD;}
