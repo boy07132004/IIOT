@@ -157,7 +157,8 @@
         result = PyEval_CallObject(pFunc, pArg);
         UA_Double m=0;
         UA_Double h=0;
-        PyArg_Parse(result, "(d,d)", &h,&m);
+        PyArg_Parse(result, "d", &h);
+        PyArg_Parse(result, "d", &m);
         printf("H : %f\nM:%f\n\n\n",h,m);
         return UA_STATUSCODE_GOOD;}
 //  Add DHT OBJECT
