@@ -150,6 +150,7 @@ int main(void) {
     signal(SIGTERM, stopHandler);
     Py_Initialize();
     PyRun_SimpleString("import sys");  
+    PyRun_SimpleString("RPi.GPIO as GPIO");
     PyRun_SimpleString("sys.path.append('./')");
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
