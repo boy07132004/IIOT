@@ -27,11 +27,9 @@ static UA_StatusCode Ledcallback(UA_Server *server,
         UA_Variant_setScalar(&myVar, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
         UA_Server_writeValue(server, myIntegerNodeId, myVar);
         PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL, *pArg = NULL, *result = NULL; 
-        PyObject *pFunc2 = NULL,*pFunc3 = NULL;
         pModule = PyImport_ImportModule("LED");
-        pFunc = PyObject_GetAttrString(pModule, "initEnv");
-        pFunc2 = PyObject_GetAttrString(pModule, "initPin");
-        pFunc3 = PyObject_GetAttrString(pModule, "LEDDD");
+        pFunc = PyObject_GetAttrString(pModule, "main");
+        pArg = Py_BuildValue("(s)", "hello_python");
         return UA_STATUSCODE_GOOD;}
 
 

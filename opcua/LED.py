@@ -2,14 +2,10 @@
 # PIN -> 7
 import RPi.GPIO as GPIO
 
-def initEnv():
+def main(LED):
     GPIO.setmode(GPIO.BOARD)
-
-def initPin():
     GPIO.setup(7, GPIO.OUT)
-
-def LEDDD():
-    while 1:
+    while LED:
         GPIO.output(7, True)     
     print("123")
 def clean():
