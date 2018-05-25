@@ -1,9 +1,13 @@
 import Adafruit_DHT as DHT
 
 
-def H(DHT):
+def H():
+    h=0
+    t=0
     h, t = DHT.read_retry(11, 17)
     return h
-def M(DHT):
+def M():
+    h=0
+    t=0
     h, t = DHT.read_retry(11, 17)
     return t
