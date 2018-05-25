@@ -158,7 +158,7 @@ UA_Double hum=0;
 //  DHT11  Add OBJECT
     static void addObjectDHT(UA_Server *server) {
     UA_ObjectAttributes HAttr = UA_ObjectAttributes_default;
-    HAttr.displayName = UA_LOCALIZEDTEXT("en-US","getdata");
+    HAttr.displayName = UA_LOCALIZEDTEXT("en-US","DHT11");
     UA_NodeId DOBJNodeId = UA_NODEID_STRING(1, "DHT");
     UA_Server_addObjectNode(server, DOBJNodeId,
                             UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
@@ -198,8 +198,8 @@ UA_Double hum=0;
         outputArgumentH.valueRank = -1;
 
         UA_MethodAttributes Hattr = UA_MethodAttributes_default;
-        Hattr.description = UA_LOCALIZEDTEXT("en-US","DHT");
-        Hattr.displayName = UA_LOCALIZEDTEXT("en-US","DHT");
+        Hattr.description = UA_LOCALIZEDTEXT("en-US","DHTdata");
+        Hattr.displayName = UA_LOCALIZEDTEXT("en-US","Get Data");
         Hattr.executable = true;
         Hattr.userExecutable = true;
         UA_Server_addMethodNode(server, UA_NODEID_NUMERIC(1,62542),
