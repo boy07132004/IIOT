@@ -153,7 +153,7 @@
         pModule = PyImport_ImportModule ("DHT");
         pFunc= PyObject_GetAttrString (pModule, "H");
         resultH = PyEval_CallObject(pFunc, pArg);
-        h=PyLong_AsDouble(resultH);
+        h=PyFloat_AsDouble(resultH);
         printf("H : %f\n\n",h);
         return UA_STATUSCODE_GOOD;}
 //  Add DHT OBJECT
