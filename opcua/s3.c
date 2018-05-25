@@ -27,8 +27,8 @@
         PyObject *pModule = NULL, *pDict = NULL, *pFunc = NULL, *pArg = NULL, *result = NULL; 
         pModule = PyImport_ImportModule("LED");
         pFunc = PyObject_GetAttrString(pModule, "main");
-        pArg = Py_BuildValue("(s)", "on");
-        PyEval_CallObject(pFunc, pArg);
+        //pArg = Py_BuildValue("(s)", "on");
+        PyObject_CallObject(pFunc, pArg);
         return UA_STATUSCODE_GOOD;}
 
 //  CALLBACK LED TURN OFF
