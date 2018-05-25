@@ -158,7 +158,7 @@ UA_Double hum=0;
 //  DHT11  Add OBJECT
     static void addObjectDHT(UA_Server *server) {
     UA_ObjectAttributes HAttr = UA_ObjectAttributes_default;
-    HAttr.displayName = UA_LOCALIZEDTEXT("en-US","DHT");
+    HAttr.displayName = UA_LOCALIZEDTEXT("en-US","getdata");
     UA_NodeId DOBJNodeId = UA_NODEID_STRING(1, "DHT");
     UA_Server_addObjectNode(server, DOBJNodeId,
                             UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
