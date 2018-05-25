@@ -63,8 +63,7 @@ UA_Double hum=0;
                             UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),
                             UA_QUALIFIEDNAME(1, "OBJECT"),
                             UA_NODEID_NULL,oAttr, NULL, NULL);
-
-    PyRun_SimpleString("GPIO.setwarnings(False)"); 
+ 
     //==VARIABLE==//
         UA_VariableAttributes attr = UA_VariableAttributes_default;
         UA_String LEDDDD = UA_STRING("off");
@@ -167,18 +166,31 @@ UA_Double hum=0;
                             UA_NODEID_NULL,HAttr, NULL, NULL);
     
     //==VARIABLE==//
+    UA_VariableAttributes HUMattr = UA_VariableAttributes_default;
+    UA_Double HUM = 0;
+    UA_Variant_setScalar(&HUMattr.value, &HUM, &UA_TYPES[UA_TYPES_DOUBLE]);
+    HUMattr.description = UA_LOCALIZEDTEXT("en-US","the answer");
+    HUMattr.displayName = UA_LOCALIZEDTEXT("en-US","Hum");
+    HUMattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
+    HUMattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+    UA_QualifiedName HUMName = UA_QUALIFIEDNAME(1, "the answer");
+    UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC(1, UA_NS0ID_ORGANIZES);
+    UA_Server_addVariableNode(server, UA_NODEID_STRING(1, "DHT-Variable"), DOBJNodeId,
+                              parentReferenceNodeId, HUMName,
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), HUMattr, NULL, NULL);
+    
+    //==VARIABLE2==//
     UA_VariableAttributes TEMPattr = UA_VariableAttributes_default;
     UA_Double TEMP = 0;
     UA_Variant_setScalar(&TEMPattr.value, &TEMP, &UA_TYPES[UA_TYPES_DOUBLE]);
     TEMPattr.description = UA_LOCALIZEDTEXT("en-US","the answer");
-    TEMPattr.displayName = UA_LOCALIZEDTEXT("en-US","the answer");
+    TEMPattr.displayName = UA_LOCALIZEDTEXT("en-US","Temp");
     TEMPattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
     TEMPattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
-    //UA_NodeId TEMPNodeId = UA_NODEID_STRING(1, "the.answer");
     UA_QualifiedName TEMPName = UA_QUALIFIEDNAME(1, "the answer");
-    UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES);
-    UA_Server_addVariableNode(server, UA_NODEID_STRING(1, "IncInt32ArrayValues"), DOBJNodeId,
-                              parentReferenceNodeId, TEMPName,
+    UA_NodeId parentReferenceNodeIdT = UA_NODEID_NUMERIC(1, UA_NS0ID_ORGANIZES);
+    UA_Server_addVariableNode(server, UA_NODEID_STRING(1, "DHT-Variable"), DOBJNodeId,
+                              parentReferenceNodeIdT, TEMPName,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), TEMPattr, NULL, NULL);
     //==METHOD==//
         UA_Argument inputArgumentH;
@@ -220,14 +232,15 @@ int main(void) {
     signal(SIGTERM, stopHandler);
     Py_Initialize();
     PyRun_SimpleString("import sys");  
+    PyRun_SimpleString("import RPi.GPIO as GPIO");
     PyRun_SimpleString("sys.path.append('./')");
+    PyRun_SimpleString("GPIO.setwarnings(False)");
     UA_ServerConfig *config = UA_ServerConfig_new_default();
     UA_Server *server = UA_Server_new(config);
     addObject(server);
     addObjectDHT(server);
 
-    UA_StatusCode retval = UA_Server_run(server, &running); 
-    PyRun_SimpleString("import RPi.GPIO as GPIO"); 
+    UA_StatusCode retval = UA_Server_run(server, &running);  
     PyRun_SimpleString("GPIO.cleanup()"); 
     Py_Finalize(); 
     UA_Server_delete(server);
