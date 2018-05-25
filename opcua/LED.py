@@ -2,7 +2,7 @@
 # PIN -> 7
 import RPi.GPIO as GPIO
 
-def main(LED):
+def main():
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(7, GPIO.OUT)
     GPIO.output(7, True)
