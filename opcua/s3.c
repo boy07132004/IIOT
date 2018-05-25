@@ -147,14 +147,17 @@
         UA_Variant_init(&myVar);
         UA_Variant_setScalar(&myVar, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
         UA_Server_writeValue(server, myIntegerNodeId, myVar);
-        PyObject *pModule = NULL, *pClass = NULL, *pFunc = NULL,*pArg = NULL, *resultH = NULL, *resultM = NULL; 
+        PyObject *pModule = NULL, *pFunc2 = NULL, *pFunc = NULL,*pArg = NULL, *resultH = NULL, *resultM = NULL; 
         UA_Double m=0;
         UA_Double h=0;
         pModule = PyImport_ImportModule ("DHT");
         pFunc= PyObject_GetAttrString (pModule, "H");
         resultH = PyEval_CallObject(pFunc, pArg);
         h=PyFloat_AsDouble(resultH);
-        printf("H : %f\n\n",h);
+        pFunc2= PyObject_GetAttrString (pModule, "M");
+        resultM = PyEval_CallObject(pFunc2, pArg);
+        m=PyFloat_AsDouble(resultM);
+        printf("Humidity : %f\nTemperature : %f\n",h,m);
         return UA_STATUSCODE_GOOD;}
 //  Add DHT OBJECT
     static void addObjectDHT(UA_Server *server) {
