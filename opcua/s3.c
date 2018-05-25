@@ -10,6 +10,9 @@
     • temp 放溫度值（UA_Double ，初始值為0）
     • hum 放濕度值（UA_Double，初始值為0）
 */
+int LEDVAL = 0;
+UA_Double tmp=0;
+UA_Double hum=0;
 
 //  CALLBACK LED TURN ON
     static UA_StatusCode Ledcallback(UA_Server *server,
@@ -18,7 +21,7 @@
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-        UA_String LEDDDD = UA_STRING("off");
+        UA_String LEDDDD = UA_STRING("on");
         UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
         UA_Variant myVar;
         UA_Variant_init(&myVar);
@@ -28,6 +31,9 @@
         pModule = PyImport_ImportModule("LED");
         pFunc = PyObject_GetAttrString(pModule, "main");
         PyObject_CallObject(pFunc, pArg);
+        LEDVAL = 1;
+        
+    
         return UA_STATUSCODE_GOOD;}
 
 //  CALLBACK LED TURN OFF
@@ -47,6 +53,7 @@
         pModule = PyImport_ImportModule("LED");
         pFunc = PyObject_GetAttrString(pModule, "OFF");
         PyObject_CallObject(pFunc, pArg);
+        LEDVAL = 0;
         return UA_STATUSCODE_GOOD;}
 
 
@@ -62,10 +69,12 @@
                             UA_QUALIFIEDNAME(1, "OBJECT"),
                             UA_NODEID_NULL,oAttr, NULL, NULL);
 
-
+    PyRun_SimpleString("GPIO.setwarnings(False)"); 
     //==VARIABLE==//
         UA_VariableAttributes attr = UA_VariableAttributes_default;
         UA_String LEDDDD = UA_STRING("off");
+        //if (LEDVAL==1)  LEDDDD=UA_STRING("on");
+
         UA_Variant_setScalar(&attr.value, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
         attr.description = UA_LOCALIZEDTEXT("en-US","the answer");
         attr.displayName = UA_LOCALIZEDTEXT("en-US","LED_Status");
@@ -148,16 +157,15 @@
         UA_Variant_setScalar(&myVar, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
         UA_Server_writeValue(server, myIntegerNodeId, myVar);
         PyObject *pModule = NULL, *pFunc2 = NULL, *pFunc = NULL,*pArg = NULL, *resultH = NULL, *resultM = NULL; 
-        UA_Double m=0;
-        UA_Double h=0;
+    
         pModule = PyImport_ImportModule ("DHT");
         pFunc= PyObject_GetAttrString (pModule, "H");
         resultH = PyEval_CallObject(pFunc, pArg);
-        h=PyFloat_AsDouble(resultH);
+        hum=PyFloat_AsDouble(resultH);
         pFunc2= PyObject_GetAttrString (pModule, "M");
         resultM = PyEval_CallObject(pFunc2, pArg);
-        m=PyFloat_AsDouble(resultM);
-        printf("Humidity : %f\nTemperature : %f\n",h,m);
+        tmp=PyFloat_AsDouble(resultM);
+        printf("Humidity : %f\nTemperature : %f\n",hum,tmp);
         return UA_STATUSCODE_GOOD;}
 //  Add DHT OBJECT
     static void addObjectDHT(UA_Server *server) {
