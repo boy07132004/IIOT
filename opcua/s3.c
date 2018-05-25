@@ -10,11 +10,10 @@
     • temp 放溫度值（UA_Double ，初始值為0）
     • hum 放濕度值（UA_Double，初始值為0）
 */
-int LEDVAL = 0;
 UA_Double tmp=0;
 UA_Double hum=0;
 
-//  CALLBACK LED TURN ON
+//  LED    CALLBACK TURN ON
     static UA_StatusCode Ledcallback(UA_Server *server,
                          const UA_NodeId *sessionId, void *sessionHandle,
                          const UA_NodeId *methodId, void *methodContext,
@@ -31,12 +30,9 @@ UA_Double hum=0;
         pModule = PyImport_ImportModule("LED");
         pFunc = PyObject_GetAttrString(pModule, "main");
         PyObject_CallObject(pFunc, pArg);
-        LEDVAL = 1;
-        
-    
         return UA_STATUSCODE_GOOD;}
 
-//  CALLBACK LED TURN OFF
+//  LED    CALLBACK TURN OFF
     static UA_StatusCode Ledcallback2(UA_Server *server,
                          const UA_NodeId *sessionId, void *sessionHandle,
                          const UA_NodeId *methodId, void *methodContext,
@@ -53,12 +49,11 @@ UA_Double hum=0;
         pModule = PyImport_ImportModule("LED");
         pFunc = PyObject_GetAttrString(pModule, "OFF");
         PyObject_CallObject(pFunc, pArg);
-        LEDVAL = 0;
         return UA_STATUSCODE_GOOD;}
 
 
 
-//  Add LED OBJECT
+//  LED    Add OBJECT
     static void addObject(UA_Server *server) {
     UA_ObjectAttributes oAttr = UA_ObjectAttributes_default;
     oAttr.displayName = UA_LOCALIZEDTEXT("en-US","LED");
@@ -73,8 +68,6 @@ UA_Double hum=0;
     //==VARIABLE==//
         UA_VariableAttributes attr = UA_VariableAttributes_default;
         UA_String LEDDDD = UA_STRING("off");
-        //if (LEDVAL==1)  LEDDDD=UA_STRING("on");
-
         UA_Variant_setScalar(&attr.value, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
         attr.description = UA_LOCALIZEDTEXT("en-US","the answer");
         attr.displayName = UA_LOCALIZEDTEXT("en-US","LED_Status");
@@ -143,19 +136,14 @@ UA_Double hum=0;
                                 1, &inputArgument2, 1, &outputArgument2, NULL, NULL);
     
     }
-//  CALLBACK DHT11
+//  DHT11  CALLBACK
     static UA_StatusCode DHTcallback(UA_Server *server,
                          const UA_NodeId *sessionId, void *sessionHandle,
                          const UA_NodeId *methodId, void *methodContext,
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-        UA_String LEDDDD = UA_STRING("off");
-        UA_NodeId myIntegerNodeId = UA_NODEID_STRING(1, "the.answer");
-        UA_Variant myVar;
-        UA_Variant_init(&myVar);
-        UA_Variant_setScalar(&myVar, &LEDDDD, &UA_TYPES[UA_TYPES_STRING]);
-        UA_Server_writeValue(server, myIntegerNodeId, myVar);
+        
         PyObject *pModule = NULL, *pFunc2 = NULL, *pFunc = NULL,*pArg = NULL, *resultH = NULL, *resultM = NULL; 
     
         pModule = PyImport_ImportModule ("DHT");
@@ -167,7 +155,7 @@ UA_Double hum=0;
         tmp=PyFloat_AsDouble(resultM);
         printf("Humidity : %f\nTemperature : %f\n",hum,tmp);
         return UA_STATUSCODE_GOOD;}
-//  Add DHT OBJECT
+//  DHT11  Add OBJECT
     static void addObjectDHT(UA_Server *server) {
     UA_ObjectAttributes HAttr = UA_ObjectAttributes_default;
     HAttr.displayName = UA_LOCALIZEDTEXT("en-US","DHT");
