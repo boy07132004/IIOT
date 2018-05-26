@@ -81,12 +81,12 @@ UA_Double hum=0;
                                 parentReferenceNodeId, LEDDDDName,
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), attr, NULL, NULL);  
     //==METHOD==//
-        UA_Argument inputArgument;
+        /*UA_Argument inputArgument;
         UA_Argument_init(&inputArgument);
         inputArgument.description = UA_LOCALIZEDTEXT("en-US", "A String");
         inputArgument.name = UA_STRING("MyInput");
         inputArgument.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
-        inputArgument.valueRank = -1;
+        inputArgument.valueRank = -1;*/
 
         UA_Argument outputArgument;
         UA_Argument_init(&outputArgument);
@@ -105,7 +105,7 @@ UA_Double hum=0;
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
                                 UA_QUALIFIEDNAME(1, "LED-QualName"),
                                 ledattr, &Ledcallback,
-                                1, &inputArgument, 1, &outputArgument, NULL, NULL);
+                                0,NULL, 1, &outputArgument, NULL, NULL);
         
     //==METHOD2==//
         UA_Argument inputArgument2;
