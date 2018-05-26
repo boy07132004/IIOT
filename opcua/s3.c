@@ -167,30 +167,29 @@ UA_Double hum=0;
     
     //==VARIABLE==//
     UA_VariableAttributes HUMattr = UA_VariableAttributes_default;
-    UA_Double HUM = 0;
+    UA_Double HUM = hum;
     UA_Variant_setScalar(&HUMattr.value, &HUM, &UA_TYPES[UA_TYPES_DOUBLE]);
     HUMattr.description = UA_LOCALIZEDTEXT("en-US","the answer");
     HUMattr.displayName = UA_LOCALIZEDTEXT("en-US","Hum");
     HUMattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
     HUMattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
     UA_QualifiedName HUMName = UA_QUALIFIEDNAME(1, "the answer");
-    UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC(1, UA_NS0ID_ORGANIZES);
-    UA_Server_addVariableNode(server, UA_NODEID_STRING(1, "DHT-Variable"), DOBJNodeId,
+    UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES);
+    UA_Server_addVariableNode(server, UA_NODEID_STRING(0, "DHT-Variable"), DOBJNodeId,
                               parentReferenceNodeId, HUMName,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), HUMattr, NULL, NULL);
     
     //==VARIABLE2==//
     UA_VariableAttributes TEMPattr = UA_VariableAttributes_default;
-    UA_Double TEMP = 0;
+    UA_Double TEMP = tmp;
     UA_Variant_setScalar(&TEMPattr.value, &TEMP, &UA_TYPES[UA_TYPES_DOUBLE]);
     TEMPattr.description = UA_LOCALIZEDTEXT("en-US","the answer");
     TEMPattr.displayName = UA_LOCALIZEDTEXT("en-US","Temp");
     TEMPattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
     TEMPattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
     UA_QualifiedName TEMPName = UA_QUALIFIEDNAME(1, "the answer");
-    UA_NodeId parentReferenceNodeIdT = UA_NODEID_NUMERIC(1, UA_NS0ID_ORGANIZES);
     UA_Server_addVariableNode(server, UA_NODEID_STRING(1, "DHT-Variable"), DOBJNodeId,
-                              parentReferenceNodeIdT, TEMPName,
+                              UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES), TEMPName,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), TEMPattr, NULL, NULL);
     //==METHOD==//
         UA_Argument inputArgumentH;
