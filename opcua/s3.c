@@ -86,14 +86,14 @@ UA_Double hum=0;
         inputArgument.description = UA_LOCALIZEDTEXT("en-US", "A String");
         inputArgument.name = UA_STRING("MyInput");
         inputArgument.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
-        inputArgument.valueRank = -1;*/
+        inputArgument.valueRank = -1;
 
         UA_Argument outputArgument;
         UA_Argument_init(&outputArgument);
         outputArgument.description = UA_LOCALIZEDTEXT("en-US", "A String");
         outputArgument.name = UA_STRING("MyOutput");
         outputArgument.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
-        outputArgument.valueRank = -1;
+        outputArgument.valueRank = -1;*/
 
         UA_MethodAttributes ledattr = UA_MethodAttributes_default;
         ledattr.description = UA_LOCALIZEDTEXT("en-US","Turn on");
@@ -105,7 +105,7 @@ UA_Double hum=0;
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
                                 UA_QUALIFIEDNAME(1, "LED-QualName"),
                                 ledattr, &Ledcallback,
-                                0,NULL, 1, &outputArgument, NULL, NULL);
+                                0,NULL, 0, NULL, NULL, NULL);
         
     //==METHOD2==//
         UA_Argument inputArgument2;
