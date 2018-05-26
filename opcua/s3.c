@@ -1,15 +1,7 @@
 #include </usr/include/python3.5/Python.h>
 #include <signal.h>
 #include "open62541.h"
-/*
-    建立兩個Object 分別為LED 以及DTH11
-• 在LED 下建立
-    • status 為LED 狀態（UA_String，初始值為off）
-• 在DTH11 下建立
-    • getdata method 測量溫濕度
-    • temp 放溫度值（UA_Double ，初始值為0）
-    • hum 放濕度值（UA_Double，初始值為0）
-*/
+
 UA_Double tmp=0;
 UA_Double hum=0;
 
@@ -95,20 +87,6 @@ UA_Double hum=0;
                                 0,NULL, 0, NULL, NULL, NULL);
         
     //==METHOD2==//
-        UA_Argument inputArgument2;
-        UA_Argument_init(&inputArgument2);
-        inputArgument2.description = UA_LOCALIZEDTEXT("en-US", "A String");
-        inputArgument2.name = UA_STRING("MyInput");
-        inputArgument2.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
-        inputArgument2.valueRank = -1;
-
-        UA_Argument outputArgument2;
-        UA_Argument_init(&outputArgument2);
-        outputArgument2.description = UA_LOCALIZEDTEXT("en-US", "A String");
-        outputArgument2.name = UA_STRING("MyOutput");
-        outputArgument2.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
-        outputArgument2.valueRank = -1;
-
         UA_MethodAttributes ledattr2 = UA_MethodAttributes_default;
         ledattr2.description = UA_LOCALIZEDTEXT("en-US","Turn off");
         ledattr2.displayName = UA_LOCALIZEDTEXT("en-US","turnoff");
@@ -119,7 +97,7 @@ UA_Double hum=0;
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
                                 UA_QUALIFIEDNAME(2, "LED-QualName2"),
                                 ledattr2, &Ledcallback2,
-                                1, &inputArgument2, 1, &outputArgument2, NULL, NULL);
+                                0, NULL, 0, NULL, NULL, NULL);
     
     }
 //  DHT11  CALLBACK
@@ -140,12 +118,18 @@ UA_Double hum=0;
         resultM = PyEval_CallObject(pFunc2, pArg);
         tmp=PyFloat_AsDouble(resultM);
         printf("Humidity : %f\nTemperature : %f\n",hum,tmp);
-        //
+        //  REFRESH Temp
         UA_NodeId CHANGEId = UA_NODEID_STRING(1, "DHT-Variable");
         UA_Variant myVarTMP;
         UA_Variant_init(&myVarTMP);
         UA_Variant_setScalar(&myVarTMP, &tmp, &UA_TYPES[UA_TYPES_DOUBLE]);
         UA_Server_writeValue(server, CHANGEId, myVarTMP);
+        //  REFRESH HUM
+        UA_NodeId CHANGEHUMId = UA_NODEID_STRING(0, "DHT-Variable");
+        UA_Variant myVarHUM;
+        UA_Variant_init(&myVarHUM);
+        UA_Variant_setScalar(&myVarHUM, &hum, &UA_TYPES[UA_TYPES_DOUBLE]);
+        UA_Server_writeValue(server, CHANGEHUMId, myVarHUM);
         //
         return UA_STATUSCODE_GOOD;}
 //  DHT11  Add OBJECT
@@ -160,33 +144,33 @@ UA_Double hum=0;
                             UA_NODEID_NULL,HAttr, NULL, NULL);
     
     //==VARIABLE==//
-    UA_VariableAttributes HUMattr = UA_VariableAttributes_default;
-    UA_Double HUM = hum;
-    UA_Variant_setScalar(&HUMattr.value, &HUM, &UA_TYPES[UA_TYPES_DOUBLE]);
-    HUMattr.description = UA_LOCALIZEDTEXT("en-US","the answer");
-    HUMattr.displayName = UA_LOCALIZEDTEXT("en-US","Hum");
-    HUMattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
-    HUMattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
-    UA_QualifiedName HUMName = UA_QUALIFIEDNAME(1, "the answer");
-    UA_NodeId humnodeid =UA_NODEID_STRING(0, "DHT-Variable");
-    UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES);
-    UA_Server_addVariableNode(server, humnodeid, DOBJNodeId,
-                              parentReferenceNodeId, HUMName,
-                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), HUMattr, NULL, NULL);
+        UA_VariableAttributes HUMattr = UA_VariableAttributes_default;
+        UA_Double HUM = hum;
+        UA_Variant_setScalar(&HUMattr.value, &HUM, &UA_TYPES[UA_TYPES_DOUBLE]);
+        HUMattr.description = UA_LOCALIZEDTEXT("en-US","the answer");
+        HUMattr.displayName = UA_LOCALIZEDTEXT("en-US","Hum");
+        HUMattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
+        HUMattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+        UA_QualifiedName HUMName = UA_QUALIFIEDNAME(1, "the answer");
+        UA_NodeId humnodeid =UA_NODEID_STRING(0, "DHT-Variable");
+        UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES);
+        UA_Server_addVariableNode(server, humnodeid, DOBJNodeId,
+                                parentReferenceNodeId, HUMName,
+                                UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), HUMattr, NULL, NULL);
     
     //==VARIABLE2==//
-    UA_VariableAttributes TEMPattr = UA_VariableAttributes_default;
-    UA_Double TEMP = tmp;
-    UA_Variant_setScalar(&TEMPattr.value, &TEMP, &UA_TYPES[UA_TYPES_DOUBLE]);
-    TEMPattr.description = UA_LOCALIZEDTEXT("en-US","the answer");
-    TEMPattr.displayName = UA_LOCALIZEDTEXT("en-US","Temp");
-    TEMPattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
-    TEMPattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
-    UA_QualifiedName TEMPName = UA_QUALIFIEDNAME(1, "the answer");
-    UA_NodeId tmpnodeid =UA_NODEID_STRING(1, "DHT-Variable");
-    UA_Server_addVariableNode(server, tmpnodeid, DOBJNodeId,
-                              UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES), TEMPName,
-                              UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), TEMPattr, NULL, NULL);
+        UA_VariableAttributes TEMPattr = UA_VariableAttributes_default;
+        UA_Double TEMP = tmp;
+        UA_Variant_setScalar(&TEMPattr.value, &TEMP, &UA_TYPES[UA_TYPES_DOUBLE]);
+        TEMPattr.description = UA_LOCALIZEDTEXT("en-US","the answer");
+        TEMPattr.displayName = UA_LOCALIZEDTEXT("en-US","Temp");
+        TEMPattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
+        TEMPattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+        UA_QualifiedName TEMPName = UA_QUALIFIEDNAME(1, "the answer");
+        UA_NodeId tmpnodeid =UA_NODEID_STRING(1, "DHT-Variable");
+        UA_Server_addVariableNode(server, tmpnodeid, DOBJNodeId,
+                                UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES), TEMPName,
+                                UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), TEMPattr, NULL, NULL);
     //==METHOD==//
         UA_MethodAttributes Hattr = UA_MethodAttributes_default;
         Hattr.description = UA_LOCALIZEDTEXT("en-US","DHTdata");
