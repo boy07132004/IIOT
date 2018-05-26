@@ -81,19 +81,6 @@ UA_Double hum=0;
                                 parentReferenceNodeId, LEDDDDName,
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), attr, NULL, NULL);  
     //==METHOD==//
-        /*UA_Argument inputArgument;
-        UA_Argument_init(&inputArgument);
-        inputArgument.description = UA_LOCALIZEDTEXT("en-US", "A String");
-        inputArgument.name = UA_STRING("MyInput");
-        inputArgument.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
-        inputArgument.valueRank = -1;
-
-        UA_Argument outputArgument;
-        UA_Argument_init(&outputArgument);
-        outputArgument.description = UA_LOCALIZEDTEXT("en-US", "A String");
-        outputArgument.name = UA_STRING("MyOutput");
-        outputArgument.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
-        outputArgument.valueRank = -1;*/
 
         UA_MethodAttributes ledattr = UA_MethodAttributes_default;
         ledattr.description = UA_LOCALIZEDTEXT("en-US","Turn on");
@@ -153,6 +140,13 @@ UA_Double hum=0;
         resultM = PyEval_CallObject(pFunc2, pArg);
         tmp=PyFloat_AsDouble(resultM);
         printf("Humidity : %f\nTemperature : %f\n",hum,tmp);
+        //
+        UA_NodeId CHANGEId = UA_NODEID_STRING(1, "DHT-Variable");
+        UA_Variant myVarTMP;
+        UA_Variant_init(&myVarTMP);
+        UA_Variant_setScalar(&myVarTMP, &tmp, &UA_TYPES[UA_TYPES_DOUBLE]);
+        UA_Server_writeValue(server, CHANGEId, myVarTMP);
+        //
         return UA_STATUSCODE_GOOD;}
 //  DHT11  Add OBJECT
     static void addObjectDHT(UA_Server *server) {
@@ -174,8 +168,9 @@ UA_Double hum=0;
     HUMattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
     HUMattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
     UA_QualifiedName HUMName = UA_QUALIFIEDNAME(1, "the answer");
+    UA_NodeId humnodeid =UA_NODEID_STRING(0, "DHT-Variable");
     UA_NodeId parentReferenceNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES);
-    UA_Server_addVariableNode(server, UA_NODEID_STRING(0, "DHT-Variable"), DOBJNodeId,
+    UA_Server_addVariableNode(server, humnodeid, DOBJNodeId,
                               parentReferenceNodeId, HUMName,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), HUMattr, NULL, NULL);
     
@@ -188,24 +183,11 @@ UA_Double hum=0;
     TEMPattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
     TEMPattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
     UA_QualifiedName TEMPName = UA_QUALIFIEDNAME(1, "the answer");
-    UA_Server_addVariableNode(server, UA_NODEID_STRING(1, "DHT-Variable"), DOBJNodeId,
+    UA_NodeId tmpnodeid =UA_NODEID_STRING(1, "DHT-Variable");
+    UA_Server_addVariableNode(server, tmpnodeid, DOBJNodeId,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES), TEMPName,
                               UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), TEMPattr, NULL, NULL);
     //==METHOD==//
-        UA_Argument inputArgumentH;
-        UA_Argument_init(&inputArgumentH);
-        inputArgumentH.description = UA_LOCALIZEDTEXT("en-US", "A String");
-        inputArgumentH.name = UA_STRING("MyInput");
-        inputArgumentH.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
-        inputArgumentH.valueRank = -1;
-
-        UA_Argument outputArgumentH;
-        UA_Argument_init(&outputArgumentH);
-        outputArgumentH.description = UA_LOCALIZEDTEXT("en-US", "A String");
-        outputArgumentH.name = UA_STRING("MyOutput");
-        outputArgumentH.dataType = UA_TYPES[UA_TYPES_STRING].typeId;
-        outputArgumentH.valueRank = -1;
-
         UA_MethodAttributes Hattr = UA_MethodAttributes_default;
         Hattr.description = UA_LOCALIZEDTEXT("en-US","DHTdata");
         Hattr.displayName = UA_LOCALIZEDTEXT("en-US","Get Data");
@@ -216,7 +198,7 @@ UA_Double hum=0;
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
                                 UA_QUALIFIEDNAME(1, "DHT-QualName"),
                                 Hattr, &DHTcallback,
-                                1, &inputArgumentH, 1, &outputArgumentH, NULL, NULL);
+                                0, NULL, 0, NULL, NULL, NULL);
     }
 
 
