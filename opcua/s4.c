@@ -36,7 +36,7 @@ int main(void) {
     signal(SIGINT, stopHandler);
     signal(SIGTERM, stopHandler);
     UA_Client *client = UA_Client_new(UA_ClientConfig_default);
-    UA_StatusCode retval = UA_Client_connect(client, "opc.tcp://192.168.50.97:4840");
+    UA_StatusCode retval = UA_Client_connect(client, "opc.tcp://172.20.10.2:4840");
     if(retval != UA_STATUSCODE_GOOD) {UA_Client_delete(client);return (int)retval;}
     //
     UA_CreateSubscriptionRequest
