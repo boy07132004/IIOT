@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"></meta> 
+	<title>HTNL DOM</title>
+	<style type="text/css">
+	</style>
+	<script type="text/javascript">
+	//alert(window.screen.width+"x"+window.screen.height);
+	function change(){
+		var spanObj=document.getElementById("emotion");
+		spanObj.innerHTML="bad";
+		spanObj.style.color="red";
+		spanObj.style.fontWeight="bold";
+		spanObj.style.dispaly="none";
+	
+	}
+	</script>
+</head>
+<body>
+	<div>
+		Today is <span id="emotion">good</span> day. let's ....
+	</div>
+	<button onclick="change();">Change</button>
+</body>
+</html>	
