@@ -46,7 +46,7 @@ def mode_1():
     pwmfan.stop()
     GPIO.cleanup()
 
-def mode_2:
+def mode_2():
     GPIO.setmode(GPIO.BOARD)
     signal.signal(signal.SIGINT, end_handler)
     BCM_PIN = 18
