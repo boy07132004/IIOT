@@ -20,7 +20,7 @@ def initLEDPin(pin):
 def main():
     GPIO.setmode(GPIO.BOARD)
     signal.signal(signal.SIGINT, end_handler)
-    BCM_PIN = 12
+    BCM_PIN = 18
     pwmr=initLEDPin(3)
     pwmg=initLEDPin(5)
     pwmb=initLEDPin(7)
