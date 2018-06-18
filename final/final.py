@@ -19,6 +19,7 @@ def initPin(pin):
 #-----------------------MAIN------------------------#
 def mode_1():
     GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
     signal.signal(signal.SIGINT, end_handler)
     BCM_PIN = 18
     pwmr=initPin(3)
@@ -48,6 +49,7 @@ def mode_1():
 
 def mode_2():
     GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
     signal.signal(signal.SIGINT, end_handler)
     BCM_PIN = 18
     pwmb=initPin(7)
