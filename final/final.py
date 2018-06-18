@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RGB_pin->3,5,7
+RGB_pin->3,5
 Ir_pin->37
 """
 import RPi.GPIO as GPIO
@@ -65,7 +65,6 @@ def main():
 # init LED_PIN
     pwmr = initLEDPin(3)
     pwmg = initLEDPin(5)
-    pwmb = initLEDPin(7)
     
 # function introduce
     print("1    :LED on\n0    :LED off\nPower:poweroff\n\
@@ -81,7 +80,6 @@ def main():
             duties=50
             pwmr.ChangeDutyCycle(duties)
             pwmg.ChangeDutyCycle(duties)
-            pwmb.ChangeDutyCycle(duties)
             shining=True
             while shining:
                 ss = getSignal(37)
@@ -95,7 +93,6 @@ def main():
                     print('duty++  now duty:',duties)
                     pwmr.ChangeDutyCycle(duties)
                     pwmg.ChangeDutyCycle(duties)
-                    pwmb.ChangeDutyCycle(duties)
                 
                 elif sigg == str('minus'):
                     if duties==0:
@@ -105,14 +102,12 @@ def main():
                     print('duty--  now duty:',duties)
                     pwmr.ChangeDutyCycle(duties)
                     pwmg.ChangeDutyCycle(duties)
-                    pwmb.ChangeDutyCycle(duties)
                 
                 elif sigg == str('off'):
                     print('----LED off----\n')
                     duties=0
                     pwmr.ChangeDutyCycle(duties)
                     pwmg.ChangeDutyCycle(duties)
-                    pwmb.ChangeDutyCycle(duties)
                     shining=False
                 elif sigg == str('power'):
                     print('Turn off the led first')
@@ -129,7 +124,6 @@ def main():
     # end
     pwmr.stop()
     pwmg.stop()
-    pwmb.stop()
     GPIO.cleanup()
     
 if __name__ == "__main__":
