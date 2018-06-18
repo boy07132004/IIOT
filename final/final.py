@@ -32,7 +32,7 @@ def main():
             duty=1
         elif (t>=30):
             duty=100
-        pwmr.ChangeDutyCycle(0)
+        pwmr.ChangeDutyCycle(duty)
         print('now t: ',t,'\nnow duty: ',duty)
         time.sleep(5)
     # end
