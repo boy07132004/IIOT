@@ -15,10 +15,6 @@ def initLEDPin(pin):
     pwm.start(0)
     return pwm
 
-def change(duty):
-    pwmr.localsChangeDutyCycle(duty)
-    pwmg.localsChangeDutyCycle(duty)
-    pwmb.localsChangeDutyCycle(duty)
 def getSignal(pin):
     start, stop = 0, 0
     signals = []
@@ -67,9 +63,9 @@ def main():
     GPIO.setup(37, GPIO.IN)
 
 # init LED_PIN
-    pwmr= initLEDPin(3)
-    pwmg= initLEDPin(5)
-    pwmb= initLEDPin(7)
+    ledpins     = {'r':3,'g':5,'b':7}
+    for i in ledpins:
+        locals()['pwm'+str(i)] = initLEDPin(ledpins[str(i)])
     
 # function introduce
     print("1    :LED on\n0    :LED off\nPower:poweroff\n\
@@ -83,7 +79,9 @@ def main():
         if sig == str('on'):
             print('----LED on----\n')
             duties=50
-            change(duties)
+            pwmr.ChangeDutyCycle(duties)
+            pwmg.ChangeDutyCycle(duties)
+            pwmb.ChangeDutyCycle(duties)
             shining=True
             while shining:
                 ss = getSignal(37)
@@ -95,7 +93,9 @@ def main():
                         continue
                     duties+=10
                     print('duty++  now duty:',duties)
-                    change(duties)
+                    pwmr.ChangeDutyCycle(duties)
+                    pwmg.ChangeDutyCycle(duties)
+                    pwmb.ChangeDutyCycle(duties)
                 
                 elif sigg == str('minus'):
                     if duties==0:
@@ -103,12 +103,16 @@ def main():
                         continue
                     duties-=10
                     print('duty--  now duty:',duties)
-                    change(duties)
+                    pwmr.ChangeDutyCycle(duties)
+                    pwmg.ChangeDutyCycle(duties)
+                    pwmb.ChangeDutyCycle(duties)
                 
                 elif sigg == str('off'):
                     print('----LED off----\n')
                     duties=0
-                    change(duties)
+                    pwmr.ChangeDutyCycle(duties)
+                    pwmg.ChangeDutyCycle(duties)
+                    pwmb.ChangeDutyCycle(duties)
                     shining=False
                 elif sigg == str('power'):
                     print('Turn off the led first')
