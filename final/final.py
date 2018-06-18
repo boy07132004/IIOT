@@ -43,7 +43,24 @@ def mode_1():
     # end
     pwmr.stop()
     pwmg.stop()
+    pwmfan.stop()
     GPIO.cleanup()
-    
+
+def mode_2:
+    GPIO.setmode(GPIO.BOARD)
+    signal.signal(signal.SIGINT, end_handler)
+    BCM_PIN = 18
+    pwmb=initPin(7)
+    pwmfan = initPin(40)
+    pwmb.ChangeDutyCycle(70)
+    pwmfan.ChangeDutyCycle(100)
+    while shining:
+        h, t = DHT.read_retry(11, BCM_PIN)
+        print('now t: ',t,'\nnow duty: 100')
+        time.sleep(5)
+    # end
+    pwmb.stop()
+    pwmfan.stop()
+    GPIO.cleanup()
 if __name__ == "__main__":
-    mode_1()
+    mode_2()
