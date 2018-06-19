@@ -22,7 +22,9 @@ pid_t child;
         child = fork();
         if (child == 0){
             printf("Start Mode_1");
-            system('python3 ./mode_1.py');
+            char cmd[100];
+            sprintf(cmd,"python3 ./mode_1.py");
+            system(cmd);
         }
         else if (child >0)return UA_STATUSCODE_GOOD;
         else printf("error!!\n");
@@ -42,7 +44,9 @@ pid_t child;
         child = fork();
         if (child == 0){
             printf("Start Mode_2");
-            system('python3 ./mode_2.py');
+            char cmd[100];
+            sprintf(cmd,"python3 ./mode_2.py");
+            system(cmd);
         }
         else if (child >0)return UA_STATUSCODE_GOOD;
         else printf("error!!\n");
