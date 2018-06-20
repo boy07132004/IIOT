@@ -6,7 +6,7 @@
 
 UA_Double tmp=0;
 UA_Double hum=0;
-pid_t child;
+pid_t child=2;
 
 //  Mode_1  CALLBACK
     static UA_StatusCode Mode_1_callback(UA_Server *server,
@@ -22,9 +22,9 @@ pid_t child;
         child = fork();
         if (child == 0){
             printf("Start Mode_1");
-            //char cmd[100];
-            //sprintf(cmd,"python3 ./mode_1.py");
-            //system(cmd);
+            char cmd[100];
+            sprintf(cmd,"python3 ./mode_1.py");
+            system(cmd);
         }
         else if (child >0)return UA_STATUSCODE_GOOD;
         else printf("error!!\n");
