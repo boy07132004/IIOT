@@ -9,6 +9,7 @@
 UA_Double tmp=0;
 UA_Double hum=0;
 pid_t child=2;
+int execres = 100;
 
 //  Mode_1  CALLBACK
     static UA_StatusCode Mode_1_callback(UA_Server *server,
@@ -18,7 +19,8 @@ pid_t child=2;
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
             printf("Start Mode_1");
-            execl("./mode_1.py","python3",NULL);
+            char *argvlist[]={"/usr/bin/python3.5", "/home/zheming/IIOT/opcua/mode_1.py", NULL};
+            execres = execve(argvlist[0],argvlist,NULL);
         
         return UA_STATUSCODE_GOOD;
     }
