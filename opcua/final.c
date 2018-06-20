@@ -28,6 +28,12 @@ int execres = 100;
                 char *argvlist[]={"/usr/bin/python3.5", "/home/pi/IIOT/opcua/mode_1.py", NULL};
                 execres = execve(argvlist[0],argvlist,NULL);
             }
+        //  REFRESH MODE
+        UA_NodeId MODEID = UA_NODEID_STRING(1, "DHT-Variable");
+        UA_Variant myVarMODE;
+        UA_Variant_init(&myVarMODE);
+        UA_Variant_setScalar(&myVarMODE, &mode, &UA_TYPES[UA_TYPES_DOUBLE]);
+        UA_Server_writeValue(server, MODEID, myVarMODE);
         return UA_STATUSCODE_GOOD;
     }
 
@@ -49,6 +55,12 @@ int execres = 100;
                 char *argvlist[]={"/usr/bin/python3.5", "/home/pi/IIOT/opcua/mode_2.py", NULL};
                 execres = execve(argvlist[0],argvlist,NULL);
             }
+        //  REFRESH MODE
+        UA_NodeId MODEID = UA_NODEID_STRING(1, "DHT-Variable");
+        UA_Variant myVarMODE;
+        UA_Variant_init(&myVarMODE);
+        UA_Variant_setScalar(&myVarMODE, &mode, &UA_TYPES[UA_TYPES_DOUBLE]);
+        UA_Server_writeValue(server, MODEID, myVarMODE);
         return UA_STATUSCODE_GOOD;
     }
 
@@ -111,7 +123,7 @@ int execres = 100;
         UA_NodeId modenodeid =UA_NODEID_STRING(1, "DHT-Variable");
         UA_Server_addVariableNode(server, modenodeid, DOBJNodeId,
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES), ModeName,
-                                UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), MODEattr, NULL, NULL);
+                                UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), Modeattr, NULL, NULL);
     //==MODE_1==//
         UA_MethodAttributes MODE1_ATTR = UA_MethodAttributes_default;
         MODE1_ATTR.description = UA_LOCALIZEDTEXT("en-US","Auto");
