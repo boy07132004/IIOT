@@ -6,9 +6,8 @@
 #include <sys/types.h>
 
 UA_Double tmp=0;
-UA_Double hum=0;
 pid_t child=2;
-bool died = true;
+int mode = 0;
 int execres = 100;
 
 //  Mode_1  CALLBACK
@@ -18,12 +17,12 @@ int execres = 100;
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-            if (!died) {
+            if (mode>0) {
                 kill(child,SIGINT);
                 signal(SIGCHLD, SIG_IGN);
             }
-            child = fork();
-            died =false;
+            child   =fork() ;
+            mode    =1      ;
             if (child ==0){
                 printf("Start Mode_1");
                 char *argvlist[]={"/usr/bin/python3.5", "/home/pi/IIOT/opcua/mode_1.py", NULL};
@@ -39,18 +38,41 @@ int execres = 100;
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-        PyRun_SimpleString("GPIO.cleanup()");
-        kill(child,SIGINT);
-        child = fork();
-        if (child == 0){
-            printf("Start Mode_2");
-            char cmd[100];
-            sprintf(cmd,"python3 ./mode_2.py");
-            system(cmd);
-        }
-        else if (child >0)return UA_STATUSCODE_GOOD;
-        else printf("error!!\n");
+        if (mode>0) {
+                kill(child,SIGINT);
+                signal(SIGCHLD, SIG_IGN);
+            }
+            child   = fork();
+            mode    = 2     ;
+            if (child ==0){
+                printf("Start Mode_2");
+                char *argvlist[]={"/usr/bin/python3.5", "/home/pi/IIOT/opcua/mode_2.py", NULL};
+                execres = execve(argvlist[0],argvlist,NULL);
+            }
+        return UA_STATUSCODE_GOOD;
     }
+
+//  DHT11  CALLBACK
+    static UA_StatusCode DHTcallback(UA_Server *server,
+                         const UA_NodeId *sessionId, void *sessionHandle,
+                         const UA_NodeId *methodId, void *methodContext,
+                         const UA_NodeId *objectId, void *objectContext,
+                         size_t inputSize, const UA_Variant *input,
+                         size_t outputSize, UA_Variant *output) {
+        
+        PyObject *pModule = NULL, *pFunc = NULL,*pArg = NULL, *resultTmp = NULL; 
+    
+        pModule = PyImport_ImportModule ("DHT");        
+        pFunc= PyObject_GetAttrString (pModule, "M");
+        resultTmp = PyEval_CallObject(pFunc2, pArg);
+        tmp=PyFloat_AsDouble(resultTmp);
+        //  REFRESH Temp
+        UA_NodeId CHANGEId = UA_NODEID_STRING(1, "DHT-Variable");
+        UA_Variant myVarTMP;
+        UA_Variant_init(&myVarTMP);
+        UA_Variant_setScalar(&myVarTMP, &tmp, &UA_TYPES[UA_TYPES_DOUBLE]);
+        UA_Server_writeValue(server, CHANGEId, myVarTMP);
+        return UA_STATUSCODE_GOOD;}
 
 //  DHT11  Add OBJECT
     static void addObjectDHT(UA_Server *server) {
@@ -100,6 +122,19 @@ int execres = 100;
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
                                 UA_QUALIFIEDNAME(1, "DHT-QualName"),
                                 MODE2_ATTR, &Mode_2_callback,
+                                0, NULL, 0, NULL, NULL, NULL);
+
+    //====GET_DATA====//
+        UA_MethodAttributes Hattr = UA_MethodAttributes_default;
+        Hattr.description = UA_LOCALIZEDTEXT("en-US","DHTdata");
+        Hattr.displayName = UA_LOCALIZEDTEXT("en-US","Get Data");
+        Hattr.executable = true;
+        Hattr.userExecutable = true;
+        UA_Server_addMethodNode(server, UA_NODEID_NUMERIC(2,62542),
+                                DOBJNodeId,
+                                UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
+                                UA_QUALIFIEDNAME(1, "DHT-QualName"),
+                                Hattr, &DHTcallback,
                                 0, NULL, 0, NULL, NULL, NULL);
     }
 
