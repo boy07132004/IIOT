@@ -37,19 +37,11 @@ pid_t child;
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-        if(child == 0) {
-            //PyRun_SimpleString("GPIO.cleanup()");
-            exit(0);
-        }
-        child = fork();
-        if (child == 0){
-            printf("Start Mode_2");
-            //char cmd[100];
-            //sprintf(cmd,"python3 ./mode_2.py");
-            //system(cmd);
-        }
-        else if (child >0)return UA_STATUSCODE_GOOD;
-        else printf("error!!\n");
+        printf("Start Mode_1");
+        char cmd[100];
+        sprintf(cmd,"python3 ./mode_1.py");
+        system(cmd);
+        return UA_STATUSCODE_GOOD;
     }
 
 //  DHT11  Add OBJECT
