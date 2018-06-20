@@ -4,11 +4,11 @@
 #include "unistd.h"
 #include <stdlib.h>
 #include <sys/types.h>
-#include <errno.h>
 
 UA_Double tmp=0;
 UA_Double hum=0;
 pid_t child=2;
+bool died = true;
 int execres = 100;
 
 //  Mode_1  CALLBACK
@@ -18,10 +18,14 @@ int execres = 100;
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-            printf("Start Mode_1");
-            char *argvlist[]={"/usr/bin/python3.5", "/home/pi/IIOT/opcua/mode_1.py", NULL};
-            execres = execve(argvlist[0],argvlist,NULL);
-        
+            if (!died) kill(child,SIGINT);
+            child = fork();
+            died =false;
+            if (child ==0){
+                printf("Start Mode_1");
+                char *argvlist[]={"/usr/bin/python3.5", "/home/pi/IIOT/opcua/mode_1.py", NULL};
+                execres = execve(argvlist[0],argvlist,NULL);
+            }
         return UA_STATUSCODE_GOOD;
     }
 
@@ -33,7 +37,7 @@ int execres = 100;
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
         PyRun_SimpleString("GPIO.cleanup()");
-        kill(-child,SIGTERM);
+        kill(child,SIGINT);
         child = fork();
         if (child == 0){
             printf("Start Mode_2");
