@@ -18,12 +18,7 @@ pid_t child=2;
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
             printf("Start Mode_1");
-            char cmd[100];
-            sprintf(cmd,"python3 ./mode_1.py");
-            system(cmd);
-            printf("before");
-            exit(0);
-            printf("after");
+            execl("./mode_1.py","python3",NULL);
         
         return UA_STATUSCODE_GOOD;
     }
