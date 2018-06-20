@@ -64,7 +64,7 @@ int execres = 100;
     
         pModule = PyImport_ImportModule ("DHT");        
         pFunc= PyObject_GetAttrString (pModule, "M");
-        resultTmp = PyEval_CallObject(pFunc2, pArg);
+        resultTmp = PyEval_CallObject(pFunc, pArg);
         tmp=PyFloat_AsDouble(resultTmp);
         //  REFRESH Temp
         UA_NodeId CHANGEId = UA_NODEID_STRING(1, "DHT-Variable");
