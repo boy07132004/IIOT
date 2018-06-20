@@ -3,6 +3,8 @@
 #include "open62541.h"
 #include "unistd.h"
 #include <stdlib.h>
+#include <sys/types.h>
+#include <errno.h>
 
 UA_Double tmp=0;
 UA_Double hum=0;
@@ -15,10 +17,8 @@ pid_t child=2;
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-        if(child == 0) {
-            PyRun_SimpleString("GPIO.cleanup()");
-            exit(0);
-        }
+        PyRun_SimpleString("GPIO.cleanup()");
+        kill(-child,SIGTERM);
         child = fork();
         if (child == 0){
             printf("Start Mode_1");
@@ -37,10 +37,8 @@ pid_t child=2;
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-        if(child == 0) {
-            PyRun_SimpleString("GPIO.cleanup()");
-            exit(0);
-        }
+        PyRun_SimpleString("GPIO.cleanup()");
+        kill(-child,SIGTERM);
         child = fork();
         if (child == 0){
             printf("Start Mode_2");
