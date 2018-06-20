@@ -17,8 +17,6 @@ pid_t child=2;
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-        child = fork();
-        if (child == 0){
             printf("Start Mode_1");
             char cmd[100];
             sprintf(cmd,"python3 ./mode_1.py");
@@ -26,9 +24,8 @@ pid_t child=2;
             printf("before");
             exit(0);
             printf("after");
-        }
-        else if (child >0)return UA_STATUSCODE_GOOD;
-        else printf("error!!\n");
+        
+        return UA_STATUSCODE_GOOD;
     }
 
 //  Mode_2  CALLBACK
