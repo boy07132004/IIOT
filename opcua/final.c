@@ -18,7 +18,10 @@ int execres = 100;
                          const UA_NodeId *objectId, void *objectContext,
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
-            if (!died) kill(child,SIGTERM);
+            if (!died) {
+                kill(child,SIGINT);
+                signal(SIGCHLD, SIG_IGN);
+            }
             child = fork();
             died =false;
             if (child ==0){
