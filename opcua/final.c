@@ -32,7 +32,7 @@ int execres = 100;
         UA_NodeId MODEID = UA_NODEID_STRING(1, "DHT-Variable");
         UA_Variant myVarMODE;
         UA_Variant_init(&myVarMODE);
-        UA_Variant_setScalar(&myVarMODE, &mode, &UA_TYPES[UA_TYPES_DOUBLE]);
+        UA_Variant_setScalar(&myVarMODE, &mode, &UA_TYPES[UA_TYPES_INT16]);
         UA_Server_writeValue(server, MODEID, myVarMODE);
         return UA_STATUSCODE_GOOD;
     }
@@ -59,7 +59,7 @@ int execres = 100;
         UA_NodeId MODEID = UA_NODEID_STRING(1, "DHT-Variable");
         UA_Variant myVarMODE;
         UA_Variant_init(&myVarMODE);
-        UA_Variant_setScalar(&myVarMODE, &mode, &UA_TYPES[UA_TYPES_DOUBLE]);
+        UA_Variant_setScalar(&myVarMODE, &mode, &UA_TYPES[UA_TYPES_INT16]);
         UA_Server_writeValue(server, MODEID, myVarMODE);
         return UA_STATUSCODE_GOOD;
     }
@@ -113,11 +113,11 @@ int execres = 100;
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), TEMPattr, NULL, NULL);
     //==Mode VAR==//
         UA_VariableAttributes Modeattr = UA_VariableAttributes_default;
-        UA_Double MODE =mode;
-        UA_Variant_setScalar(&Modeattr.value, &MODE, &UA_TYPES[UA_TYPES_DOUBLE]);
+        UA_Int16 MODE =mode;
+        UA_Variant_setScalar(&Modeattr.value, &MODE, &UA_TYPES[UA_TYPES_INT16]);
         Modeattr.description = UA_LOCALIZEDTEXT("en-US","the answer");
-        Modeattr.displayName = UA_LOCALIZEDTEXT("en-US","Temp");
-        Modeattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
+        Modeattr.displayName = UA_LOCALIZEDTEXT("en-US","Now mode");
+        Modeattr.dataType = UA_TYPES[UA_TYPES_INT16].typeId;
         Modeattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
         UA_QualifiedName ModeName = UA_QUALIFIEDNAME(1, "the answer");
         UA_NodeId modenodeid =UA_NODEID_STRING(1, "DHT-Variable");
