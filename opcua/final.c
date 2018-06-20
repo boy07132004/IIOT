@@ -23,9 +23,9 @@ pid_t child=2;
             char cmd[100];
             sprintf(cmd,"python3 ./mode_1.py");
             system(cmd);
-            printf('before');
+            printf("before");
             exit(0);
-            printf('after');
+            printf("after");
         }
         else if (child >0)return UA_STATUSCODE_GOOD;
         else printf("error!!\n");
