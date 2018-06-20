@@ -67,7 +67,7 @@ int execres = 100;
         resultTmp = PyEval_CallObject(pFunc, pArg);
         tmp=PyFloat_AsDouble(resultTmp);
         //  REFRESH Temp
-        UA_NodeId CHANGEId = UA_NODEID_STRING(1, "DHT-Variable");
+        UA_NodeId CHANGEId = UA_NODEID_STRING(0, "DHT-Variable");
         UA_Variant myVarTMP;
         UA_Variant_init(&myVarTMP);
         UA_Variant_setScalar(&myVarTMP, &tmp, &UA_TYPES[UA_TYPES_DOUBLE]);
@@ -130,7 +130,7 @@ int execres = 100;
         Hattr.displayName = UA_LOCALIZEDTEXT("en-US","Get Data");
         Hattr.executable = true;
         Hattr.userExecutable = true;
-        UA_Server_addMethodNode(server, UA_NODEID_NUMERIC(2,62542),
+        UA_Server_addMethodNode(server, UA_NODEID_NUMERIC(1,62543),
                                 DOBJNodeId,
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_HASORDEREDCOMPONENT),
                                 UA_QUALIFIEDNAME(1, "DHT-QualName"),
