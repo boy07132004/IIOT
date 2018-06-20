@@ -19,7 +19,7 @@ int execres = 100;
                          size_t inputSize, const UA_Variant *input,
                          size_t outputSize, UA_Variant *output) {
             printf("Start Mode_1");
-            char *argvlist[]={"/usr/bin/python3.5", "/home/zheming/IIOT/opcua/mode_1.py", NULL};
+            char *argvlist[]={"/usr/bin/python3.5", "/home/pi/IIOT/opcua/mode_1.py", NULL};
             execres = execve(argvlist[0],argvlist,NULL);
         
         return UA_STATUSCODE_GOOD;
