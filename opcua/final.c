@@ -86,7 +86,7 @@ int execres = 100;
                             UA_NODEID_NULL,HAttr, NULL, NULL);
     
     
-    //==VARIABLE==//
+    //==temp VAR==//
         UA_VariableAttributes TEMPattr = UA_VariableAttributes_default;
         UA_Double TEMP = tmp;
         UA_Variant_setScalar(&TEMPattr.value, &TEMP, &UA_TYPES[UA_TYPES_DOUBLE]);
@@ -99,6 +99,19 @@ int execres = 100;
         UA_Server_addVariableNode(server, tmpnodeid, DOBJNodeId,
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES), TEMPName,
                                 UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), TEMPattr, NULL, NULL);
+    //==Mode VAR==//
+        UA_VariableAttributes Modeattr = UA_VariableAttributes_default;
+        UA_Double MODE =mode;
+        UA_Variant_setScalar(&Modeattr.value, &MODE, &UA_TYPES[UA_TYPES_DOUBLE]);
+        Modeattr.description = UA_LOCALIZEDTEXT("en-US","the answer");
+        Modeattr.displayName = UA_LOCALIZEDTEXT("en-US","Temp");
+        Modeattr.dataType = UA_TYPES[UA_TYPES_DOUBLE].typeId;
+        Modeattr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+        UA_QualifiedName ModeName = UA_QUALIFIEDNAME(1, "the answer");
+        UA_NodeId modenodeid =UA_NODEID_STRING(1, "DHT-Variable");
+        UA_Server_addVariableNode(server, modenodeid, DOBJNodeId,
+                                UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES), ModeName,
+                                UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE), MODEattr, NULL, NULL);
     //==MODE_1==//
         UA_MethodAttributes MODE1_ATTR = UA_MethodAttributes_default;
         MODE1_ATTR.description = UA_LOCALIZEDTEXT("en-US","Auto");
