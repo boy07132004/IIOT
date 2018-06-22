@@ -15,14 +15,14 @@ def main():
     pwmr=initPin(3)
     pwmg=initPin(5)
     pwmfan = initPin(40)
-
+    duty=0
     while 1:
         h, t = DHT.read_retry(11, BCM_PIN)
-        if (t<30):
+        if (t<=30):
             pwmg.ChangeDutyCycle(70)
             pwmr.ChangeDutyCycle(0)
             pwmfan.ChangeDutyCycle(0)
-        elif (t>=30):
+        elif (t>30):
             duty=5*t-150
             if duty>100:duty=100
             pwmg.ChangeDutyCycle(0)
